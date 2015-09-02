@@ -25,20 +25,26 @@
     [super tearDown];
 }
 
-- (void)testTaskMustHaveTitle {
+- (void)testTaskMustHaveTitleAndCreateDate {
     PWDTask *task1 = [[PWDTask alloc] init];
     XCTAssertNotNil(task1.title);
+    XCTAssertNotNil(task1.createDate);
+    task1.title = nil;
+    XCTAssertNotNil(task1.title);
+    
+    
     PWDTask *task2 = [[PWDTask alloc] initWithTitle:nil];
     XCTAssertNotNil(task2.title);
+    XCTAssertNotNil(task2.createDate);
+    
+    
     PWDTask *task3 = [[PWDTask alloc] initWithTitle:@""];
     XCTAssertNotNil(task3.title);
+    task3.title = nil;
+    XCTAssertNotNil(task3.title);
+    XCTAssertNotNil(task3.createDate);
+
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
-}
 
 @end

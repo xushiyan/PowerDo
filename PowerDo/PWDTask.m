@@ -10,10 +10,10 @@
 
 @implementation PWDTask
 
-
 - (instancetype)initWithTitle:(NSString *)title {
     if (self = [super init]) {
-        self.title = title ? title : @"";
+        self.title = title;
+        _createDate = [NSDate date];
     }
     return self;
 }
@@ -21,4 +21,9 @@
 - (instancetype)init {
     return [self initWithTitle:@""];
 }
+
+-(void)setTitle:(NSString *)title {
+    _title = title ? [title copy]: @"";
+}
+
 @end

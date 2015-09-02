@@ -13,5 +13,6 @@
 - (instancetype)initWithTitle:(NSString *)title NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic,copy) NSString *title;
+@property (nonatomic,strong,readonly) NSDate *createDate;
 
 @end
