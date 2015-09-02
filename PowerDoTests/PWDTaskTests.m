@@ -9,13 +9,13 @@
 #import <XCTest/XCTest.h>
 #import "PWDTask.h"
 
-@interface PWDTaskTest : XCTestCase
+@interface PWDTaskTests : XCTestCase
 
 @property (nonatomic,strong) PWDTask *task;
 
 @end
 
-@implementation PWDTaskTest
+@implementation PWDTaskTests
 
 - (void)setUp {
     [super setUp];
