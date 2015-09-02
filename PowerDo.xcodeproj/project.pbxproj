@@ -1,0 +1,525 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		86485B201B973A4C0027D01A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B1F1B973A4C0027D01A /* main.m */; };
+		86485B231B973A4C0027D01A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B221B973A4C0027D01A /* AppDelegate.m */; };
+		86485B261B973A4C0027D01A /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B251B973A4C0027D01A /* FirstViewController.m */; };
+		86485B291B973A4C0027D01A /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B281B973A4C0027D01A /* SecondViewController.m */; };
+		86485B2C1B973A4C0027D01A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86485B2A1B973A4C0027D01A /* Main.storyboard */; };
+		86485B2E1B973A4C0027D01A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86485B2D1B973A4C0027D01A /* Assets.xcassets */; };
+		86485B311B973A4C0027D01A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86485B2F1B973A4C0027D01A /* LaunchScreen.storyboard */; };
+		86485B3C1B973A4C0027D01A /* PowerDoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B3B1B973A4C0027D01A /* PowerDoTests.m */; };
+		86485B471B973A4C0027D01A /* PowerDoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B461B973A4C0027D01A /* PowerDoUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		86485B381B973A4C0027D01A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 86485B131B973A4C0027D01A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 86485B1A1B973A4C0027D01A;
+			remoteInfo = PowerDo;
+		};
+		86485B431B973A4C0027D01A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 86485B131B973A4C0027D01A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 86485B1A1B973A4C0027D01A;
+			remoteInfo = PowerDo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		86485B1B1B973A4C0027D01A /* PowerDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PowerDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		86485B1F1B973A4C0027D01A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		86485B211B973A4C0027D01A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		86485B221B973A4C0027D01A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		86485B241B973A4C0027D01A /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		86485B251B973A4C0027D01A /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		86485B271B973A4C0027D01A /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		86485B281B973A4C0027D01A /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		86485B2B1B973A4C0027D01A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		86485B2D1B973A4C0027D01A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		86485B301B973A4C0027D01A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		86485B321B973A4C0027D01A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86485B371B973A4C0027D01A /* PowerDoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PowerDoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		86485B3B1B973A4C0027D01A /* PowerDoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PowerDoTests.m; sourceTree = "<group>"; };
+		86485B3D1B973A4C0027D01A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86485B421B973A4C0027D01A /* PowerDoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PowerDoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		86485B461B973A4C0027D01A /* PowerDoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PowerDoUITests.m; sourceTree = "<group>"; };
+		86485B481B973A4C0027D01A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		86485B181B973A4C0027D01A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86485B341B973A4C0027D01A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86485B3F1B973A4C0027D01A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		86485B121B973A4C0027D01A = {
+			isa = PBXGroup;
+			children = (
+				86485B1D1B973A4C0027D01A /* PowerDo */,
+				86485B3A1B973A4C0027D01A /* PowerDoTests */,
+				86485B451B973A4C0027D01A /* PowerDoUITests */,
+				86485B1C1B973A4C0027D01A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		86485B1C1B973A4C0027D01A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				86485B1B1B973A4C0027D01A /* PowerDo.app */,
+				86485B371B973A4C0027D01A /* PowerDoTests.xctest */,
+				86485B421B973A4C0027D01A /* PowerDoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		86485B1D1B973A4C0027D01A /* PowerDo */ = {
+			isa = PBXGroup;
+			children = (
+				86485B211B973A4C0027D01A /* AppDelegate.h */,
+				86485B221B973A4C0027D01A /* AppDelegate.m */,
+				86485B241B973A4C0027D01A /* FirstViewController.h */,
+				86485B251B973A4C0027D01A /* FirstViewController.m */,
+				86485B271B973A4C0027D01A /* SecondViewController.h */,
+				86485B281B973A4C0027D01A /* SecondViewController.m */,
+				86485B2A1B973A4C0027D01A /* Main.storyboard */,
+				86485B2D1B973A4C0027D01A /* Assets.xcassets */,
+				86485B2F1B973A4C0027D01A /* LaunchScreen.storyboard */,
+				86485B321B973A4C0027D01A /* Info.plist */,
+				86485B1E1B973A4C0027D01A /* Supporting Files */,
+			);
+			path = PowerDo;
+			sourceTree = "<group>";
+		};
+		86485B1E1B973A4C0027D01A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				86485B1F1B973A4C0027D01A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		86485B3A1B973A4C0027D01A /* PowerDoTests */ = {
+			isa = PBXGroup;
+			children = (
+				86485B3B1B973A4C0027D01A /* PowerDoTests.m */,
+				86485B3D1B973A4C0027D01A /* Info.plist */,
+			);
+			path = PowerDoTests;
+			sourceTree = "<group>";
+		};
+		86485B451B973A4C0027D01A /* PowerDoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				86485B461B973A4C0027D01A /* PowerDoUITests.m */,
+				86485B481B973A4C0027D01A /* Info.plist */,
+			);
+			path = PowerDoUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		86485B1A1B973A4C0027D01A /* PowerDo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 86485B4B1B973A4C0027D01A /* Build configuration list for PBXNativeTarget "PowerDo" */;
+			buildPhases = (
+				86485B171B973A4C0027D01A /* Sources */,
+				86485B181B973A4C0027D01A /* Frameworks */,
+				86485B191B973A4C0027D01A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PowerDo;
+			productName = PowerDo;
+			productReference = 86485B1B1B973A4C0027D01A /* PowerDo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		86485B361B973A4C0027D01A /* PowerDoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 86485B4E1B973A4C0027D01A /* Build configuration list for PBXNativeTarget "PowerDoTests" */;
+			buildPhases = (
+				86485B331B973A4C0027D01A /* Sources */,
+				86485B341B973A4C0027D01A /* Frameworks */,
+				86485B351B973A4C0027D01A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				86485B391B973A4C0027D01A /* PBXTargetDependency */,
+			);
+			name = PowerDoTests;
+			productName = PowerDoTests;
+			productReference = 86485B371B973A4C0027D01A /* PowerDoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		86485B411B973A4C0027D01A /* PowerDoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 86485B511B973A4C0027D01A /* Build configuration list for PBXNativeTarget "PowerDoUITests" */;
+			buildPhases = (
+				86485B3E1B973A4C0027D01A /* Sources */,
+				86485B3F1B973A4C0027D01A /* Frameworks */,
+				86485B401B973A4C0027D01A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				86485B441B973A4C0027D01A /* PBXTargetDependency */,
+			);
+			name = PowerDoUITests;
+			productName = PowerDoUITests;
+			productReference = 86485B421B973A4C0027D01A /* PowerDoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		86485B131B973A4C0027D01A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = xushiyan;
+				TargetAttributes = {
+					86485B1A1B973A4C0027D01A = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					86485B361B973A4C0027D01A = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = 86485B1A1B973A4C0027D01A;
+					};
+					86485B411B973A4C0027D01A = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = 86485B1A1B973A4C0027D01A;
+					};
+				};
+			};
+			buildConfigurationList = 86485B161B973A4C0027D01A /* Build configuration list for PBXProject "PowerDo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 86485B121B973A4C0027D01A;
+			productRefGroup = 86485B1C1B973A4C0027D01A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				86485B1A1B973A4C0027D01A /* PowerDo */,
+				86485B361B973A4C0027D01A /* PowerDoTests */,
+				86485B411B973A4C0027D01A /* PowerDoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		86485B191B973A4C0027D01A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86485B311B973A4C0027D01A /* LaunchScreen.storyboard in Resources */,
+				86485B2E1B973A4C0027D01A /* Assets.xcassets in Resources */,
+				86485B2C1B973A4C0027D01A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86485B351B973A4C0027D01A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86485B401B973A4C0027D01A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		86485B171B973A4C0027D01A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86485B291B973A4C0027D01A /* SecondViewController.m in Sources */,
+				86485B231B973A4C0027D01A /* AppDelegate.m in Sources */,
+				86485B261B973A4C0027D01A /* FirstViewController.m in Sources */,
+				86485B201B973A4C0027D01A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86485B331B973A4C0027D01A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86485B3C1B973A4C0027D01A /* PowerDoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86485B3E1B973A4C0027D01A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86485B471B973A4C0027D01A /* PowerDoUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		86485B391B973A4C0027D01A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 86485B1A1B973A4C0027D01A /* PowerDo */;
+			targetProxy = 86485B381B973A4C0027D01A /* PBXContainerItemProxy */;
+		};
+		86485B441B973A4C0027D01A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 86485B1A1B973A4C0027D01A /* PowerDo */;
+			targetProxy = 86485B431B973A4C0027D01A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		86485B2A1B973A4C0027D01A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				86485B2B1B973A4C0027D01A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		86485B2F1B973A4C0027D01A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				86485B301B973A4C0027D01A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		86485B491B973A4C0027D01A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		86485B4A1B973A4C0027D01A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		86485B4C1B973A4C0027D01A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = PowerDo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xushiyan.PowerDo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		86485B4D1B973A4C0027D01A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = PowerDo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xushiyan.PowerDo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		86485B4F1B973A4C0027D01A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = PowerDoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xushiyan.PowerDoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PowerDo.app/PowerDo";
+			};
+			name = Debug;
+		};
+		86485B501B973A4C0027D01A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = PowerDoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xushiyan.PowerDoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PowerDo.app/PowerDo";
+			};
+			name = Release;
+		};
+		86485B521B973A4C0027D01A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = PowerDoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xushiyan.PowerDoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = PowerDo;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		86485B531B973A4C0027D01A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = PowerDoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xushiyan.PowerDoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = PowerDo;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		86485B161B973A4C0027D01A /* Build configuration list for PBXProject "PowerDo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86485B491B973A4C0027D01A /* Debug */,
+				86485B4A1B973A4C0027D01A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		86485B4B1B973A4C0027D01A /* Build configuration list for PBXNativeTarget "PowerDo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86485B4C1B973A4C0027D01A /* Debug */,
+				86485B4D1B973A4C0027D01A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		86485B4E1B973A4C0027D01A /* Build configuration list for PBXNativeTarget "PowerDoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86485B4F1B973A4C0027D01A /* Debug */,
+				86485B501B973A4C0027D01A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		86485B511B973A4C0027D01A /* Build configuration list for PBXNativeTarget "PowerDoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86485B521B973A4C0027D01A /* Debug */,
+				86485B531B973A4C0027D01A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 86485B131B973A4C0027D01A /* Project object */;
+}
