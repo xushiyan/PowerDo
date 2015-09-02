@@ -11,17 +11,19 @@
 
 @interface PWDTaskTest : XCTestCase
 
+@property (nonatomic,strong) PWDTask *task;
+
 @end
 
 @implementation PWDTaskTest
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    self.task = [[PWDTask alloc] initWithTitle:@"sample task"];
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    self.task = nil;
     [super tearDown];
 }
 
@@ -46,5 +48,27 @@
 
 }
 
+- (void)testTaskIsNotCompletedAtFirst {
+    PWDTask *task = self.task;
+    XCTAssertFalse(task.completed);
+}
+
+- (void)testTaskIsDueTodayByDefault {
+    PWDTask *task = self.task;
+    NSDate *createDate = task.createDate;
+    NSDate *dueDate = task.dueDate;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    XCTAssertTrue([calendar isDate:createDate inSameDayAsDate:dueDate]);
+}
+
+- (void)testDueDateIsNotBeforeCreateDate {
+    PWDTask *task = self.task;
+    NSDate *dueDate = task.dueDate;
+    NSDate *createDate = task.createDate;
+    XCTAssertNotNil(dueDate);
+    XCTAssertNotNil(createDate);
+    NSComparisonResult result = [dueDate compare:createDate];
+    XCTAssertTrue(result != NSOrderedAscending);
+}
 
 @end

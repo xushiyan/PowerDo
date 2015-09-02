@@ -13,7 +13,15 @@
 - (instancetype)initWithTitle:(NSString *)title {
     if (self = [super init]) {
         self.title = title;
-        _createDate = [NSDate date];
+        
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDate *now = [NSDate date];
+        NSDateComponents *components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:now];
+        NSDate *todayStart = [calendar dateFromComponents:components];
+        NSDate *todayEnd = [[calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:todayStart options:0] dateByAddingTimeInterval:-1];
+        _createDate = now;
+        _dueDate = todayEnd;
+        
     }
     return self;
 }
