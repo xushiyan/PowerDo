@@ -16,6 +16,8 @@
 		86485B311B973A4C0027D01A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86485B2F1B973A4C0027D01A /* LaunchScreen.storyboard */; };
 		86485B3C1B973A4C0027D01A /* PowerDoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B3B1B973A4C0027D01A /* PowerDoTests.m */; };
 		86485B471B973A4C0027D01A /* PowerDoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B461B973A4C0027D01A /* PowerDoUITests.m */; };
+		86E21A741B973D3C0098AC93 /* PWDTaskTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E21A731B973D3C0098AC93 /* PWDTaskTest.m */; };
+		86E21A781B973EF50098AC93 /* PWDTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E21A771B973EF50098AC93 /* PWDTask.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,9 @@
 		86485B421B973A4C0027D01A /* PowerDoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PowerDoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		86485B461B973A4C0027D01A /* PowerDoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PowerDoUITests.m; sourceTree = "<group>"; };
 		86485B481B973A4C0027D01A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86E21A731B973D3C0098AC93 /* PWDTaskTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTaskTest.m; sourceTree = "<group>"; };
+		86E21A761B973EF50098AC93 /* PWDTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTask.h; sourceTree = "<group>"; };
+		86E21A771B973EF50098AC93 /* PWDTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTask.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +109,7 @@
 		86485B1D1B973A4C0027D01A /* PowerDo */ = {
 			isa = PBXGroup;
 			children = (
+				86E21A751B973EE20098AC93 /* Model */,
 				86485B211B973A4C0027D01A /* AppDelegate.h */,
 				86485B221B973A4C0027D01A /* AppDelegate.m */,
 				86485B241B973A4C0027D01A /* FirstViewController.h */,
@@ -130,6 +136,7 @@
 		86485B3A1B973A4C0027D01A /* PowerDoTests */ = {
 			isa = PBXGroup;
 			children = (
+				86E21A721B973CBD0098AC93 /* Model */,
 				86485B3B1B973A4C0027D01A /* PowerDoTests.m */,
 				86485B3D1B973A4C0027D01A /* Info.plist */,
 			);
@@ -143,6 +150,23 @@
 				86485B481B973A4C0027D01A /* Info.plist */,
 			);
 			path = PowerDoUITests;
+			sourceTree = "<group>";
+		};
+		86E21A721B973CBD0098AC93 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				86E21A731B973D3C0098AC93 /* PWDTaskTest.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		86E21A751B973EE20098AC93 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				86E21A761B973EF50098AC93 /* PWDTask.h */,
+				86E21A771B973EF50098AC93 /* PWDTask.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,6 +231,7 @@
 		86485B131B973A4C0027D01A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = PWD;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = xushiyan;
 				TargetAttributes = {
@@ -277,6 +302,7 @@
 			files = (
 				86485B291B973A4C0027D01A /* SecondViewController.m in Sources */,
 				86485B231B973A4C0027D01A /* AppDelegate.m in Sources */,
+				86E21A781B973EF50098AC93 /* PWDTask.m in Sources */,
 				86485B261B973A4C0027D01A /* FirstViewController.m in Sources */,
 				86485B201B973A4C0027D01A /* main.m in Sources */,
 			);
@@ -286,6 +312,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86E21A741B973D3C0098AC93 /* PWDTaskTest.m in Sources */,
 				86485B3C1B973A4C0027D01A /* PowerDoTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,6 +529,7 @@
 				86485B4D1B973A4C0027D01A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		86485B4E1B973A4C0027D01A /* Build configuration list for PBXNativeTarget "PowerDoTests" */ = {
 			isa = XCConfigurationList;
@@ -510,6 +538,7 @@
 				86485B501B973A4C0027D01A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		86485B511B973A4C0027D01A /* Build configuration list for PBXNativeTarget "PowerDoUITests" */ = {
 			isa = XCConfigurationList;
@@ -518,6 +547,7 @@
 				86485B531B973A4C0027D01A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
