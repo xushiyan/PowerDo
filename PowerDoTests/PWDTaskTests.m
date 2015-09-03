@@ -57,18 +57,18 @@
     PWDTask *task = self.task;
     NSDate *createDate = task.createDate;
     NSDate *dueDate = task.dueDate;
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    XCTAssertTrue([calendar isDate:createDate inSameDayAsDate:dueDate]);
-}
-
-- (void)testDueDateIsNotBeforeCreateDate {
-    PWDTask *task = self.task;
-    NSDate *dueDate = task.dueDate;
-    NSDate *createDate = task.createDate;
     XCTAssertNotNil(dueDate);
     XCTAssertNotNil(createDate);
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    XCTAssertTrue([calendar isDateInToday:createDate]);
+    XCTAssertTrue([calendar isDateInToday:dueDate]);
+    XCTAssertTrue([calendar isDate:createDate inSameDayAsDate:dueDate]);
     NSComparisonResult result = [dueDate compare:createDate];
-    XCTAssertTrue(result != NSOrderedAscending);
+    XCTAssertTrue(result != NSOrderedAscending, @"dueDate should not be earlier than createDate.");
+    
+    NSDate *tomorrowStart = [dueDate dateByAddingTimeInterval:1];
+    XCTAssertTrue([calendar isDateInTomorrow:tomorrowStart], @"By default, dueDate should be at the end of today.");
 }
 
 @end
