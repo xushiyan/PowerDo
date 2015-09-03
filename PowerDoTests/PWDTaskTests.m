@@ -65,10 +65,29 @@
     XCTAssertTrue([calendar isDateInToday:dueDate]);
     XCTAssertTrue([calendar isDate:createDate inSameDayAsDate:dueDate]);
     NSComparisonResult result = [dueDate compare:createDate];
-    XCTAssertTrue(result != NSOrderedAscending, @"dueDate should not be earlier than createDate.");
+    // we do not consider extreme case in which task is created in the last millisecond of today
+    XCTAssertNotEqual(result, NSOrderedAscending, @"dueDate should not be earlier than createDate.");
     
     NSDate *tomorrowStart = [dueDate dateByAddingTimeInterval:1];
     XCTAssertTrue([calendar isDateInTomorrow:tomorrowStart], @"By default, dueDate should be at the end of today.");
+}
+
+- (void)testTaskDueDateIsModifiable {
+    PWDTask *task = self.task;
+    NSDate *createDate = task.createDate;
+    task.dueDate = [NSDate distantFuture];
+    NSComparisonResult result1 = [task.dueDate compare:createDate];
+    XCTAssertNotEqual(result1, NSOrderedAscending, @"dueDate should not be earlier than createDate.");
+    
+    task.dueDate = [NSDate distantPast];
+    NSComparisonResult result2 = [task.dueDate compare:createDate];
+    XCTAssertNotEqual(result2, NSOrderedAscending, @"dueDate should not be earlier than createDate.");
+    XCTAssertEqualObjects(task.dueDate, [NSDate distantFuture], @"Invalid dueDate won't be set.");
+    
+    task.dueDate = createDate;
+    NSComparisonResult result3 = [task.dueDate compare:createDate];
+    XCTAssertEqual(result3, NSOrderedSame);
+    XCTAssertEqualObjects(task.dueDate, createDate);
 }
 
 @end

@@ -30,8 +30,15 @@
     return [self initWithTitle:@""];
 }
 
--(void)setTitle:(NSString *)title {
+- (void)setTitle:(NSString *)title {
     _title = title ? [title copy]: @"";
+}
+
+- (void)setDueDate:(NSDate *)dueDate {
+    NSComparisonResult result = [dueDate compare:_createDate];
+    if (result != NSOrderedAscending) {
+        _dueDate = dueDate;
+    }
 }
 
 @end
