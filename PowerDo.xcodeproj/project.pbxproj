@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8621A00A1B9B1FBA0082B853 /* PWDTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621A0091B9B1FBA0082B853 /* PWDTaskManager.m */; };
+		8621A00C1B9B20580082B853 /* PWDTaskManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621A00B1B9B20580082B853 /* PWDTaskManagerTests.m */; };
 		86485B201B973A4C0027D01A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B1F1B973A4C0027D01A /* main.m */; };
 		86485B231B973A4C0027D01A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B221B973A4C0027D01A /* AppDelegate.m */; };
 		86485B261B973A4C0027D01A /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B251B973A4C0027D01A /* FirstViewController.m */; };
@@ -38,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8621A0081B9B1FBA0082B853 /* PWDTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTaskManager.h; sourceTree = "<group>"; };
+		8621A0091B9B1FBA0082B853 /* PWDTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTaskManager.m; sourceTree = "<group>"; };
+		8621A00B1B9B20580082B853 /* PWDTaskManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTaskManagerTests.m; sourceTree = "<group>"; };
+		8621A00E1B9B25430082B853 /* FoundationExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundationExtras.h; sourceTree = "<group>"; };
 		86485B1B1B973A4C0027D01A /* PowerDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PowerDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86485B1F1B973A4C0027D01A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		86485B211B973A4C0027D01A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -86,6 +92,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8621A00D1B9B24610082B853 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				8621A00E1B9B25430082B853 /* FoundationExtras.h */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
 		86485B121B973A4C0027D01A = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +123,7 @@
 		86485B1D1B973A4C0027D01A /* PowerDo */ = {
 			isa = PBXGroup;
 			children = (
+				8621A00D1B9B24610082B853 /* Helper */,
 				86E21A751B973EE20098AC93 /* Model */,
 				86485B211B973A4C0027D01A /* AppDelegate.h */,
 				86485B221B973A4C0027D01A /* AppDelegate.m */,
@@ -156,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				86E21A731B973D3C0098AC93 /* PWDTaskTests.m */,
+				8621A00B1B9B20580082B853 /* PWDTaskManagerTests.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -165,6 +181,8 @@
 			children = (
 				86E21A761B973EF50098AC93 /* PWDTask.h */,
 				86E21A771B973EF50098AC93 /* PWDTask.m */,
+				8621A0081B9B1FBA0082B853 /* PWDTaskManager.h */,
+				8621A0091B9B1FBA0082B853 /* PWDTaskManager.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -300,6 +318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8621A00A1B9B1FBA0082B853 /* PWDTaskManager.m in Sources */,
 				86485B291B973A4C0027D01A /* SecondViewController.m in Sources */,
 				86485B231B973A4C0027D01A /* AppDelegate.m in Sources */,
 				86E21A781B973EF50098AC93 /* PWDTask.m in Sources */,
@@ -312,6 +331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8621A00C1B9B20580082B853 /* PWDTaskManagerTests.m in Sources */,
 				86E21A741B973D3C0098AC93 /* PWDTaskTests.m in Sources */,
 				86485B3C1B973A4C0027D01A /* PowerDoTests.m in Sources */,
 			);
