@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "PWDTaskManager.h"
 
 @interface AppDelegate ()
 
@@ -18,8 +17,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    self.taskManager = [PWDTaskManager defaultInstance];
-    
     return YES;
 }
 
