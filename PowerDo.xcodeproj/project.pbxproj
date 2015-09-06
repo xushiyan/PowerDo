@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4EB1112A1B9C0D4900BF5656 /* PowerDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4EB111281B9C0D4900BF5656 /* PowerDo.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		8621A00A1B9B1FBA0082B853 /* PWDTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621A0091B9B1FBA0082B853 /* PWDTaskManager.m */; };
 		8621A00C1B9B20580082B853 /* PWDTaskManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621A00B1B9B20580082B853 /* PWDTaskManagerTests.m */; };
 		86485B201B973A4C0027D01A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B1F1B973A4C0027D01A /* main.m */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4EB111291B9C0D4900BF5656 /* PowerDo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PowerDo.xcdatamodel; sourceTree = "<group>"; };
 		8621A0081B9B1FBA0082B853 /* PWDTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTaskManager.h; sourceTree = "<group>"; };
 		8621A0091B9B1FBA0082B853 /* PWDTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTaskManager.m; sourceTree = "<group>"; };
 		8621A00B1B9B20580082B853 /* PWDTaskManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTaskManagerTests.m; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				86E21A771B973EF50098AC93 /* PWDTask.m */,
 				8621A0081B9B1FBA0082B853 /* PWDTaskManager.h */,
 				8621A0091B9B1FBA0082B853 /* PWDTaskManager.m */,
+				4EB111281B9C0D4900BF5656 /* PowerDo.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				8621A00A1B9B1FBA0082B853 /* PWDTaskManager.m in Sources */,
 				86485B291B973A4C0027D01A /* SecondViewController.m in Sources */,
 				86485B231B973A4C0027D01A /* AppDelegate.m in Sources */,
+				4EB1112A1B9C0D4900BF5656 /* PowerDo.xcdatamodeld in Sources */,
 				86E21A781B973EF50098AC93 /* PWDTask.m in Sources */,
 				86485B261B973A4C0027D01A /* FirstViewController.m in Sources */,
 				86485B201B973A4C0027D01A /* main.m in Sources */,
@@ -570,6 +574,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4EB111281B9C0D4900BF5656 /* PowerDo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4EB111291B9C0D4900BF5656 /* PowerDo.xcdatamodel */,
+			);
+			currentVersion = 4EB111291B9C0D4900BF5656 /* PowerDo.xcdatamodel */;
+			path = PowerDo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 86485B131B973A4C0027D01A /* Project object */;
 }
