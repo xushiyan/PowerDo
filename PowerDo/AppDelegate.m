@@ -20,6 +20,14 @@
     // Override point for customization after application launch.
     self.taskManager = [PWDTaskManager defaultInstance];
     
+    UIWindow *mainWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    mainWindow.rootViewController = tabBarController;
+    
+    mainWindow.backgroundColor = [UIColor whiteColor];
+    self.window = mainWindow;
+    [mainWindow makeKeyAndVisible];
+    
     return YES;
 }
 
