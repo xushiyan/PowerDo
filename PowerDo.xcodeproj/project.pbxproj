@@ -18,6 +18,7 @@
 		86485B471B973A4C0027D01A /* PowerDoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B461B973A4C0027D01A /* PowerDoUITests.m */; };
 		86E21A741B973D3C0098AC93 /* PWDTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E21A731B973D3C0098AC93 /* PWDTaskTests.m */; };
 		86E21A781B973EF50098AC93 /* PWDTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E21A771B973EF50098AC93 /* PWDTask.m */; };
+		E262CCEA1BA0881A00A82C98 /* PWDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E262CCE91BA0881A00A82C98 /* PWDSettingsViewController.m */; };
 		E2C426551B9DDD9500E3BC92 /* PWDTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C426541B9DDD9500E3BC92 /* PWDTodayViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,8 @@
 		86E21A731B973D3C0098AC93 /* PWDTaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTaskTests.m; sourceTree = "<group>"; };
 		86E21A761B973EF50098AC93 /* PWDTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTask.h; sourceTree = "<group>"; };
 		86E21A771B973EF50098AC93 /* PWDTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTask.m; sourceTree = "<group>"; };
+		E262CCE81BA0881A00A82C98 /* PWDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDSettingsViewController.h; sourceTree = "<group>"; };
+		E262CCE91BA0881A00A82C98 /* PWDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDSettingsViewController.m; sourceTree = "<group>"; };
 		E2C426531B9DDD9500E3BC92 /* PWDTodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTodayViewController.h; sourceTree = "<group>"; };
 		E2C426541B9DDD9500E3BC92 /* PWDTodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTodayViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,6 +189,8 @@
 			children = (
 				E2C426531B9DDD9500E3BC92 /* PWDTodayViewController.h */,
 				E2C426541B9DDD9500E3BC92 /* PWDTodayViewController.m */,
+				E262CCE81BA0881A00A82C98 /* PWDSettingsViewController.h */,
+				E262CCE91BA0881A00A82C98 /* PWDSettingsViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -321,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8621A00A1B9B1FBA0082B853 /* PWDTaskManager.m in Sources */,
+				E262CCEA1BA0881A00A82C98 /* PWDSettingsViewController.m in Sources */,
 				86485B231B973A4C0027D01A /* AppDelegate.m in Sources */,
 				4EB1112A1B9C0D4900BF5656 /* PowerDo.xcdatamodeld in Sources */,
 				86E21A781B973EF50098AC93 /* PWDTask.m in Sources */,

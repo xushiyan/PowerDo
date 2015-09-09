@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "PWDTaskManager.h"
 #import "PWDTodayViewController.h"
+#import "PWDSettingsViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,10 +21,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.taskManager = [PWDTaskManager defaultInstance];
+    
     PWDTodayViewController *today_vc = [[PWDTodayViewController alloc] initWithStyle:UITableViewStylePlain];
     UINavigationController *today_nc = [[UINavigationController alloc] initWithRootViewController:today_vc];
+    
+    PWDSettingsViewController *settings_vc = [[PWDSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    UINavigationController *settings_nc = [[UINavigationController alloc] initWithRootViewController:settings_vc];
+    
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[today_nc];
+    tabBarController.viewControllers = @[today_nc,settings_nc];
     
     UIWindow *mainWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     mainWindow.rootViewController = tabBarController;
