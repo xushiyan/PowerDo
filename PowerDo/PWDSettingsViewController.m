@@ -19,6 +19,7 @@ static NSString * const SettingsCellIdentifier = @"SettingsCellIdentifier";
     UITableView *tableView = self.tableView;
     tableView.estimatedRowHeight = 44;
     tableView.rowHeight = UITableViewAutomaticDimension;
+    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:SettingsCellIdentifier];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(nonnull UITableView *)tableView {
