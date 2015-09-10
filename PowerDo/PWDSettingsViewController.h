@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+enum PWDSettingsSection {
+    PWDSettingsSectionTime,
+    PWDSettingsSectionFeedback,
+    PWDSettingsSectionEnd
+};
+
+enum PWDFeedbackRow {
+    PWDFeedbackRowFeedback,
+    PWDFeedbackRowLike,
+    PWDFeedbackRowAbout,
+    PWDFeedbackRowEnd
+};
+
 @interface PWDSettingsViewController : UITableViewController
 
 @end
