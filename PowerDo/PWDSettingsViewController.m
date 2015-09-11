@@ -7,20 +7,80 @@
 //
 
 #import "PWDSettingsViewController.h"
+#import "PWDDatePickerCell.h"
 
-static NSString * const SettingsCellIdentifier = @"SettingsCellIdentifier";
-
-@implementation PWDSettingsViewController
+@implementation PWDSettingsViewController {
+    BOOL datePickerOpen;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = NSLocalizedString(@"Settings", @"Settings tab title");
+
     
     UITableView *tableView = self.tableView;
     tableView.estimatedRowHeight = 44;
-    tableView.rowHeight = UITableViewAutomaticDimension;
-    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:SettingsCellIdentifier];
+    [tableView registerClass:[PWDTableViewCell class] forCellReuseIdentifier:[PWDTableViewCell identifier]];
+    [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([PWDDatePickerCell class]) bundle:nil] forCellReuseIdentifier:[PWDDatePickerCell identifier]];
 }
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    
+    switch (section) {
+        case PWDSettingsSectionConfigure:
+            switch (row) {
+                case PWDConfigureRowPlanCutoffTime: {
+                    datePickerOpen = !datePickerOpen;
+                    [tableView reloadSections:[NSIndexSet indexSetWithIndex:PWDSettingsSectionConfigure] withRowAnimation:UITableViewRowAnimationAutomatic];
+                }
+                    break;
+            }
+            break;
+    }
+}
+
+- (BOOL)tableView:(nonnull UITableView *)tableView shouldHighlightRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    
+    BOOL highlight = YES;
+    switch (section) {
+        case PWDSettingsSectionConfigure:
+            switch (row) {
+                case PWDConfigureRowPlanCutoffTimePicker: {
+                    highlight = NO;
+                }
+                    break;
+            }
+            break;
+    }
+    return highlight;
+}
+
+- (CGFloat)tableView:(nonnull UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    
+    CGFloat height = UITableViewAutomaticDimension;
+    switch (section) {
+        case PWDSettingsSectionConfigure:
+            switch (row) {
+                case PWDConfigureRowPlanCutoffTimePicker: {
+                    if (!datePickerOpen) {
+                        height = 0;
+                    }
+                }
+                    break;
+            }
+            break;
+    }
+    return height;
+}
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(nonnull UITableView *)tableView {
     return PWDSettingsSectionEnd;
@@ -29,8 +89,9 @@ static NSString * const SettingsCellIdentifier = @"SettingsCellIdentifier";
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger num = 0;
     switch (section) {
-        case PWDSettingsSectionTime:
-            num = 1;
+        case PWDSettingsSectionConfigure: {
+            num = PWDConfigureRowEnd;
+        }
             break;
         case PWDSettingsSectionFeedback: {
             num = PWDFeedbackRowEnd;
@@ -41,36 +102,50 @@ static NSString * const SettingsCellIdentifier = @"SettingsCellIdentifier";
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SettingsCellIdentifier forIndexPath:indexPath];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    UITableViewCell *xCell = nil;
     
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
     switch (section) {
-        case PWDSettingsSectionTime: {
-            cell.textLabel.text = NSLocalizedString(@"Configure Time", @"Settings cell label");
+        case PWDSettingsSectionConfigure: {
+            switch (row) {
+                case PWDConfigureRowPlanCutoffTime: {
+                    xCell = [tableView dequeueReusableCellWithIdentifier:[PWDTableViewCell identifier] forIndexPath:indexPath];
+                    xCell.textLabel.text = NSLocalizedString(@"Cutoff Time", @"Settings cell label");
+                }
+                    break;
+                case PWDConfigureRowPlanCutoffTimePicker: {
+                    PWDDatePickerCell *cell = (PWDDatePickerCell *)[tableView dequeueReusableCellWithIdentifier:[PWDDatePickerCell identifier] forIndexPath:indexPath];
+                    
+                    xCell = cell;
+                }
+                    break;
+            }
         }
             break;
         case PWDSettingsSectionFeedback: {
+            xCell = [tableView dequeueReusableCellWithIdentifier:[PWDTableViewCell identifier] forIndexPath:indexPath];
             switch (row) {
                 case PWDFeedbackRowFeedback: {
-                    cell.textLabel.text = NSLocalizedString(@"Feedback", @"Settings cell label");
+                    xCell.textLabel.text = NSLocalizedString(@"Feedback", @"Settings cell label");
+                    xCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 }
                     break;
                 case PWDFeedbackRowLike: {
-                    cell.textLabel.text = NSLocalizedString(@"Like us!", @"Settings cell label");
-                    cell.accessoryType = UITableViewCellAccessoryNone;
+                    xCell.textLabel.text = NSLocalizedString(@"Like us!", @"Settings cell label");
+                    xCell.accessoryType = UITableViewCellAccessoryNone;
                 }
                     break;
                 case PWDFeedbackRowAbout: {
-                    cell.textLabel.text = NSLocalizedString(@"About", @"Settings cell label");
+                    xCell.textLabel.text = NSLocalizedString(@"About", @"Settings cell label");
+                    xCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 }
                     break;
             }
         }
             break;
     }
-    return cell;
+    return xCell;
 }
 
 @end

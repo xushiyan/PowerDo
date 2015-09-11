@@ -23,9 +23,11 @@
     self.taskManager = [PWDTaskManager defaultInstance];
     
     PWDTodayViewController *today_vc = [[PWDTodayViewController alloc] initWithStyle:UITableViewStylePlain];
+    today_vc.title = NSLocalizedString(@"Today", @"Today tab title");
     UINavigationController *today_nc = [[UINavigationController alloc] initWithRootViewController:today_vc];
     
     PWDSettingsViewController *settings_vc = [[PWDSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    settings_vc.title = NSLocalizedString(@"Settings", @"Settings tab title");
     UINavigationController *settings_nc = [[UINavigationController alloc] initWithRootViewController:settings_vc];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];

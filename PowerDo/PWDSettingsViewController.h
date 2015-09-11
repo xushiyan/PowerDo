@@ -8,13 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-enum PWDSettingsSection {
-    PWDSettingsSectionTime,
+typedef NS_ENUM(NSInteger, PWDSettingsSection) {
+    PWDSettingsSectionConfigure,
     PWDSettingsSectionFeedback,
     PWDSettingsSectionEnd
 };
 
-enum PWDFeedbackRow {
+typedef NS_ENUM(NSInteger, PWDConfigureRow) {
+    PWDConfigureRowPlanCutoffTime,
+    PWDConfigureRowPlanCutoffTimePicker,
+    PWDConfigureRowEnd
+};
+
+typedef NS_ENUM(NSInteger, PWDFeedbackRow) {
     PWDFeedbackRowFeedback,
     PWDFeedbackRowLike,
     PWDFeedbackRowAbout,

@@ -16,6 +16,10 @@
 		86485B311B973A4C0027D01A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86485B2F1B973A4C0027D01A /* LaunchScreen.storyboard */; };
 		86485B3C1B973A4C0027D01A /* PowerDoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B3B1B973A4C0027D01A /* PowerDoTests.m */; };
 		86485B471B973A4C0027D01A /* PowerDoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B461B973A4C0027D01A /* PowerDoUITests.m */; };
+		86A75F8A1BA2C10200588730 /* PWDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A75F891BA2C10200588730 /* PWDConstants.swift */; };
+		86A75FA41BA2DA5400588730 /* PWDTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 86A75FA31BA2DA5400588730 /* PWDTableViewCell.m */; };
+		86A75FA81BA2DB0C00588730 /* PWDDatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 86A75FA61BA2DB0C00588730 /* PWDDatePickerCell.m */; };
+		86A75FA91BA2DB0C00588730 /* PWDDatePickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86A75FA71BA2DB0C00588730 /* PWDDatePickerCell.xib */; };
 		86E21A741B973D3C0098AC93 /* PWDTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E21A731B973D3C0098AC93 /* PWDTaskTests.m */; };
 		86E21A781B973EF50098AC93 /* PWDTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E21A771B973EF50098AC93 /* PWDTask.m */; };
 		E262CCEA1BA0881A00A82C98 /* PWDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E262CCE91BA0881A00A82C98 /* PWDSettingsViewController.m */; };
@@ -58,6 +62,13 @@
 		86485B421B973A4C0027D01A /* PowerDoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PowerDoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		86485B461B973A4C0027D01A /* PowerDoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PowerDoUITests.m; sourceTree = "<group>"; };
 		86485B481B973A4C0027D01A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86A75F881BA2C10200588730 /* PowerDo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PowerDo-Bridging-Header.h"; sourceTree = "<group>"; };
+		86A75F891BA2C10200588730 /* PWDConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PWDConstants.swift; sourceTree = "<group>"; };
+		86A75FA21BA2DA5400588730 /* PWDTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTableViewCell.h; sourceTree = "<group>"; };
+		86A75FA31BA2DA5400588730 /* PWDTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTableViewCell.m; sourceTree = "<group>"; };
+		86A75FA51BA2DB0C00588730 /* PWDDatePickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDDatePickerCell.h; sourceTree = "<group>"; };
+		86A75FA61BA2DB0C00588730 /* PWDDatePickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDDatePickerCell.m; sourceTree = "<group>"; };
+		86A75FA71BA2DB0C00588730 /* PWDDatePickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PWDDatePickerCell.xib; sourceTree = "<group>"; };
 		86E21A731B973D3C0098AC93 /* PWDTaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTaskTests.m; sourceTree = "<group>"; };
 		86E21A761B973EF50098AC93 /* PWDTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTask.h; sourceTree = "<group>"; };
 		86E21A771B973EF50098AC93 /* PWDTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTask.m; sourceTree = "<group>"; };
@@ -96,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				8621A00E1B9B25430082B853 /* FoundationExtras.h */,
+				86A75F891BA2C10200588730 /* PWDConstants.swift */,
+				86A75F881BA2C10200588730 /* PowerDo-Bridging-Header.h */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -125,6 +138,7 @@
 			children = (
 				8621A00D1B9B24610082B853 /* Helper */,
 				86E21A751B973EE20098AC93 /* Model */,
+				86A75F8B1BA2CC4600588730 /* View */,
 				E2C426521B9DDD3900E3BC92 /* Controller */,
 				86485B211B973A4C0027D01A /* AppDelegate.h */,
 				86485B221B973A4C0027D01A /* AppDelegate.m */,
@@ -161,6 +175,18 @@
 				86485B481B973A4C0027D01A /* Info.plist */,
 			);
 			path = PowerDoUITests;
+			sourceTree = "<group>";
+		};
+		86A75F8B1BA2CC4600588730 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				86A75FA21BA2DA5400588730 /* PWDTableViewCell.h */,
+				86A75FA31BA2DA5400588730 /* PWDTableViewCell.m */,
+				86A75FA51BA2DB0C00588730 /* PWDDatePickerCell.h */,
+				86A75FA61BA2DB0C00588730 /* PWDDatePickerCell.m */,
+				86A75FA71BA2DB0C00588730 /* PWDDatePickerCell.xib */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		86E21A721B973CBD0098AC93 /* Model */ = {
@@ -258,6 +284,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = PWD;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = xushiyan;
 				TargetAttributes = {
@@ -301,6 +328,7 @@
 			files = (
 				86485B311B973A4C0027D01A /* LaunchScreen.storyboard in Resources */,
 				86485B2E1B973A4C0027D01A /* Assets.xcassets in Resources */,
+				86A75FA91BA2DB0C00588730 /* PWDDatePickerCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,10 +356,13 @@
 				8621A00A1B9B1FBA0082B853 /* PWDTaskManager.m in Sources */,
 				E262CCEA1BA0881A00A82C98 /* PWDSettingsViewController.m in Sources */,
 				86485B231B973A4C0027D01A /* AppDelegate.m in Sources */,
+				86A75FA81BA2DB0C00588730 /* PWDDatePickerCell.m in Sources */,
 				4EB1112A1B9C0D4900BF5656 /* PowerDo.xcdatamodeld in Sources */,
 				86E21A781B973EF50098AC93 /* PWDTask.m in Sources */,
+				86A75F8A1BA2C10200588730 /* PWDConstants.swift in Sources */,
 				E2C426551B9DDD9500E3BC92 /* PWDTodayViewController.m in Sources */,
 				86485B201B973A4C0027D01A /* main.m in Sources */,
+				86A75FA41BA2DA5400588730 /* PWDTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,10 +495,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = PowerDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xushiyan.PowerDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PowerDo/PowerDo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -475,10 +509,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = PowerDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xushiyan.PowerDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PowerDo/PowerDo-Bridging-Header.h";
 			};
 			name = Release;
 		};
