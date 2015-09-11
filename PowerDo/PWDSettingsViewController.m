@@ -9,25 +9,20 @@
 #import "PWDSettingsViewController.h"
 #import "PWDDatePickerCell.h"
 #import "PWDConstants.h"
+#import "FoundationExtras.h"
 
 @implementation PWDSettingsViewController {
     BOOL _datePickerOpen;
-    NSCalendar *_calendar;
     NSDate *_cutoffTime;
     UILabel *_cutoffTimeLabel;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    _calendar = [NSCalendar currentCalendar];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSArray *cutoffTimeComponents = [userDefaults objectForKey:PWDUserDefaultsKeyPlanCutoffTimeComponents];
-    NSDateComponents *components = [[NSDateComponents alloc] init];
-    components.hour = [cutoffTimeComponents[0] intValue];
-    components.minute = [cutoffTimeComponents[1] intValue];
-    _cutoffTime = [_calendar dateFromComponents:components];
+    _cutoffTime = [NSDate dateFromHour:[cutoffTimeComponents[0] integerValue] minute:[cutoffTimeComponents[1] integerValue]];
     
     UITableView *tableView = self.tableView;
     tableView.estimatedRowHeight = 44;
@@ -46,7 +41,7 @@
             switch (row) {
                 case PWDConfigureRowPlanCutoffTime: {
                     if (_datePickerOpen) {
-                        NSDateComponents *components = [_calendar components:NSCalendarUnitHour|NSCalendarUnitMinute fromDate:_cutoffTime];
+                        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitHour|NSCalendarUnitMinute fromDate:_cutoffTime];
                         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                         [userDefaults setObject:@[@(components.hour),@(components.minute)] forKey:PWDUserDefaultsKeyPlanCutoffTimeComponents];
                         [userDefaults synchronize];

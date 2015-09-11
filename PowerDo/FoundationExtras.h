@@ -6,6 +6,8 @@
 //  Copyright © 2015 xushiyan. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 #ifndef FoundationExtras_h
 #define FoundationExtras_h
 
@@ -33,3 +35,11 @@ classInstance = [self new]; \
 return classInstance; \
 } \
 @end
+
+
+@interface NSDate (Extras)
+
++ (instancetype) dateFromHour:(NSInteger)hour minute:(NSInteger)minute;
+
+@end
+
