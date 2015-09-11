@@ -8,19 +8,25 @@
 
 #import "PWDSettingsViewController.h"
 #import "PWDDatePickerCell.h"
+#import "PWDConstants.h"
 
 @implementation PWDSettingsViewController {
-    BOOL datePickerOpen;
+    BOOL _datePickerOpen;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDate *cutoffTime = [userDefaults objectForKey:PWDUserDefaultsKeyPlanCutoffTime];
+    if (!cutoffTime) {
+        
+    }
     
     UITableView *tableView = self.tableView;
     tableView.estimatedRowHeight = 44;
-    [tableView registerClass:[PWDTableViewCell class] forCellReuseIdentifier:[PWDTableViewCell identifier]];
-    [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([PWDDatePickerCell class]) bundle:nil] forCellReuseIdentifier:[PWDDatePickerCell identifier]];
+    [PWDTableViewCell registerClassForTableView:tableView];
+    [PWDDatePickerCell registerNibForTableView:tableView];
 }
 
 #pragma mark - UITableViewDelegate
@@ -33,7 +39,7 @@
         case PWDSettingsSectionConfigure:
             switch (row) {
                 case PWDConfigureRowPlanCutoffTime: {
-                    datePickerOpen = !datePickerOpen;
+                    _datePickerOpen = !_datePickerOpen;
                     [tableView reloadSections:[NSIndexSet indexSetWithIndex:PWDSettingsSectionConfigure] withRowAnimation:UITableViewRowAnimationAutomatic];
                 }
                     break;
@@ -69,7 +75,7 @@
         case PWDSettingsSectionConfigure:
             switch (row) {
                 case PWDConfigureRowPlanCutoffTimePicker: {
-                    if (!datePickerOpen) {
+                    if (!_datePickerOpen) {
                         height = 0;
                     }
                 }

@@ -14,8 +14,12 @@
     return NSStringFromClass(self);
 }
 
-- (void)registerForTableView:(UITableView *)tableView {
-    [tableView registerClass:self.class forCellReuseIdentifier:[self.class identifier]];
++ (void)registerClassForTableView:(UITableView *)tableView {
+    [tableView registerClass:self forCellReuseIdentifier:[self identifier]];
+}
+
++ (void)registerNibForTableView:(UITableView *)tableView {
+    [tableView registerNib:[UINib nibWithNibName:NSStringFromClass(self) bundle:nil] forCellReuseIdentifier:[self identifier]];
 }
 
 @end

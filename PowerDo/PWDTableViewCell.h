@@ -11,6 +11,7 @@
 @interface PWDTableViewCell : UITableViewCell
 
 + (NSString *)identifier;
-- (void)registerForTableView:(UITableView *)tableView;
++ (void)registerClassForTableView:(UITableView *)tableView;
++ (void)registerNibForTableView:(UITableView *)tableView;
 
 @end
