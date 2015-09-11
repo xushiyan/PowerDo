@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "PWDTaskManager.h"
+#import "PWDStatsViewController.h"
 #import "PWDTodayViewController.h"
 #import "PWDSettingsViewController.h"
 #import "PWDConstants.h"
@@ -26,7 +27,7 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSArray *cutoffTimeComponents = [userDefaults objectForKey:PWDUserDefaultsKeyPlanCutoffTimeComponents];
     if (!cutoffTimeComponents) {
-        [userDefaults setObject:@[@8,@0] forKey:PWDUserDefaultsKeyPlanCutoffTimeComponents];
+        [userDefaults setObject:@[@0,@0] forKey:PWDUserDefaultsKeyPlanCutoffTimeComponents];
         [userDefaults synchronize];
     }
     
@@ -34,12 +35,16 @@
     today_vc.title = NSLocalizedString(@"Today", @"Today tab title");
     UINavigationController *today_nc = [[UINavigationController alloc] initWithRootViewController:today_vc];
     
+    PWDStatsViewController *stats_vc = [[PWDStatsViewController alloc] init];
+    stats_vc.title = NSLocalizedString(@"Stats", @"Stats tab title");
+    UINavigationController *stats_nc = [[UINavigationController alloc] initWithRootViewController:stats_vc];
+    
     PWDSettingsViewController *settings_vc = [[PWDSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
     settings_vc.title = NSLocalizedString(@"Settings", @"Settings tab title");
     UINavigationController *settings_nc = [[UINavigationController alloc] initWithRootViewController:settings_vc];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[today_nc,settings_nc];
+    tabBarController.viewControllers = @[today_nc,stats_nc,settings_nc];
     
     UIWindow *mainWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     mainWindow.rootViewController = tabBarController;

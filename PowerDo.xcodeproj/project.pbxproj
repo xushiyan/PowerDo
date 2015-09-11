@@ -17,6 +17,7 @@
 		86485B3C1B973A4C0027D01A /* PowerDoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B3B1B973A4C0027D01A /* PowerDoTests.m */; };
 		86485B471B973A4C0027D01A /* PowerDoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B461B973A4C0027D01A /* PowerDoUITests.m */; };
 		86658E5F1BA2F59A00FE67B3 /* FoundationExtrasTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86658E5E1BA2F59A00FE67B3 /* FoundationExtrasTests.m */; };
+		86658E621BA3372700FE67B3 /* PWDStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86658E611BA3372700FE67B3 /* PWDStatsViewController.m */; };
 		86A75FA41BA2DA5400588730 /* PWDTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 86A75FA31BA2DA5400588730 /* PWDTableViewCell.m */; };
 		86A75FA81BA2DB0C00588730 /* PWDDatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 86A75FA61BA2DB0C00588730 /* PWDDatePickerCell.m */; };
 		86A75FA91BA2DB0C00588730 /* PWDDatePickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86A75FA71BA2DB0C00588730 /* PWDDatePickerCell.xib */; };
@@ -65,6 +66,8 @@
 		86485B461B973A4C0027D01A /* PowerDoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PowerDoUITests.m; sourceTree = "<group>"; };
 		86485B481B973A4C0027D01A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86658E5E1BA2F59A00FE67B3 /* FoundationExtrasTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundationExtrasTests.m; sourceTree = "<group>"; };
+		86658E601BA3372700FE67B3 /* PWDStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDStatsViewController.h; sourceTree = "<group>"; };
+		86658E611BA3372700FE67B3 /* PWDStatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDStatsViewController.m; sourceTree = "<group>"; };
 		86A75FA21BA2DA5400588730 /* PWDTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTableViewCell.h; sourceTree = "<group>"; };
 		86A75FA31BA2DA5400588730 /* PWDTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTableViewCell.m; sourceTree = "<group>"; };
 		86A75FA51BA2DB0C00588730 /* PWDDatePickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDDatePickerCell.h; sourceTree = "<group>"; };
@@ -231,6 +234,8 @@
 				E2C426541B9DDD9500E3BC92 /* PWDTodayViewController.m */,
 				E262CCE81BA0881A00A82C98 /* PWDSettingsViewController.h */,
 				E262CCE91BA0881A00A82C98 /* PWDSettingsViewController.m */,
+				86658E601BA3372700FE67B3 /* PWDStatsViewController.h */,
+				86658E611BA3372700FE67B3 /* PWDStatsViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -371,6 +376,7 @@
 				E262CCEA1BA0881A00A82C98 /* PWDSettingsViewController.m in Sources */,
 				86485B231B973A4C0027D01A /* AppDelegate.m in Sources */,
 				86A75FA81BA2DB0C00588730 /* PWDDatePickerCell.m in Sources */,
+				86658E621BA3372700FE67B3 /* PWDStatsViewController.m in Sources */,
 				4EB1112A1B9C0D4900BF5656 /* PowerDo.xcdatamodeld in Sources */,
 				86E21A781B973EF50098AC93 /* PWDTask.m in Sources */,
 				E2C426551B9DDD9500E3BC92 /* PWDTodayViewController.m in Sources */,
