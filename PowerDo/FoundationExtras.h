@@ -39,7 +39,5 @@ return classInstance; \
 
 @interface NSDate (Extras)
 
-+ (instancetype) dateFromHour:(NSInteger)hour minute:(NSInteger)minute;
-
 @end
 

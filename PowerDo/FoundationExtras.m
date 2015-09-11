@@ -11,11 +11,4 @@
 
 @implementation NSDate (Extras)
 
-+ (instancetype) dateFromHour:(NSInteger)hour minute:(NSInteger)minute {
-    NSDateComponents *components = [[NSDateComponents alloc] init];
-    components.hour = hour;
-    components.minute = minute;
-    return [[NSCalendar currentCalendar] dateFromComponents:components];
-}
-
 @end

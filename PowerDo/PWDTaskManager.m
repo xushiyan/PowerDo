@@ -7,6 +7,7 @@
 //
 
 #import "PWDTaskManager.h"
+#import "PWDConstants.h"
 
 @implementation PWDTaskManager
 
@@ -43,6 +44,21 @@
 
 - (NSURL *)applicationDocumentsDirectory {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+- (NSDate *)cutoffTimeForToday {
+    return [self cutoffTimeForDate:[NSDate date]];
+}
+
+- (NSDate *)cutoffTimeForDate:(NSDate *)date {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSArray *cutoffTimeComponents = [userDefaults objectForKey:PWDUserDefaultsKeyPlanCutoffTimeComponents];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    return [calendar dateBySettingHour:[cutoffTimeComponents[0] integerValue]
+                                minute:[cutoffTimeComponents[1] integerValue]
+                                second:0
+                                ofDate:date
+                               options:0];
 }
 
 @end

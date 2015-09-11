@@ -25,13 +25,4 @@
     [super tearDown];
 }
 
-- (void)testNSDateExtras {
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    int hour = 12, minute = 17;
-    NSDate *date = [NSDate dateFromHour:hour minute:minute];
-    NSDateComponents *components = [calendar components:NSCalendarUnitHour|NSCalendarUnitMinute fromDate:date];
-    XCTAssertEqual(components.hour, hour);
-    XCTAssertEqual(components.minute, minute);
-}
-
 @end

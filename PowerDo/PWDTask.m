@@ -7,6 +7,8 @@
 //
 
 #import "PWDTask.h"
+#import "PWDConstants.h"
+#import "PWDTaskManager.h"
 
 @implementation PWDTask
 
@@ -16,11 +18,14 @@
         
         NSCalendar *calendar = [NSCalendar currentCalendar];
         NSDate *now = [NSDate date];
-        NSDateComponents *components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:now];
-        NSDate *todayStart = [calendar dateFromComponents:components];
-        NSDate *todayEnd = [[calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:todayStart options:0] dateByAddingTimeInterval:-1];
+        NSDate *cutoffTime = [[PWDTaskManager defaultInstance] cutoffTimeForDate:now];
+        
+        NSComparisonResult cutoffCompare = [calendar compareDate:now toDate:cutoffTime toUnitGranularity:NSCalendarUnitMinute];
+        NSDateComponents *createDateYrMnDy = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:now];
+        NSDate *todayStart = [calendar dateFromComponents:createDateYrMnDy];
+        NSDate *dueDate = [[calendar dateByAddingUnit:NSCalendarUnitDay value:cutoffCompare==NSOrderedAscending? 1 : 2 toDate:todayStart options:0] dateByAddingTimeInterval:-1];
         _createDate = now;
-        _dueDate = todayEnd;
+        _dueDate = dueDate;
         
     }
     return self;

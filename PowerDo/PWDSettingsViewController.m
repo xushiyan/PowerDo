@@ -10,6 +10,7 @@
 #import "PWDDatePickerCell.h"
 #import "PWDConstants.h"
 #import "FoundationExtras.h"
+#import "PWDTaskManager.h"
 
 @implementation PWDSettingsViewController {
     BOOL _datePickerOpen;
@@ -20,9 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSArray *cutoffTimeComponents = [userDefaults objectForKey:PWDUserDefaultsKeyPlanCutoffTimeComponents];
-    _cutoffTime = [NSDate dateFromHour:[cutoffTimeComponents[0] integerValue] minute:[cutoffTimeComponents[1] integerValue]];
+    _cutoffTime = [[PWDTaskManager defaultInstance] cutoffTimeForToday];
     
     UITableView *tableView = self.tableView;
     tableView.estimatedRowHeight = 44;
@@ -148,6 +147,7 @@
             break;
         case PWDSettingsSectionFeedback: {
             xCell = [tableView dequeueReusableCellWithIdentifier:[PWDTableViewCell identifier] forIndexPath:indexPath];
+            xCell.accessoryView = nil;
             switch (row) {
                 case PWDFeedbackRowFeedback: {
                     xCell.textLabel.text = NSLocalizedString(@"Feedback", @"Settings cell label");
