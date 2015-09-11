@@ -13,7 +13,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dd0-Hd-wpZ">
+                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="30" translatesAutoresizingMaskIntoConstraints="NO" id="dd0-Hd-wpZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
                         <date key="date" timeIntervalSinceReferenceDate="463657748.14480001">
                             <!--2015-09-11 09:49:08 +0000-->

@@ -12,16 +12,22 @@
 
 @implementation PWDSettingsViewController {
     BOOL _datePickerOpen;
+    NSCalendar *_calendar;
+    NSDate *_cutoffTime;
+    UILabel *_cutoffTimeLabel;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    _calendar = [NSCalendar currentCalendar];
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSDate *cutoffTime = [userDefaults objectForKey:PWDUserDefaultsKeyPlanCutoffTime];
-    if (!cutoffTime) {
-        
-    }
+    NSArray *cutoffTimeComponents = [userDefaults objectForKey:PWDUserDefaultsKeyPlanCutoffTimeComponents];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    components.hour = [cutoffTimeComponents[0] intValue];
+    components.minute = [cutoffTimeComponents[1] intValue];
+    _cutoffTime = [_calendar dateFromComponents:components];
     
     UITableView *tableView = self.tableView;
     tableView.estimatedRowHeight = 44;
@@ -39,7 +45,15 @@
         case PWDSettingsSectionConfigure:
             switch (row) {
                 case PWDConfigureRowPlanCutoffTime: {
+                    if (_datePickerOpen) {
+                        NSDateComponents *components = [_calendar components:NSCalendarUnitHour|NSCalendarUnitMinute fromDate:_cutoffTime];
+                        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                        [userDefaults setObject:@[@(components.hour),@(components.minute)] forKey:PWDUserDefaultsKeyPlanCutoffTimeComponents];
+                        [userDefaults synchronize];
+                    }
+                    
                     _datePickerOpen = !_datePickerOpen;
+                    
                     [tableView reloadSections:[NSIndexSet indexSetWithIndex:PWDSettingsSectionConfigure] withRowAnimation:UITableViewRowAnimationAutomatic];
                 }
                     break;
@@ -96,7 +110,7 @@
     NSInteger num = 0;
     switch (section) {
         case PWDSettingsSectionConfigure: {
-            num = PWDConfigureRowEnd;
+            num = _datePickerOpen ? PWDConfigureRowEnd : PWDConfigureRowEnd - 1;
         }
             break;
         case PWDSettingsSectionFeedback: {
@@ -118,11 +132,19 @@
                 case PWDConfigureRowPlanCutoffTime: {
                     xCell = [tableView dequeueReusableCellWithIdentifier:[PWDTableViewCell identifier] forIndexPath:indexPath];
                     xCell.textLabel.text = NSLocalizedString(@"Cutoff Time", @"Settings cell label");
+                    
+                    UILabel *accessoryLabel = [[UILabel alloc] init];
+                    xCell.accessoryView = accessoryLabel;
+                    _cutoffTimeLabel = accessoryLabel;
+                    accessoryLabel.text = [NSDateFormatter localizedStringFromDate:_cutoffTime dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
+                    [accessoryLabel sizeToFit];
                 }
                     break;
                 case PWDConfigureRowPlanCutoffTimePicker: {
                     PWDDatePickerCell *cell = (PWDDatePickerCell *)[tableView dequeueReusableCellWithIdentifier:[PWDDatePickerCell identifier] forIndexPath:indexPath];
-                    
+                    UIDatePicker *datePicker = cell.datePicker;
+                    datePicker.date = _cutoffTime;
+                    [datePicker addTarget:self action:@selector(updateCuttoffTimeLabel:) forControlEvents:UIControlEventValueChanged];
                     xCell = cell;
                 }
                     break;
@@ -152,6 +174,14 @@
             break;
     }
     return xCell;
+}
+
+#pragma mark - Actions
+
+- (void)updateCuttoffTimeLabel:(UIDatePicker *)sender {
+    _cutoffTimeLabel.text = [NSDateFormatter localizedStringFromDate:sender.date dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
+    [_cutoffTimeLabel sizeToFit];
+    _cutoffTime = sender.date;
 }
 
 @end

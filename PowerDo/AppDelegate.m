@@ -10,6 +10,7 @@
 #import "PWDTaskManager.h"
 #import "PWDTodayViewController.h"
 #import "PWDSettingsViewController.h"
+#import "PWDConstants.h"
 
 @interface AppDelegate ()
 
@@ -21,6 +22,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.taskManager = [PWDTaskManager defaultInstance];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSArray *cutoffTimeComponents = [userDefaults objectForKey:PWDUserDefaultsKeyPlanCutoffTimeComponents];
+    if (!cutoffTimeComponents) {
+        [userDefaults setObject:@[@8,@0] forKey:PWDUserDefaultsKeyPlanCutoffTimeComponents];
+        [userDefaults synchronize];
+    }
     
     PWDTodayViewController *today_vc = [[PWDTodayViewController alloc] initWithStyle:UITableViewStylePlain];
     today_vc.title = NSLocalizedString(@"Today", @"Today tab title");
