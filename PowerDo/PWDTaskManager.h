@@ -18,8 +18,6 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
-- (NSDate *)cutoffTimeForToday;
-- (NSDate *)cutoffTimeForDate:(NSDate *)date;
 
 @end
 

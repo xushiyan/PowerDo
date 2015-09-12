@@ -15,7 +15,6 @@
 @interface PWDTaskTests : XCTestCase
 
 @property (nonatomic,strong) PWDTask *task;
-@property (nonatomic,strong) NSDate *cutoffTime;
 
 @end
 
@@ -25,12 +24,10 @@
     [super setUp];
     
     self.task = [[PWDTask alloc] initWithTitle:@"sample task"];
-    self.cutoffTime = [[PWDTaskManager defaultInstance] cutoffTimeForDate:self.task.createDate];
 }
 
 - (void)tearDown {
     self.task = nil;
-    self.cutoffTime = nil;
     [super tearDown];
 }
 
@@ -60,9 +57,8 @@
     XCTAssertFalse(task.completed);
 }
 
-- (void)testTaskIsDueTodayOrTomorrow {
+- (void)testTaskIsDueEndOfTomorrowByDefault {
     
-    NSDate *cutoffTime = self.cutoffTime;
     PWDTask *task = self.task;
     NSDate *createDate = task.createDate;
     NSDate *dueDate = task.dueDate;
@@ -72,24 +68,13 @@
     NSCalendar *calendar = [NSCalendar currentCalendar];
     XCTAssertTrue([calendar isDateInToday:createDate], @"Created date should be today.");
     
-    NSComparisonResult cutoffCompare = [calendar compareDate:createDate toDate:cutoffTime toUnitGranularity:NSCalendarUnitMinute];
-    if (cutoffCompare == NSOrderedAscending) {
-        // task created before cutoff time
-        XCTAssertTrue([calendar isDateInToday:dueDate], @"dueDate should be at today.");
-        XCTAssertTrue([calendar isDate:createDate inSameDayAsDate:dueDate], @"dueDate should be at the same day as createDate");
-        
-        NSDate *tomorrowStart = [dueDate dateByAddingTimeInterval:1];
-        XCTAssertTrue([calendar isDateInTomorrow:tomorrowStart], @"dueDate should be at the end of today.");
-        
-    } else {
-        // task created at or after cutoff time
-        XCTAssertTrue([calendar isDateInTomorrow:dueDate], @"dueDate should be at tomorrow.");
-        
-        NSDate *megaTomorrowStart = [dueDate dateByAddingTimeInterval:1];
-        NSDate *megaTomorrow = [calendar dateByAddingUnit:NSCalendarUnitDay value:2 toDate:createDate options:0];
-        XCTAssertTrue([calendar isDate:megaTomorrowStart inSameDayAsDate:megaTomorrow], @"dueDate should be at the end of the tomorrow.");
-    }
-
+    // task created at or after cutoff time
+    XCTAssertTrue([calendar isDateInTomorrow:dueDate], @"dueDate should be at tomorrow.");
+    
+    NSDate *megaTomorrowStart = [dueDate dateByAddingTimeInterval:1];
+    NSDate *megaTomorrow = [calendar dateByAddingUnit:NSCalendarUnitDay value:2 toDate:createDate options:0];
+    XCTAssertTrue([calendar isDate:megaTomorrowStart inSameDayAsDate:megaTomorrow], @"dueDate should be at the end of the tomorrow.");
+    
     NSComparisonResult result = [dueDate compare:createDate];
     // we do not consider extreme case in which task is created in the last millisecond of today
     XCTAssertNotEqual(result, NSOrderedAscending, @"dueDate should not be earlier than createDate.");

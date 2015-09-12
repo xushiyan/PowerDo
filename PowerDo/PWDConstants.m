@@ -8,7 +8,6 @@
 
 #import "PWDConstants.h"
 
-NSString * const PWDUserDefaultsKeyPlanCutoffTimeComponents = @"PWDUserDefaultsKeyPlanCutoffTimeComponents";
 
 @implementation PWDConstants
 

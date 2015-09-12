@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "FoundationExtras.h"
 
-extern NSString * const PWDUserDefaultsKeyPlanCutoffTimeComponents;
 
 @interface PWDConstants : NSObject
 

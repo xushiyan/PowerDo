@@ -18,13 +18,10 @@
         
         NSCalendar *calendar = [NSCalendar currentCalendar];
         NSDate *now = [NSDate date];
-        NSDate *cutoffTime = [[PWDTaskManager defaultInstance] cutoffTimeForDate:now];
-        
-        NSComparisonResult cutoffCompare = [calendar compareDate:now toDate:cutoffTime toUnitGranularity:NSCalendarUnitMinute];
-        NSDateComponents *createDateYrMnDy = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:now];
-        NSDate *todayStart = [calendar dateFromComponents:createDateYrMnDy];
-        NSDate *dueDate = [[calendar dateByAddingUnit:NSCalendarUnitDay value:cutoffCompare==NSOrderedAscending? 1 : 2 toDate:todayStart options:0] dateByAddingTimeInterval:-1];
         _createDate = now;
+        
+        NSDate *todayStart = [calendar startOfDayForDate:now];
+        NSDate *dueDate = [[calendar dateByAddingUnit:NSCalendarUnitDay value:2 toDate:todayStart options:0] dateByAddingTimeInterval:-1];
         _dueDate = dueDate;
         
     }
