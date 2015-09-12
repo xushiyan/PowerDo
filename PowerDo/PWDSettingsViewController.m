@@ -11,6 +11,8 @@
 #import "PWDConstants.h"
 #import "FoundationExtras.h"
 #import "PWDTaskManager.h"
+#import "PWDAboutViewController.h"
+#import "PWDFeedbackViewController.h"
 
 @implementation PWDSettingsViewController {
     
@@ -35,11 +37,14 @@
         case PWDSettingsSectionFeedback:
             switch (row) {
                 case PWDFeedbackRowFeedback: {
-                    
+                    PWDFeedbackViewController *feedback_vc = [[PWDFeedbackViewController alloc] initWithNibName:NSStringFromClass([PWDFeedbackViewController class]) bundle:nil];
+                    feedback_vc.title = NSLocalizedString(@"Feedback", @"Feedback vc title");
+                    [self showViewController:feedback_vc sender:nil];
                 }
                     break;
                 case PWDFeedbackRowAbout: {
-                    
+                    PWDAboutViewController *about_vc = [[PWDAboutViewController alloc] initWithNibName:NSStringFromClass([PWDAboutViewController class]) bundle:nil];
+                    [self showViewController:about_vc sender:nil];
                 }
                     break;
             }

@@ -25,6 +25,10 @@
 		86A75FAE1BA2F12900588730 /* FoundationExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 86A75FAD1BA2F12900588730 /* FoundationExtras.m */; };
 		86E21A741B973D3C0098AC93 /* PWDTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E21A731B973D3C0098AC93 /* PWDTaskTests.m */; };
 		86E21A781B973EF50098AC93 /* PWDTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E21A771B973EF50098AC93 /* PWDTask.m */; };
+		E22319031BA485BF00C1C21F /* PWDAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E22319011BA485BF00C1C21F /* PWDAboutViewController.m */; };
+		E22319041BA485BF00C1C21F /* PWDAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E22319021BA485BF00C1C21F /* PWDAboutViewController.xib */; };
+		E22319081BA486D400C1C21F /* PWDFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E22319061BA486D400C1C21F /* PWDFeedbackViewController.m */; };
+		E22319091BA486D400C1C21F /* PWDFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E22319071BA486D400C1C21F /* PWDFeedbackViewController.xib */; };
 		E262CCEA1BA0881A00A82C98 /* PWDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E262CCE91BA0881A00A82C98 /* PWDSettingsViewController.m */; };
 		E2C426551B9DDD9500E3BC92 /* PWDTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C426541B9DDD9500E3BC92 /* PWDTodayViewController.m */; };
 /* End PBXBuildFile section */
@@ -79,6 +83,12 @@
 		86E21A731B973D3C0098AC93 /* PWDTaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTaskTests.m; sourceTree = "<group>"; };
 		86E21A761B973EF50098AC93 /* PWDTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTask.h; sourceTree = "<group>"; };
 		86E21A771B973EF50098AC93 /* PWDTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTask.m; sourceTree = "<group>"; };
+		E22319001BA485BF00C1C21F /* PWDAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDAboutViewController.h; sourceTree = "<group>"; };
+		E22319011BA485BF00C1C21F /* PWDAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDAboutViewController.m; sourceTree = "<group>"; };
+		E22319021BA485BF00C1C21F /* PWDAboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PWDAboutViewController.xib; sourceTree = "<group>"; };
+		E22319051BA486D400C1C21F /* PWDFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDFeedbackViewController.h; sourceTree = "<group>"; };
+		E22319061BA486D400C1C21F /* PWDFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDFeedbackViewController.m; sourceTree = "<group>"; };
+		E22319071BA486D400C1C21F /* PWDFeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PWDFeedbackViewController.xib; sourceTree = "<group>"; };
 		E262CCE81BA0881A00A82C98 /* PWDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDSettingsViewController.h; sourceTree = "<group>"; };
 		E262CCE91BA0881A00A82C98 /* PWDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDSettingsViewController.m; sourceTree = "<group>"; };
 		E2C426531B9DDD9500E3BC92 /* PWDTodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTodayViewController.h; sourceTree = "<group>"; };
@@ -236,6 +246,12 @@
 				E262CCE91BA0881A00A82C98 /* PWDSettingsViewController.m */,
 				86658E601BA3372700FE67B3 /* PWDStatsViewController.h */,
 				86658E611BA3372700FE67B3 /* PWDStatsViewController.m */,
+				E22319001BA485BF00C1C21F /* PWDAboutViewController.h */,
+				E22319011BA485BF00C1C21F /* PWDAboutViewController.m */,
+				E22319021BA485BF00C1C21F /* PWDAboutViewController.xib */,
+				E22319051BA486D400C1C21F /* PWDFeedbackViewController.h */,
+				E22319061BA486D400C1C21F /* PWDFeedbackViewController.m */,
+				E22319071BA486D400C1C21F /* PWDFeedbackViewController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -345,9 +361,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E22319041BA485BF00C1C21F /* PWDAboutViewController.xib in Resources */,
 				86485B311B973A4C0027D01A /* LaunchScreen.storyboard in Resources */,
 				86485B2E1B973A4C0027D01A /* Assets.xcassets in Resources */,
 				86A75FA91BA2DB0C00588730 /* PWDDatePickerCell.xib in Resources */,
+				E22319091BA486D400C1C21F /* PWDFeedbackViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +392,8 @@
 			files = (
 				8621A00A1B9B1FBA0082B853 /* PWDTaskManager.m in Sources */,
 				E262CCEA1BA0881A00A82C98 /* PWDSettingsViewController.m in Sources */,
+				E22319031BA485BF00C1C21F /* PWDAboutViewController.m in Sources */,
+				E22319081BA486D400C1C21F /* PWDFeedbackViewController.m in Sources */,
 				86485B231B973A4C0027D01A /* AppDelegate.m in Sources */,
 				86A75FA81BA2DB0C00588730 /* PWDDatePickerCell.m in Sources */,
 				86658E621BA3372700FE67B3 /* PWDStatsViewController.m in Sources */,
