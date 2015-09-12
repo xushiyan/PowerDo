@@ -114,4 +114,9 @@
     XCTAssertEqualObjects(task.dueDate, createDate);
 }
 
+- (void)testTaskHasEasyDifficultyByDefault {
+    PWDTask *task = self.task;
+    XCTAssertEqual(task.difficulty, PWDTaskDifficultyEasy, @"By default, newly created task has easy difficulty.");
+}
+
 @end

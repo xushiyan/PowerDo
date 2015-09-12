@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, PWDTaskDifficulty) {
+    PWDTaskDifficultyEasy,
+    PWDTaskDifficultyMedium,
+    PWDTaskDifficultyHard,
+};
+
 @interface PWDTask : NSObject
 
 - (instancetype)initWithTitle:(NSString *)title NS_DESIGNATED_INITIALIZER;
@@ -16,5 +22,6 @@
 @property (nonatomic,getter=isCompleted) BOOL completed;
 @property (nonatomic,strong,readonly) NSDate *createDate;
 @property (nonatomic,strong) NSDate *dueDate;
+@property (nonatomic) enum PWDTaskDifficulty difficulty;
 
 @end
