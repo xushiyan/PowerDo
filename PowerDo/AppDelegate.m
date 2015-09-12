@@ -33,6 +33,7 @@
     
     PWDTodayViewController *today_vc = [[PWDTodayViewController alloc] initWithStyle:UITableViewStylePlain];
     today_vc.title = NSLocalizedString(@"Today", @"Today tab title");
+    today_vc.tabBarItem = [[UITabBarItem alloc] initWithTitle:today_vc.title image:[UIImage imageNamed:@"ic_today"] tag:0];
     UINavigationController *today_nc = [[UINavigationController alloc] initWithRootViewController:today_vc];
     
     PWDStatsViewController *stats_vc = [[PWDStatsViewController alloc] init];
