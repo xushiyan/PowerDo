@@ -38,10 +38,12 @@
     
     PWDStatsViewController *stats_vc = [[PWDStatsViewController alloc] init];
     stats_vc.title = NSLocalizedString(@"Stats", @"Stats tab title");
+    stats_vc.tabBarItem = [[UITabBarItem alloc] initWithTitle:stats_vc.title image:[UIImage imageNamed:@"ic_insert_chart"] tag:1];
     UINavigationController *stats_nc = [[UINavigationController alloc] initWithRootViewController:stats_vc];
     
     PWDSettingsViewController *settings_vc = [[PWDSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
     settings_vc.title = NSLocalizedString(@"Settings", @"Settings tab title");
+    settings_vc.tabBarItem = [[UITabBarItem alloc] initWithTitle:settings_vc.title image:[UIImage imageNamed:@"ic_settings"] tag:2];
     UINavigationController *settings_nc = [[UINavigationController alloc] initWithRootViewController:settings_vc];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
