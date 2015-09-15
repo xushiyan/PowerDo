@@ -20,27 +20,16 @@
                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="YO1-EH-ocW">
                     <rect key="frame" x="55" y="304" width="96" height="48"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y7d-U8-ycC">
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y7d-U8-ycC">
                             <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                             <state key="normal" image="ic_mood_48pt"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXX-0W-S33">
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXX-0W-S33">
                             <rect key="frame" x="48" y="0.0" width="48" height="48"/>
                             <state key="normal" image="ic_mood_bad_48pt"/>
                         </button>
                     </subviews>
                 </stackView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="optional" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qCW-Im-Yzh">
-                    <rect key="frame" x="8" y="158" width="584" height="30"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiV-BW-LrF">
-                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="fill" borderStyle="roundedRect" placeholder="Leave your suggestions or thoughts here." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uhj-aX-NZb" customClass="PWDFeedbackTextField">
                     <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                     <constraints>
@@ -67,16 +56,19 @@
                         </mask>
                     </variation>
                 </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email address (optional)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qCW-Im-Yzh">
+                    <rect key="frame" x="8" y="158" width="584" height="30"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Uhj-aX-NZb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="5lh-La-Rkc"/>
-                <constraint firstItem="YO1-EH-ocW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="16" id="Kdl-Y1-LP6"/>
-                <constraint firstItem="qCW-Im-Yzh" firstAttribute="leading" secondItem="wiV-BW-LrF" secondAttribute="leading" id="QsE-Hu-OJ1"/>
-                <constraint firstItem="wiV-BW-LrF" firstAttribute="top" secondItem="Uhj-aX-NZb" secondAttribute="bottom" constant="24" id="ZqX-Wb-bbv"/>
-                <constraint firstItem="YO1-EH-ocW" firstAttribute="width" secondItem="qCW-Im-Yzh" secondAttribute="width" multiplier="0.618" id="eqG-b8-zWG"/>
-                <constraint firstItem="qCW-Im-Yzh" firstAttribute="top" secondItem="wiV-BW-LrF" secondAttribute="bottom" constant="12" id="k46-Bt-ysf"/>
-                <constraint firstItem="Uhj-aX-NZb" firstAttribute="top" secondItem="YO1-EH-ocW" secondAttribute="bottom" constant="16" id="ktj-G2-nVj"/>
+                <constraint firstItem="qCW-Im-Yzh" firstAttribute="top" secondItem="Uhj-aX-NZb" secondAttribute="bottom" constant="16" id="9Eu-Fx-VCM"/>
+                <constraint firstItem="YO1-EH-ocW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="24" id="Kdl-Y1-LP6"/>
+                <constraint firstItem="YO1-EH-ocW" firstAttribute="width" secondItem="Uhj-aX-NZb" secondAttribute="width" multiplier="0.618" id="bpv-OZ-UIW"/>
+                <constraint firstItem="Uhj-aX-NZb" firstAttribute="top" secondItem="YO1-EH-ocW" secondAttribute="bottom" constant="24" id="ktj-G2-nVj"/>
                 <constraint firstItem="qCW-Im-Yzh" firstAttribute="leading" secondItem="Uhj-aX-NZb" secondAttribute="leading" id="lpB-vv-ZWa"/>
                 <constraint firstItem="YO1-EH-ocW" firstAttribute="centerX" secondItem="Uhj-aX-NZb" secondAttribute="centerX" id="m0a-NF-3Rz"/>
                 <constraint firstItem="qCW-Im-Yzh" firstAttribute="trailing" secondItem="Uhj-aX-NZb" secondAttribute="trailing" id="m4N-yS-YCg"/>
@@ -84,40 +76,34 @@
             </constraints>
             <variation key="default">
                 <mask key="subviews">
-                    <exclude reference="wiV-BW-LrF"/>
                     <exclude reference="Uhj-aX-NZb"/>
                 </mask>
                 <mask key="constraints">
+                    <exclude reference="Kdl-Y1-LP6"/>
+                    <exclude reference="m0a-NF-3Rz"/>
                     <exclude reference="5lh-La-Rkc"/>
+                    <exclude reference="bpv-OZ-UIW"/>
                     <exclude reference="ktj-G2-nVj"/>
                     <exclude reference="zre-Pf-7j2"/>
-                    <exclude reference="ZqX-Wb-bbv"/>
-                    <exclude reference="QsE-Hu-OJ1"/>
-                    <exclude reference="k46-Bt-ysf"/>
+                    <exclude reference="9Eu-Fx-VCM"/>
                     <exclude reference="lpB-vv-ZWa"/>
                     <exclude reference="m4N-yS-YCg"/>
-                    <exclude reference="Kdl-Y1-LP6"/>
-                    <exclude reference="eqG-b8-zWG"/>
-                    <exclude reference="m0a-NF-3Rz"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
                 <mask key="subviews">
-                    <include reference="wiV-BW-LrF"/>
                     <include reference="Uhj-aX-NZb"/>
                 </mask>
                 <mask key="constraints">
+                    <include reference="Kdl-Y1-LP6"/>
+                    <include reference="m0a-NF-3Rz"/>
                     <include reference="5lh-La-Rkc"/>
+                    <include reference="bpv-OZ-UIW"/>
                     <include reference="ktj-G2-nVj"/>
                     <include reference="zre-Pf-7j2"/>
-                    <include reference="ZqX-Wb-bbv"/>
-                    <include reference="QsE-Hu-OJ1"/>
-                    <include reference="k46-Bt-ysf"/>
+                    <include reference="9Eu-Fx-VCM"/>
                     <include reference="lpB-vv-ZWa"/>
                     <include reference="m4N-yS-YCg"/>
-                    <include reference="Kdl-Y1-LP6"/>
-                    <include reference="eqG-b8-zWG"/>
-                    <include reference="m0a-NF-3Rz"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="203" y="52"/>

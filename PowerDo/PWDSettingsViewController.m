@@ -20,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = backButtonItem;
     
@@ -124,6 +125,11 @@
             xCell = [tableView dequeueReusableCellWithIdentifier:[PWDTableViewCell identifier] forIndexPath:indexPath];
             xCell.accessoryView = nil;
             switch (row) {
+                case PWDFeedbackRowHelp: {
+                    xCell.textLabel.text = NSLocalizedString(@"How to gain Power?", @"Settings cell label");
+                    xCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                }
+                    break;
                 case PWDFeedbackRowFeedback: {
                     xCell.textLabel.text = NSLocalizedString(@"Feedback", @"Settings cell label");
                     xCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger, PWDSettingsSection) {
 };
 
 typedef NS_ENUM(NSInteger, PWDFeedbackRow) {
+    PWDFeedbackRowHelp,
     PWDFeedbackRowFeedback,
     PWDFeedbackRowAbout,
     PWDFeedbackRowEnd

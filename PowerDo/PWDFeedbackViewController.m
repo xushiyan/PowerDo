@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = NSLocalizedString(@"how do you feel", @"Feedback vc title");
+    self.title = NSLocalizedString(@"Feedback", @"Feedback vc title");
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
