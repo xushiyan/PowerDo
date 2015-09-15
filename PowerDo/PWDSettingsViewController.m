@@ -20,6 +20,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backButtonItem;
     
     UITableView *tableView = self.tableView;
     tableView.estimatedRowHeight = 44;
@@ -38,7 +40,6 @@
             switch (row) {
                 case PWDFeedbackRowFeedback: {
                     PWDFeedbackViewController *feedback_vc = [[PWDFeedbackViewController alloc] initWithNibName:NSStringFromClass([PWDFeedbackViewController class]) bundle:nil];
-                    feedback_vc.title = NSLocalizedString(@"Feedback", @"Feedback vc title");
                     [self showViewController:feedback_vc sender:nil];
                 }
                     break;
