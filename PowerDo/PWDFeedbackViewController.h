@@ -12,6 +12,6 @@
 @interface PWDFeedbackViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet PWDFeedbackTextField *feedbackField;
-
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
+
 @end

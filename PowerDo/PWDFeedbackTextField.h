@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+IB_DESIGNABLE
 @interface PWDFeedbackTextField : UITextField
+
+@property (nonatomic) IBInspectable CGFloat insetX;
+@property (nonatomic) IBInspectable CGFloat insetY;
 
 @end

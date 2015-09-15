@@ -19,11 +19,11 @@
 */
 
 - (CGRect)textRectForBounds:(CGRect)bounds {
-    return CGRectInset(bounds, 10, 40);
+    return CGRectInset([super textRectForBounds:bounds], _insetX, _insetY);
 }
 
 - (CGRect)editingRectForBounds:(CGRect)bounds {
-    return CGRectInset(bounds, 10, 40);
+    return CGRectInset([super editingRectForBounds:bounds], _insetX, _insetY);
 }
 
 @end
