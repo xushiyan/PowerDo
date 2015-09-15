@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
     self.edgesForExtendedLayout = UIRectEdgeNone;
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Send", @"Feedback send button") style:UIBarButtonItemStylePlain target:self action:nil];
@@ -29,8 +30,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    UITextView *feedbackContent = self.feedbackContent;
-    [feedbackContent becomeFirstResponder];
 }
 
 /*

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PWDFeedbackTextField.h"
 
 @interface PWDFeedbackViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UITextView *feedbackContent;
+@property (weak, nonatomic) IBOutlet PWDFeedbackTextField *feedbackField;
+
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @end

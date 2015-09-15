@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4EB1112A1B9C0D4900BF5656 /* PowerDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4EB111281B9C0D4900BF5656 /* PowerDo.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		4EB1112A1B9C0D4900BF5656 /* PowerDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4EB111281B9C0D4900BF5656 /* PowerDo.xcdatamodeld */; };
 		8621A00A1B9B1FBA0082B853 /* PWDTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621A0091B9B1FBA0082B853 /* PWDTaskManager.m */; };
 		8621A00C1B9B20580082B853 /* PWDTaskManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621A00B1B9B20580082B853 /* PWDTaskManagerTests.m */; };
 		86485B201B973A4C0027D01A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B1F1B973A4C0027D01A /* main.m */; };
@@ -31,6 +31,7 @@
 		E22319091BA486D400C1C21F /* PWDFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E22319071BA486D400C1C21F /* PWDFeedbackViewController.xib */; };
 		E262CCEA1BA0881A00A82C98 /* PWDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E262CCE91BA0881A00A82C98 /* PWDSettingsViewController.m */; };
 		E2C426551B9DDD9500E3BC92 /* PWDTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C426541B9DDD9500E3BC92 /* PWDTodayViewController.m */; };
+		E2DAC0331BA8744000C33CBD /* PWDFeedbackTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAC0321BA8744000C33CBD /* PWDFeedbackTextField.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,8 @@
 		E262CCE91BA0881A00A82C98 /* PWDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDSettingsViewController.m; sourceTree = "<group>"; };
 		E2C426531B9DDD9500E3BC92 /* PWDTodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTodayViewController.h; sourceTree = "<group>"; };
 		E2C426541B9DDD9500E3BC92 /* PWDTodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTodayViewController.m; sourceTree = "<group>"; };
+		E2DAC0311BA8744000C33CBD /* PWDFeedbackTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDFeedbackTextField.h; sourceTree = "<group>"; };
+		E2DAC0321BA8744000C33CBD /* PWDFeedbackTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDFeedbackTextField.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +215,8 @@
 				86A75FA51BA2DB0C00588730 /* PWDDatePickerCell.h */,
 				86A75FA61BA2DB0C00588730 /* PWDDatePickerCell.m */,
 				86A75FA71BA2DB0C00588730 /* PWDDatePickerCell.xib */,
+				E2DAC0311BA8744000C33CBD /* PWDFeedbackTextField.h */,
+				E2DAC0321BA8744000C33CBD /* PWDFeedbackTextField.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -401,6 +406,7 @@
 				86E21A781B973EF50098AC93 /* PWDTask.m in Sources */,
 				E2C426551B9DDD9500E3BC92 /* PWDTodayViewController.m in Sources */,
 				86485B201B973A4C0027D01A /* main.m in Sources */,
+				E2DAC0331BA8744000C33CBD /* PWDFeedbackTextField.m in Sources */,
 				86A75FA41BA2DA5400588730 /* PWDTableViewCell.m in Sources */,
 				86A75FAE1BA2F12900588730 /* FoundationExtras.m in Sources */,
 				86A75FAC1BA2E20700588730 /* PWDConstants.m in Sources */,

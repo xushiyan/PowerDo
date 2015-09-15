@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8121.17" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PWDFeedbackViewController">
             <connections>
                 <outlet property="emailField" destination="qCW-Im-Yzh" id="vWz-hy-kYA"/>
-                <outlet property="feedbackContent" destination="hVI-gC-k3f" id="jS5-Jg-e5O"/>
+                <outlet property="feedbackField" destination="Uhj-aX-NZb" id="yCA-GC-OTh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,31 +16,77 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hVI-gC-k3f">
-                    <rect key="frame" x="8" y="8" width="584" height="142"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Leave your suggestions here." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uhj-aX-NZb" customClass="PWDFeedbackTextField">
+                    <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="142" id="RcK-Pm-Tzc"/>
+                        <constraint firstAttribute="height" constant="142" id="luM-5l-1o0"/>
                     </constraints>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your email for us to get back to you. (optional)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qCW-Im-Yzh">
+                    <textInputTraits key="textInputTraits"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="luM-5l-1o0"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="luM-5l-1o0"/>
+                        </mask>
+                    </variation>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="so that we can get back to you (optional)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qCW-Im-Yzh">
                     <rect key="frame" x="8" y="158" width="584" height="30"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiV-BW-LrF">
+                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="qCW-Im-Yzh" firstAttribute="top" secondItem="hVI-gC-k3f" secondAttribute="bottom" constant="8" id="3Xi-11-ZVl"/>
-                <constraint firstAttribute="trailing" secondItem="hVI-gC-k3f" secondAttribute="trailing" constant="8" id="Haa-2r-BgU"/>
-                <constraint firstItem="hVI-gC-k3f" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="LoT-iZ-CCe"/>
-                <constraint firstItem="hVI-gC-k3f" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="d38-b7-s5r"/>
-                <constraint firstItem="qCW-Im-Yzh" firstAttribute="trailing" secondItem="hVI-gC-k3f" secondAttribute="trailing" id="fgJ-BF-3fF"/>
-                <constraint firstItem="qCW-Im-Yzh" firstAttribute="leading" secondItem="hVI-gC-k3f" secondAttribute="leading" id="oyP-ms-LEr"/>
+                <constraint firstItem="Uhj-aX-NZb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="MWF-Ve-7G4"/>
+                <constraint firstItem="qCW-Im-Yzh" firstAttribute="leading" secondItem="wiV-BW-LrF" secondAttribute="leading" id="QsE-Hu-OJ1"/>
+                <constraint firstItem="wiV-BW-LrF" firstAttribute="top" secondItem="Uhj-aX-NZb" secondAttribute="bottom" constant="24" id="ZqX-Wb-bbv"/>
+                <constraint firstItem="qCW-Im-Yzh" firstAttribute="top" secondItem="wiV-BW-LrF" secondAttribute="bottom" constant="12" id="k46-Bt-ysf"/>
+                <constraint firstItem="qCW-Im-Yzh" firstAttribute="leading" secondItem="Uhj-aX-NZb" secondAttribute="leading" id="lpB-vv-ZWa"/>
+                <constraint firstItem="Uhj-aX-NZb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="16" id="slc-1s-Osw"/>
+                <constraint firstAttribute="trailing" secondItem="Uhj-aX-NZb" secondAttribute="trailing" constant="16" id="zre-Pf-7j2"/>
             </constraints>
-            <point key="canvasLocation" x="215" y="272"/>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="Uhj-aX-NZb"/>
+                    <exclude reference="wiV-BW-LrF"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="MWF-Ve-7G4"/>
+                    <exclude reference="slc-1s-Osw"/>
+                    <exclude reference="zre-Pf-7j2"/>
+                    <exclude reference="ZqX-Wb-bbv"/>
+                    <exclude reference="QsE-Hu-OJ1"/>
+                    <exclude reference="k46-Bt-ysf"/>
+                    <exclude reference="lpB-vv-ZWa"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="subviews">
+                    <include reference="Uhj-aX-NZb"/>
+                    <include reference="wiV-BW-LrF"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="MWF-Ve-7G4"/>
+                    <include reference="slc-1s-Osw"/>
+                    <include reference="zre-Pf-7j2"/>
+                    <include reference="ZqX-Wb-bbv"/>
+                    <include reference="QsE-Hu-OJ1"/>
+                    <include reference="k46-Bt-ysf"/>
+                    <include reference="lpB-vv-ZWa"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="201" y="120"/>
         </view>
     </objects>
 </document>
