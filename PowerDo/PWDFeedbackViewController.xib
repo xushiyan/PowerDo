@@ -9,6 +9,8 @@
             <connections>
                 <outlet property="emailField" destination="qCW-Im-Yzh" id="vWz-hy-kYA"/>
                 <outlet property="feedbackField" destination="Uhj-aX-NZb" id="yCA-GC-OTh"/>
+                <outlet property="happyButton" destination="y7d-U8-ycC" id="E44-YF-Nit"/>
+                <outlet property="unhappyButton" destination="eXX-0W-S33" id="yYo-3a-QPN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -79,15 +81,15 @@
                     <exclude reference="Uhj-aX-NZb"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="Kdl-Y1-LP6"/>
-                    <exclude reference="m0a-NF-3Rz"/>
                     <exclude reference="5lh-La-Rkc"/>
-                    <exclude reference="bpv-OZ-UIW"/>
                     <exclude reference="ktj-G2-nVj"/>
                     <exclude reference="zre-Pf-7j2"/>
                     <exclude reference="9Eu-Fx-VCM"/>
                     <exclude reference="lpB-vv-ZWa"/>
                     <exclude reference="m4N-yS-YCg"/>
+                    <exclude reference="Kdl-Y1-LP6"/>
+                    <exclude reference="bpv-OZ-UIW"/>
+                    <exclude reference="m0a-NF-3Rz"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
@@ -95,15 +97,15 @@
                     <include reference="Uhj-aX-NZb"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="Kdl-Y1-LP6"/>
-                    <include reference="m0a-NF-3Rz"/>
                     <include reference="5lh-La-Rkc"/>
-                    <include reference="bpv-OZ-UIW"/>
                     <include reference="ktj-G2-nVj"/>
                     <include reference="zre-Pf-7j2"/>
                     <include reference="9Eu-Fx-VCM"/>
                     <include reference="lpB-vv-ZWa"/>
                     <include reference="m4N-yS-YCg"/>
+                    <include reference="Kdl-Y1-LP6"/>
+                    <include reference="bpv-OZ-UIW"/>
+                    <include reference="m0a-NF-3Rz"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="203" y="52"/>

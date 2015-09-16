@@ -13,6 +13,7 @@
 #import "PWDTaskManager.h"
 #import "PWDAboutViewController.h"
 #import "PWDFeedbackViewController.h"
+#import "PWDHelpViewController.h"
 
 @implementation PWDSettingsViewController {
     
@@ -39,6 +40,11 @@
     switch (section) {
         case PWDSettingsSectionFeedback:
             switch (row) {
+                case PWDFeedbackRowHelp: {
+                    PWDHelpViewController *help_vc = [[PWDHelpViewController alloc] initWithNibName:NSStringFromClass([PWDHelpViewController class]) bundle:nil];
+                    [self showViewController:help_vc sender:nil];
+                }
+                    break;
                 case PWDFeedbackRowFeedback: {
                     PWDFeedbackViewController *feedback_vc = [[PWDFeedbackViewController alloc] initWithNibName:NSStringFromClass([PWDFeedbackViewController class]) bundle:nil];
                     [self showViewController:feedback_vc sender:nil];

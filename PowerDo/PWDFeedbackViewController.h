@@ -13,5 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet PWDFeedbackTextField *feedbackField;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
+@property (weak, nonatomic) IBOutlet UIButton *happyButton;
+@property (weak, nonatomic) IBOutlet UIButton *unhappyButton;
 
 @end
