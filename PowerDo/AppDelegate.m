@@ -12,6 +12,7 @@
 #import "PWDTodayViewController.h"
 #import "PWDSettingsViewController.h"
 #import "PWDConstants.h"
+#import "UIColor+Extras.h"
 
 @interface AppDelegate ()
 
@@ -45,6 +46,7 @@
     UIWindow *mainWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     mainWindow.rootViewController = tabBarController;
     mainWindow.backgroundColor = [UIColor whiteColor];
+    mainWindow.tintColor = [UIColor themeColor];
     self.window = mainWindow;
     [mainWindow makeKeyAndVisible];
     

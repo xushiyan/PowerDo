@@ -24,11 +24,19 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y7d-U8-ycC">
                             <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <state key="normal" image="ic_mood_48pt"/>
+                            <connections>
+                                <action selector="tapMoodButton:" destination="-1" eventType="touchUpInside" id="coE-S0-BN2"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXX-0W-S33">
                             <rect key="frame" x="48" y="0.0" width="48" height="48"/>
+                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <state key="normal" image="ic_mood_bad_48pt"/>
+                            <connections>
+                                <action selector="tapMoodButton:" destination="-1" eventType="touchUpInside" id="DjM-yP-u4y"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>

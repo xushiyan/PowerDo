@@ -7,8 +7,12 @@
 //
 
 #import "PWDFeedbackViewController.h"
+#import "PWDFeedbackService.h"
+#import "UIColor+Extras.h"
 
 @interface PWDFeedbackViewController ()
+
+@property (nonatomic,strong) PWDFeedbackService *feedbackService;
 
 @end
 
@@ -17,6 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.feedbackService = [[PWDFeedbackService alloc] init];
+    
     self.title = NSLocalizedString(@"Feedback", @"Feedback vc title");
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -32,6 +38,23 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+}
+
+#pragma mark - Actions
+
+- (IBAction)tapMoodButton:(UIButton *)sender {
+    UIButton *happy = self.happyButton;
+    UIButton *unhappy = self.unhappyButton;
+    
+    if (sender == happy) {
+        self.feedbackService.mood = PWDFeedbackMoodHappy;
+        happy.tintColor = [UIColor happyMoodColor];
+        unhappy.tintColor = [UIColor lightGrayColor];
+    } else if (sender == unhappy) {
+        self.feedbackService.mood = PWDFeedbackMoodUnhappy;
+        happy.tintColor = [UIColor lightGrayColor];
+        unhappy.tintColor = [UIColor unhappyMoodColor];
+    }
 }
 
 @end

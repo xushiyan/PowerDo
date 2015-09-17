@@ -29,6 +29,8 @@
 		E22319041BA485BF00C1C21F /* PWDAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E22319021BA485BF00C1C21F /* PWDAboutViewController.xib */; };
 		E22319081BA486D400C1C21F /* PWDFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E22319061BA486D400C1C21F /* PWDFeedbackViewController.m */; };
 		E22319091BA486D400C1C21F /* PWDFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E22319071BA486D400C1C21F /* PWDFeedbackViewController.xib */; };
+		E23664D31BAB0C810035C0D2 /* PWDFeedbackService.m in Sources */ = {isa = PBXBuildFile; fileRef = E23664D21BAB0C810035C0D2 /* PWDFeedbackService.m */; };
+		E23664D61BAB11A60035C0D2 /* UIColor+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = E23664D51BAB11A60035C0D2 /* UIColor+Extras.m */; };
 		E262CCEA1BA0881A00A82C98 /* PWDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E262CCE91BA0881A00A82C98 /* PWDSettingsViewController.m */; };
 		E2C426551B9DDD9500E3BC92 /* PWDTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C426541B9DDD9500E3BC92 /* PWDTodayViewController.m */; };
 		E2C56EA81BA9B886000B6622 /* PWDHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C56EA61BA9B886000B6622 /* PWDHelpViewController.m */; };
@@ -92,6 +94,10 @@
 		E22319051BA486D400C1C21F /* PWDFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDFeedbackViewController.h; sourceTree = "<group>"; };
 		E22319061BA486D400C1C21F /* PWDFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDFeedbackViewController.m; sourceTree = "<group>"; };
 		E22319071BA486D400C1C21F /* PWDFeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PWDFeedbackViewController.xib; sourceTree = "<group>"; };
+		E23664D11BAB0C810035C0D2 /* PWDFeedbackService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDFeedbackService.h; sourceTree = "<group>"; };
+		E23664D21BAB0C810035C0D2 /* PWDFeedbackService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDFeedbackService.m; sourceTree = "<group>"; };
+		E23664D41BAB11A60035C0D2 /* UIColor+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extras.h"; sourceTree = "<group>"; };
+		E23664D51BAB11A60035C0D2 /* UIColor+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extras.m"; sourceTree = "<group>"; };
 		E262CCE81BA0881A00A82C98 /* PWDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDSettingsViewController.h; sourceTree = "<group>"; };
 		E262CCE91BA0881A00A82C98 /* PWDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDSettingsViewController.m; sourceTree = "<group>"; };
 		E2C426531B9DDD9500E3BC92 /* PWDTodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTodayViewController.h; sourceTree = "<group>"; };
@@ -135,6 +141,8 @@
 				86A75FAD1BA2F12900588730 /* FoundationExtras.m */,
 				86A75FAA1BA2E20700588730 /* PWDConstants.h */,
 				86A75FAB1BA2E20700588730 /* PWDConstants.m */,
+				E23664D41BAB11A60035C0D2 /* UIColor+Extras.h */,
+				E23664D51BAB11A60035C0D2 /* UIColor+Extras.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -162,6 +170,7 @@
 		86485B1D1B973A4C0027D01A /* PowerDo */ = {
 			isa = PBXGroup;
 			children = (
+				E23664D01BAB0C6C0035C0D2 /* Service */,
 				8621A00D1B9B24610082B853 /* Helper */,
 				86E21A751B973EE20098AC93 /* Model */,
 				86A75F8B1BA2CC4600588730 /* View */,
@@ -245,6 +254,15 @@
 				4EB111281B9C0D4900BF5656 /* PowerDo.xcdatamodeld */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		E23664D01BAB0C6C0035C0D2 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				E23664D11BAB0C810035C0D2 /* PWDFeedbackService.h */,
+				E23664D21BAB0C810035C0D2 /* PWDFeedbackService.m */,
+			);
+			name = Service;
 			sourceTree = "<group>";
 		};
 		E2C426521B9DDD3900E3BC92 /* Controller */ = {
@@ -407,10 +425,12 @@
 				8621A00A1B9B1FBA0082B853 /* PWDTaskManager.m in Sources */,
 				E262CCEA1BA0881A00A82C98 /* PWDSettingsViewController.m in Sources */,
 				E22319031BA485BF00C1C21F /* PWDAboutViewController.m in Sources */,
+				E23664D61BAB11A60035C0D2 /* UIColor+Extras.m in Sources */,
 				E22319081BA486D400C1C21F /* PWDFeedbackViewController.m in Sources */,
 				86485B231B973A4C0027D01A /* AppDelegate.m in Sources */,
 				E2C56EA81BA9B886000B6622 /* PWDHelpViewController.m in Sources */,
 				86A75FA81BA2DB0C00588730 /* PWDDatePickerCell.m in Sources */,
+				E23664D31BAB0C810035C0D2 /* PWDFeedbackService.m in Sources */,
 				86658E621BA3372700FE67B3 /* PWDStatsViewController.m in Sources */,
 				4EB1112A1B9C0D4900BF5656 /* PowerDo.xcdatamodeld in Sources */,
 				86E21A781B973EF50098AC93 /* PWDTask.m in Sources */,
