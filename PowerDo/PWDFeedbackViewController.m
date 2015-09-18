@@ -32,7 +32,7 @@
     
     UITextField *feedbackField = self.feedbackField;
     feedbackField.delegate = self;
-    feedbackField.returnKeyType = UIReturnKeyDone;
+    feedbackField.returnKeyType = UIReturnKeyNext;
     
     UITextField *emailField = self.emailField;
     emailField.delegate = self;
@@ -54,7 +54,27 @@
 #pragma mark - UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [self.scrollView setContentOffset:CGPointMake(0, CGRectGetMinY(textField.frame)) animated:YES];
+    if (textField == self.feedbackField) {
+        CGFloat scrollY = CGRectGetMinY(textField.frame) - 24;
+        [self.scrollView setContentOffset:CGPointMake(0, scrollY) animated:YES];
+    } else if (textField == self.emailField) {
+        CGFloat scrollY = CGRectGetMinY(textField.frame) - 48;
+        [self.scrollView setContentOffset:CGPointMake(0, scrollY) animated:YES];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [self.scrollView setContentOffset:CGPointZero animated:YES];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.feedbackField) {
+        [self.emailField becomeFirstResponder];
+        return NO;
+    } else if (textField == self.emailField) {
+        [textField endEditing:YES];
+    }
+    return YES;
 }
 
 #pragma mark - Actions
