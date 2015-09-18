@@ -10,12 +10,13 @@
                 <outlet property="emailField" destination="qCW-Im-Yzh" id="vWz-hy-kYA"/>
                 <outlet property="feedbackField" destination="Uhj-aX-NZb" id="yCA-GC-OTh"/>
                 <outlet property="happyButton" destination="y7d-U8-ycC" id="E44-YF-Nit"/>
+                <outlet property="scrollView" destination="i5M-Pr-FkT" id="jxe-No-Xdb"/>
                 <outlet property="unhappyButton" destination="eXX-0W-S33" id="yYo-3a-QPN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <scrollView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -77,7 +78,9 @@
                 <constraint firstItem="Uhj-aX-NZb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="5lh-La-Rkc"/>
                 <constraint firstItem="qCW-Im-Yzh" firstAttribute="top" secondItem="Uhj-aX-NZb" secondAttribute="bottom" constant="16" id="9Eu-Fx-VCM"/>
                 <constraint firstItem="YO1-EH-ocW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="24" id="Kdl-Y1-LP6"/>
+                <constraint firstItem="Uhj-aX-NZb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="QMl-PY-btd"/>
                 <constraint firstItem="YO1-EH-ocW" firstAttribute="width" secondItem="Uhj-aX-NZb" secondAttribute="width" multiplier="0.618" id="bpv-OZ-UIW"/>
+                <constraint firstAttribute="bottom" secondItem="qCW-Im-Yzh" secondAttribute="bottom" constant="24" id="hF3-GR-T97"/>
                 <constraint firstItem="Uhj-aX-NZb" firstAttribute="top" secondItem="YO1-EH-ocW" secondAttribute="bottom" constant="24" id="ktj-G2-nVj"/>
                 <constraint firstItem="qCW-Im-Yzh" firstAttribute="leading" secondItem="Uhj-aX-NZb" secondAttribute="leading" id="lpB-vv-ZWa"/>
                 <constraint firstItem="YO1-EH-ocW" firstAttribute="centerX" secondItem="Uhj-aX-NZb" secondAttribute="centerX" id="m0a-NF-3Rz"/>
@@ -89,15 +92,17 @@
                     <exclude reference="Uhj-aX-NZb"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="5lh-La-Rkc"/>
-                    <exclude reference="ktj-G2-nVj"/>
-                    <exclude reference="zre-Pf-7j2"/>
-                    <exclude reference="9Eu-Fx-VCM"/>
-                    <exclude reference="lpB-vv-ZWa"/>
-                    <exclude reference="m4N-yS-YCg"/>
                     <exclude reference="Kdl-Y1-LP6"/>
                     <exclude reference="bpv-OZ-UIW"/>
                     <exclude reference="m0a-NF-3Rz"/>
+                    <exclude reference="5lh-La-Rkc"/>
+                    <exclude reference="QMl-PY-btd"/>
+                    <exclude reference="ktj-G2-nVj"/>
+                    <exclude reference="zre-Pf-7j2"/>
+                    <exclude reference="9Eu-Fx-VCM"/>
+                    <exclude reference="hF3-GR-T97"/>
+                    <exclude reference="lpB-vv-ZWa"/>
+                    <exclude reference="m4N-yS-YCg"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
@@ -105,19 +110,24 @@
                     <include reference="Uhj-aX-NZb"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="5lh-La-Rkc"/>
-                    <include reference="ktj-G2-nVj"/>
-                    <include reference="zre-Pf-7j2"/>
-                    <include reference="9Eu-Fx-VCM"/>
-                    <include reference="lpB-vv-ZWa"/>
-                    <include reference="m4N-yS-YCg"/>
                     <include reference="Kdl-Y1-LP6"/>
                     <include reference="bpv-OZ-UIW"/>
                     <include reference="m0a-NF-3Rz"/>
+                    <include reference="5lh-La-Rkc"/>
+                    <include reference="QMl-PY-btd"/>
+                    <include reference="ktj-G2-nVj"/>
+                    <include reference="zre-Pf-7j2"/>
+                    <include reference="9Eu-Fx-VCM"/>
+                    <include reference="hF3-GR-T97"/>
+                    <include reference="lpB-vv-ZWa"/>
+                    <include reference="m4N-yS-YCg"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="203" y="52"/>
-        </view>
+            <variation key="heightClass=regular-widthClass=regular" ambiguous="YES">
+                <rect key="frame" x="0.0" y="0.0" width="800" height="800"/>
+            </variation>
+            <point key="canvasLocation" x="212" y="-59"/>
+        </scrollView>
     </objects>
     <resources>
         <image name="ic_mood_48pt" width="48" height="48"/>

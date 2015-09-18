@@ -10,9 +10,10 @@
 #import "PWDFeedbackService.h"
 #import "UIColor+Extras.h"
 
-@interface PWDFeedbackViewController ()
+@interface PWDFeedbackViewController () <UITextFieldDelegate>
 
 @property (nonatomic,strong) PWDFeedbackService *feedbackService;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
 
@@ -28,6 +29,16 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_send"] style:UIBarButtonItemStylePlain target:self action:nil];
+    
+    UITextField *feedbackField = self.feedbackField;
+    feedbackField.delegate = self;
+    feedbackField.returnKeyType = UIReturnKeyDone;
+    
+    UITextField *emailField = self.emailField;
+    emailField.delegate = self;
+    emailField.returnKeyType = UIReturnKeyDone;
+    
+    self.scrollView.contentSize = [UIScreen mainScreen].bounds.size;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,6 +49,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [self.scrollView setContentOffset:CGPointMake(0, CGRectGetMinY(textField.frame)) animated:YES];
 }
 
 #pragma mark - Actions
