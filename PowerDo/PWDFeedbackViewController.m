@@ -64,13 +64,14 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    [self.scrollView setContentOffset:CGPointZero animated:YES];
+    if (textField == self.emailField) {
+        [self.scrollView setContentOffset:CGPointZero animated:YES];
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == self.feedbackField) {
         [self.emailField becomeFirstResponder];
-        return NO;
     } else if (textField == self.emailField) {
         [textField endEditing:YES];
     }
