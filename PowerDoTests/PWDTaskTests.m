@@ -10,7 +10,6 @@
 #import "PWDTask.h"
 #import "PWDTaskManager.h"
 #import "PWDConstants.h"
-#import "FoundationExtras.h"
 
 @interface PWDTaskTests : XCTestCase
 

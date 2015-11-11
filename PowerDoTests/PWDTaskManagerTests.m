@@ -19,7 +19,7 @@
 
 - (void)setUp {
     [super setUp];
-    self.taskManager = [PWDTaskManager defaultInstance];
+    self.taskManager = [PWDTaskManager sharedManager];
 }
 
 - (void)tearDown {
@@ -28,7 +28,7 @@
 }
 
 - (void)testTaskManagerIsSingleton {
-    PWDTaskManager *taskManager = [PWDTaskManager defaultInstance];
+    PWDTaskManager *taskManager = [PWDTaskManager sharedManager];
     XCTAssertTrue(taskManager == self.taskManager);
 }
 

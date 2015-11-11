@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FoundationExtras.h"
 @import CoreData;
 
 @interface PWDTaskManager : NSObject
+
++ (instancetype)sharedManager;
 
 @property (nonatomic,strong,readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic,strong,readonly) NSManagedObjectModel *managedObjectModel;
@@ -20,5 +21,3 @@
 - (NSURL *)applicationDocumentsDirectory;
 
 @end
-
-DECLARE_DEFAULT_SINGLETON_FOR_CLASS(PWDTaskManager)

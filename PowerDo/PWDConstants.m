@@ -12,5 +12,3 @@
 @implementation PWDConstants
 
 @end
-
-SYNTHESIZE_DEFAULT_SINGLETON_FOR_CLASS(PWDConstants)

@@ -11,6 +11,15 @@
 
 @implementation PWDTaskManager
 
++ (instancetype)sharedManager {
+    static PWDTaskManager *sharedTaskManager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedTaskManager = [[self alloc] init];
+    });
+    return sharedTaskManager;
+}
+
 - (instancetype)init {
     if (self = [super init]) {
         // Initialize the managed object model
@@ -47,5 +56,3 @@
 }
 
 @end
-
-SYNTHESIZE_DEFAULT_SINGLETON_FOR_CLASS(PWDTaskManager)

@@ -23,7 +23,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    self.taskManager = [PWDTaskManager defaultInstance];
+    self.taskManager = [PWDTaskManager sharedManager];
     
     PWDTodayViewController *today_vc = [[PWDTodayViewController alloc] initWithStyle:UITableViewStylePlain];
     today_vc.title = NSLocalizedString(@"Today", @"Today tab title");

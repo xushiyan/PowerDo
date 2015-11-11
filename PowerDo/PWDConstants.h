@@ -7,11 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FoundationExtras.h"
 
 
 @interface PWDConstants : NSObject
 
 @end
-
-DECLARE_DEFAULT_SINGLETON_FOR_CLASS(PWDConstants)
