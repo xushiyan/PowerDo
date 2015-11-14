@@ -23,6 +23,7 @@
 		86A75FAC1BA2E20700588730 /* PWDConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 86A75FAB1BA2E20700588730 /* PWDConstants.m */; };
 		86E21A741B973D3C0098AC93 /* PWDTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E21A731B973D3C0098AC93 /* PWDTaskTests.m */; };
 		86E21A781B973EF50098AC93 /* PWDTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E21A771B973EF50098AC93 /* PWDTask.m */; };
+		86F043C81BF738ED0048FADB /* PWDPlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F043C71BF738ED0048FADB /* PWDPlanViewController.m */; };
 		E22319031BA485BF00C1C21F /* PWDAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E22319011BA485BF00C1C21F /* PWDAboutViewController.m */; };
 		E22319041BA485BF00C1C21F /* PWDAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E22319021BA485BF00C1C21F /* PWDAboutViewController.xib */; };
 		E22319081BA486D400C1C21F /* PWDFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E22319061BA486D400C1C21F /* PWDFeedbackViewController.m */; };
@@ -83,6 +84,8 @@
 		86E21A731B973D3C0098AC93 /* PWDTaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTaskTests.m; sourceTree = "<group>"; };
 		86E21A761B973EF50098AC93 /* PWDTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTask.h; sourceTree = "<group>"; };
 		86E21A771B973EF50098AC93 /* PWDTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTask.m; sourceTree = "<group>"; };
+		86F043C61BF738ED0048FADB /* PWDPlanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDPlanViewController.h; sourceTree = "<group>"; };
+		86F043C71BF738ED0048FADB /* PWDPlanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDPlanViewController.m; sourceTree = "<group>"; };
 		E22319001BA485BF00C1C21F /* PWDAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDAboutViewController.h; sourceTree = "<group>"; };
 		E22319011BA485BF00C1C21F /* PWDAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDAboutViewController.m; sourceTree = "<group>"; };
 		E22319021BA485BF00C1C21F /* PWDAboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PWDAboutViewController.xib; sourceTree = "<group>"; };
@@ -275,6 +278,8 @@
 				E2C56EA51BA9B886000B6622 /* PWDHelpViewController.h */,
 				E2C56EA61BA9B886000B6622 /* PWDHelpViewController.m */,
 				E2C56EA71BA9B886000B6622 /* PWDHelpViewController.xib */,
+				86F043C61BF738ED0048FADB /* PWDPlanViewController.h */,
+				86F043C71BF738ED0048FADB /* PWDPlanViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -426,6 +431,7 @@
 				E23664D31BAB0C810035C0D2 /* PWDFeedbackService.m in Sources */,
 				86658E621BA3372700FE67B3 /* PWDStatsViewController.m in Sources */,
 				4EB1112A1B9C0D4900BF5656 /* PowerDo.xcdatamodeld in Sources */,
+				86F043C81BF738ED0048FADB /* PWDPlanViewController.m in Sources */,
 				86E21A781B973EF50098AC93 /* PWDTask.m in Sources */,
 				E2C426551B9DDD9500E3BC92 /* PWDTodayViewController.m in Sources */,
 				86485B201B973A4C0027D01A /* main.m in Sources */,
