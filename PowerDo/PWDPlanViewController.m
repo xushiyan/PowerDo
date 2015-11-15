@@ -8,7 +8,12 @@
 
 #import "PWDPlanViewController.h"
 
-@interface PWDPlanViewController ()
+@interface PWDPlanViewController () <UITextFieldDelegate>
+
+@property (nonatomic,strong) NSMutableArray *tomorrowTasks;
+@property (nonatomic,strong) NSMutableArray *somedayTasks;
+
+@property (nonatomic,weak) UITextField *addTaskField;
 
 @end
 
@@ -17,11 +22,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    UITextField *addTaskField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 0, 64)];
+    addTaskField.returnKeyType = UIReturnKeyDone;
+    addTaskField.placeholder = NSLocalizedString(@"What to do tomorrow?", @"add task field placeholder");
+    addTaskField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleTitle2];
+    addTaskField.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    addTaskField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    addTaskField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    addTaskField.textAlignment = NSTextAlignmentCenter;
+    addTaskField.delegate = self;
+    self.addTaskField = addTaskField;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UITableView *tableView = self.tableView;
+    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"sample"];
+    tableView.tableHeaderView = addTaskField;
+    
+    
+    
+    self.tomorrowTasks = [NSMutableArray array];
+    self.somedayTasks = [NSMutableArray array];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,22 +51,70 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return PWDPlanSectionEnd;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    NSInteger num = 0;
+    switch (section) {
+        case PWDPlanSectionTomorrow:
+            num = self.tomorrowTasks.count;
+            break;
+        case PWDPlanSectionSomeday:
+            num = self.somedayTasks.count;
+            break;
+    }
+    return num;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sample" forIndexPath:indexPath];
     
-    // Configure the cell...
+    switch (indexPath.section) {
+        case PWDPlanSectionTomorrow:
+            cell.textLabel.text = self.tomorrowTasks[indexPath.row];
+            break;
+        case PWDPlanSectionSomeday:
+            cell.textLabel.text = self.somedayTasks[indexPath.row];
+            break;
+    }
     
     return cell;
 }
-*/
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSString *title;
+    switch (section) {
+        case PWDPlanSectionTomorrow:
+            title = NSLocalizedString(@"Tomorrow", @"tomorrow section title");
+            break;
+        case PWDPlanSectionSomeday:
+            title = NSLocalizedString(@"Someday", @"someday section title");
+            break;
+    }
+    return title;
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.addTaskField) {
+        NSString *taskTitle = textField.text;
+        if (taskTitle.length) {
+            NSMutableArray *tmr = self.tomorrowTasks;
+            UITableView *tableView = self.tableView;
+            [tmr addObject:taskTitle];
+            [tableView beginUpdates];
+            [tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:tmr.count-1 inSection:PWDPlanSectionTomorrow]]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+            [tableView endUpdates];
+            textField.text = nil;
+        }
+        return [textField endEditing:YES];
+    }
+    return NO;
+}
 
 /*
 // Override to support conditional editing of the table view.

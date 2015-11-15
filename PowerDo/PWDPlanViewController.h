@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, PWDPlanSection) {
+    PWDPlanSectionTomorrow,
+    PWDPlanSectionSomeday,
+    PWDPlanSectionEnd,
+};
 @interface PWDPlanViewController : UITableViewController
 
 @end
