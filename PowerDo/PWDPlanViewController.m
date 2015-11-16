@@ -7,15 +7,19 @@
 //
 
 #import "PWDPlanViewController.h"
+#import "PWDTask.h"
 
 @interface PWDPlanViewController () <UITextFieldDelegate>
 
 @property (nonatomic,strong) NSMutableArray *tomorrowTasks;
 @property (nonatomic,strong) NSMutableArray *somedayTasks;
+@property (nonatomic,strong) NSArray *tasksList;
 
 @property (nonatomic,weak) UITextField *addTaskField;
 
 @end
+
+NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 
 @implementation PWDPlanViewController
 
@@ -34,13 +38,13 @@
     self.addTaskField = addTaskField;
     
     UITableView *tableView = self.tableView;
-    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"sample"];
     tableView.tableHeaderView = addTaskField;
     
     
     
     self.tomorrowTasks = [NSMutableArray array];
     self.somedayTasks = [NSMutableArray array];
+    self.tasksList = @[self.tomorrowTasks,self.somedayTasks];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,30 +59,17 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger num = 0;
-    switch (section) {
-        case PWDPlanSectionTomorrow:
-            num = self.tomorrowTasks.count;
-            break;
-        case PWDPlanSectionSomeday:
-            num = self.somedayTasks.count;
-            break;
-    }
-    return num;
+    return [self.tasksList[section] count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sample" forIndexPath:indexPath];
-    
-    switch (indexPath.section) {
-        case PWDPlanSectionTomorrow:
-            cell.textLabel.text = self.tomorrowTasks[indexPath.row];
-            break;
-        case PWDPlanSectionSomeday:
-            cell.textLabel.text = self.somedayTasks[indexPath.row];
-            break;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:PWDPlanTaskCellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:PWDPlanTaskCellIdentifier];
     }
+    PWDTask *task = self.tasksList[indexPath.section][indexPath.row];
+    cell.textLabel.text = task.title;
     
     return cell;
 }
@@ -102,11 +93,13 @@
     if (textField == self.addTaskField) {
         NSString *taskTitle = textField.text;
         if (taskTitle.length) {
-            NSMutableArray *tmr = self.tomorrowTasks;
+            NSMutableArray *tomorrowTasks = self.tomorrowTasks;
             UITableView *tableView = self.tableView;
-            [tmr addObject:taskTitle];
+            const PWDTask *task = [[PWDTask alloc] initWithTitle:taskTitle];
+            const NSInteger index = 0;
+            [tomorrowTasks insertObject:task atIndex:index];
             [tableView beginUpdates];
-            [tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:tmr.count-1 inSection:PWDPlanSectionTomorrow]]
+            [tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:PWDPlanSectionTomorrow]]
                                   withRowAnimation:UITableViewRowAnimationFade];
             [tableView endUpdates];
             textField.text = nil;
