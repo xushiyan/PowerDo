@@ -11,10 +11,7 @@
 
 @interface PWDPlanViewController () <UITextFieldDelegate>
 
-@property (nonatomic,strong) NSMutableArray *tomorrowTasks;
-@property (nonatomic,strong) NSMutableArray *somedayTasks;
-@property (nonatomic,strong) NSArray *tasksList;
-
+@property (nonatomic,strong) NSArray *taskLists;
 @property (nonatomic,weak) UITextField *addTaskField;
 
 @end
@@ -25,6 +22,8 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     UITextField *addTaskField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 0, 64)];
     addTaskField.returnKeyType = UIReturnKeyDone;
@@ -40,11 +39,9 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     UITableView *tableView = self.tableView;
     tableView.tableHeaderView = addTaskField;
     
-    
-    
-    self.tomorrowTasks = [NSMutableArray array];
-    self.somedayTasks = [NSMutableArray array];
-    self.tasksList = @[self.tomorrowTasks,self.somedayTasks];
+
+
+    self.taskLists = @[[NSMutableArray array],[NSMutableArray array]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,7 +56,7 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.tasksList[section] count];
+    return [self.taskLists[section] count];
 }
 
 
@@ -68,7 +65,7 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:PWDPlanTaskCellIdentifier];
     }
-    PWDTask *task = self.tasksList[indexPath.section][indexPath.row];
+    PWDTask *task = self.taskLists[indexPath.section][indexPath.row];
     cell.textLabel.text = task.title;
     
     return cell;
@@ -93,14 +90,14 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     if (textField == self.addTaskField) {
         NSString *taskTitle = textField.text;
         if (taskTitle.length) {
-            NSMutableArray *tomorrowTasks = self.tomorrowTasks;
+            NSMutableArray *tomorrowTasks = self.taskLists[PWDPlanSectionTomorrow];
             UITableView *tableView = self.tableView;
             const PWDTask *task = [[PWDTask alloc] initWithTitle:taskTitle];
             const NSInteger index = 0;
             [tomorrowTasks insertObject:task atIndex:index];
             [tableView beginUpdates];
             [tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:PWDPlanSectionTomorrow]]
-                                  withRowAnimation:UITableViewRowAnimationFade];
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
             [tableView endUpdates];
             textField.text = nil;
         }
@@ -109,48 +106,40 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     return NO;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
+#pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+        NSMutableArray *taskList = self.taskLists[indexPath.section];
+        [taskList removeObjectAtIndex:indexPath.row];
+        [tableView beginUpdates];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView endUpdates];
+    }
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
-*/
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
 }
-*/
+
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+    NSMutableArray *fromTaskList = self.taskLists[fromIndexPath.section];
+    PWDTask *movingTask = fromTaskList[fromIndexPath.row];
+    NSMutableArray *toTaskList = self.taskLists[toIndexPath.section];
+    [toTaskList insertObject:movingTask atIndex:toIndexPath.row];
+    [fromTaskList removeObjectAtIndex:fromIndexPath.row];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
 
 @end
