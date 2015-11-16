@@ -10,7 +10,9 @@
 #import "PWDTask.h"
 #import "NSDate+PWDExtras.h"
 
-@interface PWDPlanViewController () <UITextFieldDelegate>
+@interface PWDPlanViewController () <UITextFieldDelegate> {
+    CGFloat _headerHeight;
+}
 
 @property (nonatomic,strong) NSArray *taskLists;
 @property (nonatomic,weak) UITextField *addTaskField;
@@ -24,11 +26,14 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // TODO: remove left item
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(simulateTimeChange:)];
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    // TODO: remove simulate time change action
+    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(startAddingNewTask:)],
+//                                                [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(simulateTimeChange:)]
+                                                ];
     
-    UITextField *addTaskField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 0, 64)];
+    _headerHeight = 64;
+    UITextField *addTaskField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 0, _headerHeight)];
     addTaskField.returnKeyType = UIReturnKeyDone;
     addTaskField.placeholder = NSLocalizedString(@"What to do tomorrow?", @"add task field placeholder");
     addTaskField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleTitle2];
@@ -39,9 +44,9 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     addTaskField.delegate = self;
     self.addTaskField = addTaskField;
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
     UITableView *tableView = self.tableView;
     tableView.tableHeaderView = addTaskField;
-    
 
 
     self.taskLists = @[[NSMutableArray array],[NSMutableArray array]];
@@ -62,6 +67,12 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 // TODO: remove this function
 - (void)simulateTimeChange:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationSignificantTimeChangeNotification object:nil];
+}
+
+- (void)startAddingNewTask:(id)sender {
+    UITableView *tableView = self.tableView;
+    [self animateScrollView:tableView forContentInsetsTop:_headerHeight];
+    [self.addTaskField becomeFirstResponder];
 }
 
 - (void)handleSignificantTimeChange:(NSNotification *)note {
@@ -85,6 +96,34 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     });
 
 }
+
+- (void)animateScrollView:(UIScrollView *)scrollView forContentInsetsTop:(CGFloat)top {
+    UIEdgeInsets insets = scrollView.contentInset;
+    insets.top = top;
+    [UIView animateWithDuration:0.25 animations:^{
+        scrollView.contentInset = insets;
+        scrollView.scrollIndicatorInsets = insets;
+    }];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat yOffset = -scrollView.contentOffset.y;
+    CGFloat top = scrollView.contentInset.top;
+    if (top == _headerHeight) {
+        if (yOffset < _headerHeight/2) {
+            [self animateScrollView:scrollView forContentInsetsTop:0];
+            [self.addTaskField resignFirstResponder];
+        }
+    } else if (top == 0) {
+        if (yOffset > _headerHeight/2) {
+            [self animateScrollView:scrollView forContentInsetsTop:_headerHeight];
+            [self.addTaskField becomeFirstResponder];
+        }
+    }
+}
+
 
 #pragma mark - UITableViewDataSource
 
@@ -125,12 +164,12 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == self.addTaskField) {
+        UITableView *tableView = self.tableView;
         NSString *taskTitle = textField.text;
         if (taskTitle.length) {
             NSMutableArray *tomorrowTasks = self.taskLists[PWDPlanSectionTomorrow];
-            UITableView *tableView = self.tableView;
-            const PWDTask *task = [[PWDTask alloc] initWithTitle:taskTitle];
-            const NSInteger index = 0;
+            PWDTask *task = [[PWDTask alloc] initWithTitle:taskTitle];
+            NSInteger index = 0;
 //            task.dueDate = [NSDate date]; // TODO: remove
             [tomorrowTasks insertObject:task atIndex:index];
             [tableView beginUpdates];
@@ -138,8 +177,11 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
                                   withRowAnimation:UITableViewRowAnimationFade];
             [tableView endUpdates];
             textField.text = nil;
+            return NO;
+        } else {
+            [self animateScrollView:tableView forContentInsetsTop:0];
+            return [textField endEditing:YES];
         }
-        return [textField endEditing:YES];
     }
     return NO;
 }
