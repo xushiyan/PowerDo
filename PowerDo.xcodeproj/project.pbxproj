@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4EB1112A1B9C0D4900BF5656 /* PowerDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4EB111281B9C0D4900BF5656 /* PowerDo.xcdatamodeld */; };
+		4EFBB9181BF9BFF200F0BBA6 /* NSDate+PWDExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFBB9171BF9BFF200F0BBA6 /* NSDate+PWDExtras.m */; };
+		4EFBB91A1BF9C0B300F0BBA6 /* PWDNSDateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFBB9191BF9C0B300F0BBA6 /* PWDNSDateTests.m */; };
 		8621A00A1B9B1FBA0082B853 /* PWDTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621A0091B9B1FBA0082B853 /* PWDTaskManager.m */; };
 		8621A00C1B9B20580082B853 /* PWDTaskManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621A00B1B9B20580082B853 /* PWDTaskManagerTests.m */; };
 		86485B201B973A4C0027D01A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86485B1F1B973A4C0027D01A /* main.m */; };
@@ -56,6 +58,9 @@
 
 /* Begin PBXFileReference section */
 		4EB111291B9C0D4900BF5656 /* PowerDo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PowerDo.xcdatamodel; sourceTree = "<group>"; };
+		4EFBB9161BF9BFF200F0BBA6 /* NSDate+PWDExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+PWDExtras.h"; sourceTree = "<group>"; };
+		4EFBB9171BF9BFF200F0BBA6 /* NSDate+PWDExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+PWDExtras.m"; sourceTree = "<group>"; };
+		4EFBB9191BF9C0B300F0BBA6 /* PWDNSDateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDNSDateTests.m; sourceTree = "<group>"; };
 		8621A0081B9B1FBA0082B853 /* PWDTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTaskManager.h; sourceTree = "<group>"; };
 		8621A0091B9B1FBA0082B853 /* PWDTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTaskManager.m; sourceTree = "<group>"; };
 		8621A00B1B9B20580082B853 /* PWDTaskManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTaskManagerTests.m; sourceTree = "<group>"; };
@@ -139,6 +144,8 @@
 				86A75FAB1BA2E20700588730 /* PWDConstants.m */,
 				E23664D41BAB11A60035C0D2 /* UIColor+Extras.h */,
 				E23664D51BAB11A60035C0D2 /* UIColor+Extras.m */,
+				4EFBB9161BF9BFF200F0BBA6 /* NSDate+PWDExtras.h */,
+				4EFBB9171BF9BFF200F0BBA6 /* NSDate+PWDExtras.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -212,6 +219,7 @@
 		86658E5D1BA2F57900FE67B3 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				4EFBB9191BF9C0B300F0BBA6 /* PWDNSDateTests.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -422,6 +430,7 @@
 			files = (
 				8621A00A1B9B1FBA0082B853 /* PWDTaskManager.m in Sources */,
 				E262CCEA1BA0881A00A82C98 /* PWDSettingsViewController.m in Sources */,
+				4EFBB9181BF9BFF200F0BBA6 /* NSDate+PWDExtras.m in Sources */,
 				E22319031BA485BF00C1C21F /* PWDAboutViewController.m in Sources */,
 				E23664D61BAB11A60035C0D2 /* UIColor+Extras.m in Sources */,
 				E22319081BA486D400C1C21F /* PWDFeedbackViewController.m in Sources */,
@@ -445,6 +454,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EFBB91A1BF9C0B300F0BBA6 /* PWDNSDateTests.m in Sources */,
 				8621A00C1B9B20580082B853 /* PWDTaskManagerTests.m in Sources */,
 				86E21A741B973D3C0098AC93 /* PWDTaskTests.m in Sources */,
 				86485B3C1B973A4C0027D01A /* PowerDoTests.m in Sources */,

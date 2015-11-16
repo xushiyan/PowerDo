@@ -9,21 +9,15 @@
 #import "PWDTask.h"
 #import "PWDConstants.h"
 #import "PWDTaskManager.h"
+#import "NSDate+PWDExtras.h"
 
 @implementation PWDTask
 
 - (instancetype)initWithTitle:(NSString *)title {
     if (self = [super init]) {
         self.title = title;
-        
-        NSCalendar *calendar = [NSCalendar currentCalendar];
-        NSDate *now = [NSDate date];
-        _createDate = now;
-        
-        NSDate *todayStart = [calendar startOfDayForDate:now];
-        NSDate *dueDate = [[calendar dateByAddingUnit:NSCalendarUnitDay value:2 toDate:todayStart options:0] dateByAddingTimeInterval:-1];
-        _dueDate = dueDate;
-        
+        _createDate = [NSDate date];
+        _dueDate = [NSDate dateOfTomorrowEndFromNowDate:_createDate];
     }
     return self;
 }

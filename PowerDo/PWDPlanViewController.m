@@ -8,6 +8,7 @@
 
 #import "PWDPlanViewController.h"
 #import "PWDTask.h"
+#import "NSDate+PWDExtras.h"
 
 @interface PWDPlanViewController () <UITextFieldDelegate>
 
@@ -135,6 +136,11 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     NSMutableArray *toTaskList = self.taskLists[toIndexPath.section];
     [toTaskList insertObject:movingTask atIndex:toIndexPath.row];
     [fromTaskList removeObjectAtIndex:fromIndexPath.row];
+    if (fromIndexPath.section == PWDPlanSectionTomorrow && toIndexPath.section == PWDPlanSectionSomeday) {
+        movingTask.dueDate = [NSDate distantFuture];
+    } else if (fromIndexPath.section == PWDPlanSectionSomeday && toIndexPath.section == PWDPlanSectionTomorrow) {
+        movingTask.dueDate = [NSDate dateOfTomorrowEnd];
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
