@@ -24,6 +24,8 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // TODO: remove left item
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(simulateTimeChange:)];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     UITextField *addTaskField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 0, 64)];
@@ -43,11 +45,45 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 
 
     self.taskLists = @[[NSMutableArray array],[NSMutableArray array]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSignificantTimeChange:) name:UIApplicationSignificantTimeChangeNotification object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Functions
+// TODO: remove this function
+- (void)simulateTimeChange:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationSignificantTimeChangeNotification object:nil];
+}
+
+- (void)handleSignificantTimeChange:(NSNotification *)note {
+    NSMutableArray *tomorrowTasks = self.taskLists[PWDPlanSectionTomorrow];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSMutableArray *indexPaths = [NSMutableArray array];
+    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
+    [tomorrowTasks enumerateObjectsUsingBlock:^(PWDTask * _Nonnull task, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([calendar isDateInToday:task.dueDate]) {
+            [indexSet addIndex:idx];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:PWDPlanSectionTomorrow];
+            [indexPaths addObject:indexPath];
+        }
+    }];
+    [tomorrowTasks removeObjectsAtIndexes:indexSet];
+    __weak UITableView *tableView = self.tableView;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [tableView beginUpdates];
+        [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+        [tableView endUpdates];
+    });
+
 }
 
 #pragma mark - UITableViewDataSource
@@ -95,10 +131,11 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
             UITableView *tableView = self.tableView;
             const PWDTask *task = [[PWDTask alloc] initWithTitle:taskTitle];
             const NSInteger index = 0;
+//            task.dueDate = [NSDate date]; // TODO: remove
             [tomorrowTasks insertObject:task atIndex:index];
             [tableView beginUpdates];
             [tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:PWDPlanSectionTomorrow]]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+                                  withRowAnimation:UITableViewRowAnimationFade];
             [tableView endUpdates];
             textField.text = nil;
         }
@@ -113,7 +150,7 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
         NSMutableArray *taskList = self.taskLists[indexPath.section];
         [taskList removeObjectAtIndex:indexPath.row];
         [tableView beginUpdates];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [tableView endUpdates];
     }
 }
