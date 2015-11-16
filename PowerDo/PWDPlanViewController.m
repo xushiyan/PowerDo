@@ -9,6 +9,7 @@
 #import "PWDPlanViewController.h"
 #import "PWDTask.h"
 #import "NSDate+PWDExtras.h"
+#import "PWDTaskDifficultyIndicator.h"
 
 @interface PWDPlanViewController () <UITextFieldDelegate> {
     CGFloat _headerHeight;
@@ -143,6 +144,10 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     }
     PWDTask *task = self.taskLists[indexPath.section][indexPath.row];
     cell.textLabel.text = task.title;
+    PWDTaskDifficultyIndicator *difficultyView = [[PWDTaskDifficultyIndicator alloc] initWithFrame:CGRectMake(0, 0, 60, 25)];
+    difficultyView.backgroundColor = [UIColor clearColor];
+    difficultyView.difficulty = task.difficulty;
+    cell.accessoryView = difficultyView;
     
     return cell;
 }
@@ -187,6 +192,10 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 }
 
 #pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSMutableArray *taskList = self.taskLists[indexPath.section];

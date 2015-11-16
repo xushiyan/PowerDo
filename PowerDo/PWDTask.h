@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, PWDTaskDifficulty) {
-    PWDTaskDifficultyEasy,
-    PWDTaskDifficultyMedium,
-    PWDTaskDifficultyHard,
+    PWDTaskDifficultyEasy = 1,
+    PWDTaskDifficultyMedium = 2,
+    PWDTaskDifficultyHard = 3,
 };
 
 @interface PWDTask : NSObject

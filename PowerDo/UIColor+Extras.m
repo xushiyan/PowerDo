@@ -29,4 +29,20 @@
     return [UIColor colorFromHexString:@"3498db"];
 }
 
++ (UIColor *)colorFromTaskDifficulty:(PWDTaskDifficulty)difficulty {
+    UIColor *color;
+    switch (difficulty) {
+        case PWDTaskDifficultyEasy:
+            color = [UIColor colorFromHexString:@"EB9A91"];
+            break;
+        case PWDTaskDifficultyMedium:
+            color = [UIColor colorFromHexString:@"e9594a"];
+            break;
+        case PWDTaskDifficultyHard:
+            color = [UIColor colorFromHexString:@"B6463A"];
+            break;
+    }
+    return color;
+}
+
 @end

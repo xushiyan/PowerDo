@@ -18,6 +18,7 @@
         self.title = title;
         _createDate = [NSDate date];
         _dueDate = [NSDate dateOfTomorrowEndFromNowDate:_createDate];
+        _difficulty = PWDTaskDifficultyEasy;
     }
     return self;
 }

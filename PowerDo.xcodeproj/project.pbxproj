@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E575F671BFA14560099DDEB /* PWDTaskDifficultyIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E575F661BFA14560099DDEB /* PWDTaskDifficultyIndicator.m */; };
 		4EB1112A1B9C0D4900BF5656 /* PowerDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4EB111281B9C0D4900BF5656 /* PowerDo.xcdatamodeld */; };
 		4EFBB9181BF9BFF200F0BBA6 /* NSDate+PWDExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFBB9171BF9BFF200F0BBA6 /* NSDate+PWDExtras.m */; };
 		4EFBB91A1BF9C0B300F0BBA6 /* PWDNSDateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFBB9191BF9C0B300F0BBA6 /* PWDNSDateTests.m */; };
@@ -57,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E575F651BFA14560099DDEB /* PWDTaskDifficultyIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTaskDifficultyIndicator.h; sourceTree = "<group>"; };
+		4E575F661BFA14560099DDEB /* PWDTaskDifficultyIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTaskDifficultyIndicator.m; sourceTree = "<group>"; };
 		4EB111291B9C0D4900BF5656 /* PowerDo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PowerDo.xcdatamodel; sourceTree = "<group>"; };
 		4EFBB9161BF9BFF200F0BBA6 /* NSDate+PWDExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+PWDExtras.h"; sourceTree = "<group>"; };
 		4EFBB9171BF9BFF200F0BBA6 /* NSDate+PWDExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+PWDExtras.m"; sourceTree = "<group>"; };
@@ -234,6 +237,8 @@
 				86A75FA71BA2DB0C00588730 /* PWDDatePickerCell.xib */,
 				E2DAC0311BA8744000C33CBD /* PWDFeedbackTextField.h */,
 				E2DAC0321BA8744000C33CBD /* PWDFeedbackTextField.m */,
+				4E575F651BFA14560099DDEB /* PWDTaskDifficultyIndicator.h */,
+				4E575F661BFA14560099DDEB /* PWDTaskDifficultyIndicator.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -445,6 +450,7 @@
 				E2C426551B9DDD9500E3BC92 /* PWDTodayViewController.m in Sources */,
 				86485B201B973A4C0027D01A /* main.m in Sources */,
 				E2DAC0331BA8744000C33CBD /* PWDFeedbackTextField.m in Sources */,
+				4E575F671BFA14560099DDEB /* PWDTaskDifficultyIndicator.m in Sources */,
 				86A75FA41BA2DA5400588730 /* PWDTableViewCell.m in Sources */,
 				86A75FAC1BA2E20700588730 /* PWDConstants.m in Sources */,
 			);

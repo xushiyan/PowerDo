@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PWDTask.h"
 
 @interface UIColor (Extras)
 
@@ -14,5 +15,6 @@
 + (UIColor *)themeColor;
 + (UIColor *)happyMoodColor;
 + (UIColor *)unhappyMoodColor;
++ (UIColor *)colorFromTaskDifficulty:(PWDTaskDifficulty)difficulty;
 
 @end
