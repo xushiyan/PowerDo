@@ -291,13 +291,45 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     [[PWDTaskManager sharedManager] saveContext];
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        PWDTask *task = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        PWDTaskManager *taskManager = [PWDTaskManager sharedManager];
-        [taskManager.managedObjectContext deleteObject:task];
-        [taskManager saveContext];
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PWDTask *task = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    PWDTaskManager *taskManager = [PWDTaskManager sharedManager];
+
+    NSArray *actions;
+    UITableViewRowAction *delete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive
+                                                                      title:NSLocalizedString(@"Delete", @"Delete action title")
+                                                                    handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+                                                                        [taskManager.managedObjectContext deleteObject:task];
+                                                                        [taskManager saveContext];
+                                                                    }];
+    UITableViewRowAction *dueSomeday = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
+                                                                      title:NSLocalizedString(@"Due Someday", @"Due Someday action title")
+                                                                    handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+                                                                        task.dueDate = [NSDate distantFuture];
+                                                                        [taskManager saveContext];
+                                                                    }];
+    UITableViewRowAction *dueTomorrow = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
+                                                                          title:NSLocalizedString(@"Due Tomorrow", @"Due Someday action title")
+                                                                        handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+                                                                            task.dueDate = [NSDate dateOfTomorrowEnd];
+                                                                            [taskManager saveContext];
+                                                                        }];
+    
+    switch (task.dueDateGroup) {
+        case PWDTaskDueDateGroupTomorrow: {
+            actions = @[delete,dueSomeday];
+        }
+            break;
+            
+        case PWDTaskDueDateGroupSomeDay: {
+            actions = @[delete,dueTomorrow];
+        }
+            break;
+            
+        default:
+            break;
     }
+    return actions;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -311,23 +343,5 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
 }
-/*
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-    NSMutableArray *fromTaskList = self.taskLists[fromIndexPath.section];
-    PWDTask *movingTask = fromTaskList[fromIndexPath.row];
-    NSMutableArray *toTaskList = self.taskLists[toIndexPath.section];
-    [toTaskList insertObject:movingTask atIndex:toIndexPath.row];
-    [fromTaskList removeObjectAtIndex:fromIndexPath.row];
-    if (fromIndexPath.section == PWDPlanSectionTomorrow && toIndexPath.section == PWDPlanSectionSomeday) {
-        movingTask.dueDate = [NSDate distantFuture];
-    } else if (fromIndexPath.section == PWDPlanSectionSomeday && toIndexPath.section == PWDPlanSectionTomorrow) {
-        movingTask.dueDate = [NSDate dateOfTomorrowEnd];
-    }
-}
-
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
 
 @end
