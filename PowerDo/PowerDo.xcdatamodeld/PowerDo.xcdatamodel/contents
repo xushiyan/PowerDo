@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8118.17" systemVersion="14F27" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Xcode 7.0">
     <entity name="PWDTask" representedClassName="PWDTask" syncable="YES">
-        <attribute name="completed" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
-        <attribute name="createDate" attributeType="Date" syncable="YES"/>
+        <attribute name="createDateRaw" attributeType="Date" syncable="YES"/>
         <attribute name="difficulty" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="dueDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dueDateRaw" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="points" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="sealed" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PWDTask" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="PWDTask" positionX="-63" positionY="-18" width="128" height="150"/>
     </elements>
 </model>

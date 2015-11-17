@@ -2,11 +2,20 @@
 //  PWDTask.h
 //  PowerDo
 //
-//  Created by XU SHIYAN on 9/2/15.
+//  Created by XU SHIYAN on 17/11/15.
 //  Copyright © 2015 xushiyan. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+typedef NS_ENUM(NSUInteger, PWDTaskDueDateGroup) {
+    PWDTaskDueDateGroupToday,
+    PWDTaskDueDateGroupTomorrow,
+    PWDTaskDueDateGroupSomeDay,
+};
 
 typedef NS_ENUM(NSUInteger, PWDTaskDifficulty) {
     PWDTaskDifficultyEasy = 1,
@@ -14,14 +23,25 @@ typedef NS_ENUM(NSUInteger, PWDTaskDifficulty) {
     PWDTaskDifficultyHard = 3,
 };
 
-@interface PWDTask : NSObject
+typedef NS_ENUM(NSUInteger, PWDTaskStatus) {
+    PWDTaskStatusInPlan,
+    PWDTaskStatusOnGoing,
+    PWDTaskStatusCompleted,
+};
 
-- (instancetype)initWithTitle:(NSString *)title NS_DESIGNATED_INITIALIZER;
+@interface PWDTask : NSManagedObject
 
-@property (nonatomic,copy) NSString *title;
-@property (nonatomic,getter=isCompleted) BOOL completed;
+// Insert code here to declare functionality of your managed object subclass
 @property (nonatomic,strong,readonly) NSDate *createDate;
 @property (nonatomic,strong) NSDate *dueDate;
-@property (nonatomic) enum PWDTaskDifficulty difficulty;
+
+- (PWDTaskDueDateGroup)dueDateGroup;
+- (NSString *)dueDateGroupText;
+- (NSString *)difficultyText;
+- (NSString *)statusText;
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "PWDTask+CoreDataProperties.h"

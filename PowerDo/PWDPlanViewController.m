@@ -7,6 +7,7 @@
 //
 
 #import "PWDPlanViewController.h"
+#import "PWDTaskManager.h"
 #import "PWDTask.h"
 #import "NSDate+PWDExtras.h"
 #import "PWDTaskDifficultyIndicator.h"
@@ -173,7 +174,10 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
         NSString *taskTitle = textField.text;
         if (taskTitle.length) {
             NSMutableArray *tomorrowTasks = self.taskLists[PWDPlanSectionTomorrow];
-            PWDTask *task = [[PWDTask alloc] initWithTitle:taskTitle];
+            PWDTaskManager *taskManager = [PWDTaskManager sharedManager];
+            NSEntityDescription *entityDescription = [taskManager.managedObjectModel entitiesByName][NSStringFromClass([PWDTask class])];
+            PWDTask *task = [[PWDTask alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:taskManager.managedObjectContext];
+            task.title = taskTitle;
             NSInteger index = 0;
 //            task.dueDate = [NSDate date]; // TODO: remove
             [tomorrowTasks insertObject:task atIndex:index];
