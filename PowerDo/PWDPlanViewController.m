@@ -76,7 +76,11 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     self.automaticallyAdjustsScrollViewInsets = NO;
     UITableView *tableView = self.tableView;
     tableView.tableHeaderView = addTaskField;
-    
+    tableView.rowHeight = 64;
+    tableView.estimatedRowHeight = 64;
+    tableView.allowsSelectionDuringEditing = YES;
+    tableView.allowsMultipleSelectionDuringEditing = YES;
+
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSignificantTimeChange:) name:UIApplicationSignificantTimeChangeNotification object:nil];
 }
 
@@ -296,20 +300,20 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     PWDTaskManager *taskManager = [PWDTaskManager sharedManager];
 
     NSArray *actions;
-    UITableViewRowAction *delete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive
-                                                                      title:NSLocalizedString(@"Delete", @"Delete action title")
+    UITableViewRowAction *dueToday = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive
+                                                                      title:NSLocalizedString(@"Due\nToday", @"Due Today action title")
                                                                     handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-                                                                        [taskManager.managedObjectContext deleteObject:task];
+                                                                        task.dueDate = [NSDate dateOfTodayEnd];
                                                                         [taskManager saveContext];
                                                                     }];
     UITableViewRowAction *dueSomeday = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
-                                                                      title:NSLocalizedString(@"Due Someday", @"Due Someday action title")
+                                                                      title:NSLocalizedString(@"Due\nSomeday", @"Due Someday action title")
                                                                     handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
                                                                         task.dueDate = [NSDate distantFuture];
                                                                         [taskManager saveContext];
                                                                     }];
     UITableViewRowAction *dueTomorrow = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
-                                                                          title:NSLocalizedString(@"Due Tomorrow", @"Due Someday action title")
+                                                                          title:NSLocalizedString(@"Due\nTomorrow", @"Due Someday action title")
                                                                         handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
                                                                             task.dueDate = [NSDate dateOfTomorrowEnd];
                                                                             [taskManager saveContext];
@@ -317,12 +321,12 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     
     switch (task.dueDateGroup) {
         case PWDTaskDueDateGroupTomorrow: {
-            actions = @[delete,dueSomeday];
+            actions = @[dueToday,dueSomeday];
         }
             break;
             
         case PWDTaskDueDateGroupSomeDay: {
-            actions = @[delete,dueTomorrow];
+            actions = @[dueToday,dueTomorrow];
         }
             break;
             

@@ -10,6 +10,8 @@
 
 @interface NSDate (PWDExtras)
 
++ (instancetype)dateOfTodayEnd;
++ (instancetype)dateOfTodayEndFromNowDate:(NSDate *)nowDate;
 + (instancetype)dateOfTomorrowEnd;
 + (instancetype)dateOfTomorrowEndFromNowDate:(NSDate *)nowDate;
 
