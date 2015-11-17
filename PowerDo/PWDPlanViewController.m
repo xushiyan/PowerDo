@@ -63,7 +63,7 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editAction:)];
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAction:)];
-    UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Delete All", @"Delete all button title") style:UIBarButtonItemStylePlain target:self action:nil];
+    UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Delete All", @"Delete all button title") style:UIBarButtonItemStylePlain target:self action:@selector(deleteAction:)];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelAction:)];
     
     self.navigationItem.leftBarButtonItem = editButton;
@@ -124,10 +124,31 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     [self.addTaskField becomeFirstResponder];
 }
 
+- (void)deleteAction:(id)sender {
+    NSFetchedResultsController *controller = self.fetchedResultsController;
+    NSArray *selectedRows = [self.tableView indexPathsForSelectedRows];
+    PWDTaskManager *taskManager = [PWDTaskManager sharedManager];
+    if (selectedRows.count == 0) {
+        [controller.fetchedObjects enumerateObjectsUsingBlock:^(PWDTask * _Nonnull task, NSUInteger idx, BOOL * _Nonnull stop) {
+            [taskManager.managedObjectContext deleteObject:task];
+        }];
+    } else {
+        [selectedRows enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull indexPath, NSUInteger idx, BOOL * _Nonnull stop) {
+            PWDTask *task = [controller objectAtIndexPath:indexPath];
+            [taskManager.managedObjectContext deleteObject:task];
+        }];
+    }
+    [taskManager saveContext];
+    
+    [self.tableView setEditing:NO animated:YES];
+    [self updateBarButtonItems];
+}
+
 #pragma mark - Functions
 - (void)updateBarButtonItems {
     if (self.tableView.isEditing) {
         self.navigationItem.leftBarButtonItem = self.cancelButton;
+        [self updateDeleteButtonTitle];
         self.navigationItem.rightBarButtonItem = self.deleteButton;
     } else {
         self.editButton.enabled = self.fetchedResultsController.fetchedObjects.count > 0;
