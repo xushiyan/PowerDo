@@ -18,6 +18,11 @@
 @property (nonatomic,strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic,weak) UITextField *addTaskField;
 
+@property (nonatomic,strong) UIBarButtonItem *editButton;
+@property (nonatomic,strong) UIBarButtonItem *addButton;
+@property (nonatomic,strong) UIBarButtonItem *deleteButton;
+@property (nonatomic,strong) UIBarButtonItem *cancelButton;
+
 @end
 
 NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
@@ -55,11 +60,18 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     controller.delegate = self;
     self.fetchedResultsController = controller;
     
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    // TODO: remove simulate time change action
-    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(startAddingNewTask:)],
-//                                                [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(simulateTimeChange:)]
-                                                ];
+    
+    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editAction:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAction:)];
+    UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Delete All", @"Delete all button title") style:UIBarButtonItemStylePlain target:self action:nil];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelAction:)];
+    
+    self.navigationItem.leftBarButtonItem = editButton;
+    self.navigationItem.rightBarButtonItem = addButton;
+    self.editButton = editButton;
+    self.addButton = addButton;
+    self.deleteButton = deleteButton;
+    self.cancelButton = cancelButton;
     
     _headerHeight = 64;
     UITextField *addTaskField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 0, _headerHeight)];
@@ -81,6 +93,8 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     tableView.allowsSelectionDuringEditing = YES;
     tableView.allowsMultipleSelectionDuringEditing = YES;
 
+    [self updateBarButtonItems];
+
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSignificantTimeChange:) name:UIApplicationSignificantTimeChangeNotification object:nil];
 }
 
@@ -92,18 +106,51 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark - Action methods
 
-#pragma mark - Functions
-// TODO: remove this function
-- (void)simulateTimeChange:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationSignificantTimeChangeNotification object:nil];
+- (void)editAction:(id)sender {
+    [self.tableView setEditing:YES animated:YES];
+    [self updateBarButtonItems];
 }
 
-- (void)startAddingNewTask:(id)sender {
+- (void)cancelAction:(id)sender {
+    [self.tableView setEditing:NO animated:YES];
+    [self updateBarButtonItems];
+}
+
+- (void)addAction:(id)sender {
     UITableView *tableView = self.tableView;
     [self animateScrollView:tableView forContentInsetsTop:_headerHeight];
     [self.addTaskField becomeFirstResponder];
 }
+
+#pragma mark - Functions
+- (void)updateBarButtonItems {
+    if (self.tableView.isEditing) {
+        self.navigationItem.leftBarButtonItem = self.cancelButton;
+        self.navigationItem.rightBarButtonItem = self.deleteButton;
+    } else {
+        self.editButton.enabled = self.fetchedResultsController.fetchedObjects.count > 0;
+        self.navigationItem.leftBarButtonItem = self.editButton;
+        self.navigationItem.rightBarButtonItem = self.addButton;
+    }
+}
+
+- (void)updateDeleteButtonTitle {
+    NSArray *selectedRows = [self.tableView indexPathsForSelectedRows];
+    
+    BOOL allItemsAreSelected = selectedRows.count == self.fetchedResultsController.fetchedObjects.count;
+    BOOL noItemsAreSelected = selectedRows.count == 0;
+    
+    if (allItemsAreSelected || noItemsAreSelected) {
+        self.deleteButton.title = NSLocalizedString(@"Delete All", @"Delete all button title");
+    } else {
+        NSString *titleFormatString =
+        NSLocalizedString(@"Delete (%d)", @"Title for delete button with placeholder for number");
+        self.deleteButton.title = [NSString stringWithFormat:titleFormatString, selectedRows.count];
+    }
+}
+
 /*
 - (void)handleSignificantTimeChange:(NSNotification *)note {
     NSMutableArray *tomorrowTasks = self.taskLists[PWDPlanSectionTomorrow];
@@ -257,6 +304,7 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
+    [self updateBarButtonItems];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -270,7 +318,6 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
             NSEntityDescription *entityDescription = [taskManager.managedObjectModel entitiesByName][NSStringFromClass([PWDTask class])];
             PWDTask *task = [[PWDTask alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:taskManager.managedObjectContext];
             task.title = taskTitle;
-//            task.dueDate = [NSDate date]; // TODO: remove
             textField.text = nil;
             [taskManager saveContext];
             return NO;
@@ -284,15 +331,26 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    PWDTask *task = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    NSInteger difficulty = task.difficulty;
-    difficulty++;
-    if (difficulty > PWDTaskDifficultyHard) {
-        difficulty -= PWDTaskDifficultyHard;
+    if (tableView.isEditing) {
+        [self updateDeleteButtonTitle];
+
+    } else {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        PWDTask *task = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        NSInteger difficulty = task.difficulty;
+        difficulty++;
+        if (difficulty > PWDTaskDifficultyHard) {
+            difficulty -= PWDTaskDifficultyHard;
+        }
+        task.difficulty = difficulty;
+        [[PWDTaskManager sharedManager] saveContext];
     }
-    task.difficulty = difficulty;
-    [[PWDTaskManager sharedManager] saveContext];
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView.isEditing) {
+        [self updateDeleteButtonTitle];
+    }
 }
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -345,7 +403,7 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
-    return NO;
+    return YES;
 }
 
 @end
