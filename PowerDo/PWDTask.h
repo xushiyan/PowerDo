@@ -35,7 +35,6 @@ typedef NS_ENUM(NSUInteger, PWDTaskStatus) {
 @property (nonatomic,strong,readonly) NSDate *createDate;
 @property (nonatomic,strong) NSDate *dueDate;
 
-- (PWDTaskDueDateGroup)dueDateGroup;
 - (NSString *)dueDateGroupText;
 - (NSString *)difficultyText;
 - (NSString *)statusText;

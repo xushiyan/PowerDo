@@ -16,7 +16,9 @@
     self.title = @"";
     NSDate *now = [NSDate date];
     self.createDateRaw = [now timeIntervalSince1970];
-    self.dueDateRaw = [[NSDate dateOfTomorrowEndFromNowDate:now] timeIntervalSince1970];
+    NSDate *dueDate = [NSDate dateOfTomorrowEndFromNowDate:now];
+    self.dueDateRaw = [dueDate timeIntervalSince1970];
+    self.dueDateGroup = PWDTaskDueDateGroupTomorrow;
     self.difficulty = PWDTaskDifficultyEasy;
     self.status = PWDTaskStatusInPlan;
     self.points = .0f;
@@ -29,22 +31,19 @@
 
 - (void)setDueDate:(NSDate *)dueDate {
     self.dueDateRaw = [dueDate timeIntervalSince1970];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    if ([calendar isDateInToday:dueDate]) {
+        self.dueDateGroup = PWDTaskDueDateGroupToday;
+    } else if ([calendar isDateInTomorrow:dueDate]) {
+        self.dueDateGroup = PWDTaskDueDateGroupTomorrow;
+    } else {
+        self.dueDateGroup = PWDTaskDueDateGroupSomeDay;
+    }
 }
 
 - (NSDate *)dueDate {
     return [NSDate dateWithTimeIntervalSince1970:self.dueDateRaw];
-}
-
-- (PWDTaskDueDateGroup)dueDateGroup {
-    NSDate *dueDate = [NSDate dateWithTimeIntervalSince1970:self.dueDateRaw];
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    if ([calendar isDateInToday:dueDate]) {
-        return PWDTaskDueDateGroupToday;
-    } else if ([calendar isDateInTomorrow:dueDate]) {
-        return PWDTaskDueDateGroupTomorrow;
-    } else {
-        return PWDTaskDueDateGroupSomeDay;
-    }
 }
 
 - (NSString *)dueDateGroupText {

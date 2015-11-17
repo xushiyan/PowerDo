@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL sealed;
 @property (nonatomic) int16_t status;
 @property (nonatomic) float points;
+@property (nonatomic) int16_t dueDateGroup;
 
 @end
 

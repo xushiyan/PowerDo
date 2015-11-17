@@ -54,7 +54,7 @@
     // we do not consider extreme case in which task is created in the last millisecond of today
     XCTAssertNotEqual(result, NSOrderedAscending, @"dueDate should not be earlier than createDate.");
     
-    
+    XCTAssertEqual(task.dueDateGroup, PWDTaskDueDateGroupTomorrow);
     XCTAssertEqual(task.difficulty, PWDTaskDifficultyEasy);
     XCTAssertEqual(task.points, 0);
     XCTAssertEqual(task.status, PWDTaskStatusInPlan);

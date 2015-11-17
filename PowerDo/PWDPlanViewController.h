@@ -7,12 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-typedef NS_ENUM(NSUInteger, PWDPlanSection) {
-    PWDPlanSectionTomorrow,
-    PWDPlanSectionSomeday,
-    PWDPlanSectionEnd,
-};
-@interface PWDPlanViewController : UITableViewController
+@interface PWDPlanViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @end

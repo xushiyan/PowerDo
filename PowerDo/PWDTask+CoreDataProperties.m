@@ -20,5 +20,6 @@
 @dynamic sealed;
 @dynamic status;
 @dynamic points;
+@dynamic dueDateGroup;
 
 @end
