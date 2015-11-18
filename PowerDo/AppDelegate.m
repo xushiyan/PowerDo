@@ -8,10 +8,7 @@
 
 #import "AppDelegate.h"
 #import "PWDTaskManager.h"
-#import "PWDPlanViewController.h"
-#import "PWDTodayViewController.h"
-#import "PWDStatsViewController.h"
-#import "PWDSettingsViewController.h"
+#import "PWDRootViewController.h"
 #import "PWDConstants.h"
 #import "UIColor+Extras.h"
 
@@ -26,31 +23,8 @@
     // Override point for customization after application launch.
     self.taskManager = [PWDTaskManager sharedManager];
     
-    PWDPlanViewController *plan_vc = [[PWDPlanViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    plan_vc.title = NSLocalizedString(@"Plan", @"Plan tab title");
-    plan_vc.tabBarItem = [[UITabBarItem alloc] initWithTitle:plan_vc.title image:[UIImage imageNamed:@"ic_assignment"] tag:0];
-    UINavigationController *plan_nc = [[UINavigationController alloc] initWithRootViewController:plan_vc];
-    
-    PWDTodayViewController *today_vc = [[PWDTodayViewController alloc] initWithStyle:UITableViewStylePlain];
-    today_vc.title = NSLocalizedString(@"Today", @"Today tab title");
-    today_vc.tabBarItem = [[UITabBarItem alloc] initWithTitle:today_vc.title image:[UIImage imageNamed:@"ic_today"] tag:1];
-    UINavigationController *today_nc = [[UINavigationController alloc] initWithRootViewController:today_vc];
-    
-    PWDStatsViewController *stats_vc = [[PWDStatsViewController alloc] init];
-    stats_vc.title = NSLocalizedString(@"Stats", @"Stats tab title");
-    stats_vc.tabBarItem = [[UITabBarItem alloc] initWithTitle:stats_vc.title image:[UIImage imageNamed:@"ic_insert_chart"] tag:2];
-    UINavigationController *stats_nc = [[UINavigationController alloc] initWithRootViewController:stats_vc];
-    
-    PWDSettingsViewController *settings_vc = [[PWDSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    settings_vc.title = NSLocalizedString(@"Settings", @"Settings tab title");
-    settings_vc.tabBarItem = [[UITabBarItem alloc] initWithTitle:settings_vc.title image:[UIImage imageNamed:@"ic_settings"] tag:3];
-    UINavigationController *settings_nc = [[UINavigationController alloc] initWithRootViewController:settings_vc];
-    
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[plan_nc,today_nc,stats_nc,settings_nc];
-    
     UIWindow *mainWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    mainWindow.rootViewController = tabBarController;
+    mainWindow.rootViewController = [[PWDRootViewController alloc] init];
     mainWindow.backgroundColor = [UIColor whiteColor];
     mainWindow.tintColor = [UIColor themeColor];
     self.window = mainWindow;

@@ -38,7 +38,7 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     NSEntityDescription *entityDescription = [taskManager.managedObjectModel entitiesByName][NSStringFromClass([PWDTask class])];
     fetchRequest.entity = entityDescription;
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dueDateGroup != 0"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dueDateGroup != %ld", PWDTaskDueDateGroupToday];
     fetchRequest.predicate = predicate;
     
     NSSortDescriptor *sortDescriptorPrimary = [[NSSortDescriptor alloc] initWithKey:NSStringFromSelector(@selector(dueDateGroup)) ascending:YES];
@@ -48,7 +48,7 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     
     NSFetchedResultsController *controller = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                                  managedObjectContext:context
-                                                                                   sectionNameKeyPath:@"dueDateGroupText"
+                                                                                   sectionNameKeyPath:NSStringFromSelector(@selector(dueDateGroupText))
                                                                                             cacheName:nil];
     
     NSError *error;
@@ -207,7 +207,7 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 - (void)animateScrollView:(UIScrollView *)scrollView forContentInsetsTop:(CGFloat)top {
     UIEdgeInsets insets = scrollView.contentInset;
     insets.top = top;
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:0.25f animations:^{
         scrollView.contentInset = insets;
         scrollView.scrollIndicatorInsets = insets;
     }];

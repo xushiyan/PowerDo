@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-@interface PWDTodayViewController : UITableViewController
+@interface PWDTodayViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @end

@@ -34,8 +34,10 @@
         NSPersistentStore *persistentStore = [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
                                                                                        configuration:nil
                                                                                                  URL:storeURL
-                                                                                             options:@{NSMigratePersistentStoresAutomaticallyOption : @YES,
-                                                                                                       NSInferMappingModelAutomaticallyOption : @YES}
+                                                                                             options:@{
+                                                                                                       NSMigratePersistentStoresAutomaticallyOption : @YES,
+                                                                                                       NSInferMappingModelAutomaticallyOption : @YES
+                                                                                                       }
                                                                                                error:&error];
         if (!persistentStore) {
             NSLog(@"persistentStore init error %@, %@", error, [error userInfo]);
@@ -52,7 +54,7 @@
 - (void)saveContext {
     NSError *error;
     if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        NSLog(@"managedObjectContext save error %@, %@", error, [error userInfo]);
         abort();
     }
 }
