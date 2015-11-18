@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, PWDRootTab) {
+    PWDRootTabPlan,
+    PWDRootTabToday,
+    PWDRootTabStats,
+    PWDRootTabSettings
+};
 @interface PWDRootViewController : UITabBarController
 
 @end

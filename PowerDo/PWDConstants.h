@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const PWDTodayBadgeValueNeedsUpdateNotification;
+extern NSString * const PWDTodayBadgeValueChangeNotification;
 
 @interface PWDConstants : NSObject
 

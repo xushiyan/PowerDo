@@ -8,6 +8,7 @@
 
 #import "PWDTaskManager.h"
 #import "PWDConstants.h"
+#import "PWDTask.h"
 
 @implementation PWDTaskManager
 
@@ -47,6 +48,11 @@
         // Initialize the managed object context
         _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         [_managedObjectContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(postUpdateForTodayTasksCount:)
+                                                     name:PWDTodayBadgeValueNeedsUpdateNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -61,6 +67,28 @@
 
 - (NSURL *)applicationDocumentsDirectory {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+- (NSUInteger)fetchOnGoingTodayTasksCount {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDTask class]) inManagedObjectContext:self.managedObjectContext];
+    request.includesSubentities = NO;
+    request.predicate = [NSPredicate predicateWithFormat:@"dueDateGroup == %ld AND status == %ld", PWDTaskDueDateGroupToday, PWDTaskStatusOnGoing];
+    NSError *error;
+    NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
+    if (count == NSNotFound) {
+        NSLog(@"fetch count for %@ error: %@", [PWDTask class], error);
+    }
+    return count;
+}
+
+- (void)postUpdateForTodayTasksCount:(NSNotification *)notification {
+    if (notification.name == PWDTodayBadgeValueNeedsUpdateNotification) {
+        NSUInteger count = [self fetchOnGoingTodayTasksCount];
+        if (count != NSNotFound) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueChangeNotification object:@(count)];
+        }
+    }
 }
 
 @end

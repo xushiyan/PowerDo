@@ -10,6 +10,7 @@
 #import "PWDTask.h"
 #import "PWDTaskManager.h"
 #import "PWDTaskDifficultyIndicator.h"
+#import "PWDConstants.h"
 
 @interface PWDTodayViewController ()
 
@@ -56,6 +57,7 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
     tableView.rowHeight = 64;
     tableView.estimatedRowHeight = 64;
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
     //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSignificantTimeChange:) name:UIApplicationSignificantTimeChangeNotification object:nil];
 }
 
@@ -171,6 +173,7 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
+    [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
 }
 
 @end

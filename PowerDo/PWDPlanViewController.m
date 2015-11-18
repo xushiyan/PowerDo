@@ -11,6 +11,7 @@
 #import "PWDTask.h"
 #import "NSDate+PWDExtras.h"
 #import "PWDTaskDifficultyIndicator.h"
+#import "PWDConstants.h"
 
 @interface PWDPlanViewController () <UITextFieldDelegate> {
     CGFloat _headerHeight;
@@ -383,7 +384,9 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
                                                                       title:NSLocalizedString(@"Due\nToday", @"Due Today action title")
                                                                     handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
                                                                         task.dueDate = [NSDate dateOfTodayEnd];
+                                                                        task.status = PWDTaskStatusOnGoing;
                                                                         [taskManager saveContext];
+                                                                        [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
                                                                     }];
     UITableViewRowAction *dueSomeday = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
                                                                       title:NSLocalizedString(@"Due\nSomeday", @"Due Someday action title")
