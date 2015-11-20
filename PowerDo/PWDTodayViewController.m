@@ -11,6 +11,8 @@
 #import "PWDTaskManager.h"
 #import "PWDTaskDifficultyIndicator.h"
 #import "PWDConstants.h"
+#import "NSDate+PWDExtras.h"
+#import "UIColor+Extras.h"
 
 @interface PWDTodayViewController ()
 
@@ -78,6 +80,66 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
     difficultyView.backgroundColor = [UIColor clearColor];
     difficultyView.difficulty = task.difficulty;
     cell.accessoryView = difficultyView;
+}
+#pragma mark - UITableViewDelegate
+
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PWDTask *task = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    PWDTaskManager *taskManager = [PWDTaskManager sharedManager];
+    
+    NSArray *actions;
+    UITableViewRowAction *complete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault
+                                                                        title:NSLocalizedString(@"Complete", @"Complete action title")
+                                                                      handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+                                                                          task.status = PWDTaskStatusCompleted;
+                                                                          [taskManager saveContext];
+                                                                          [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
+                                                                      }];
+    complete.backgroundColor = [UIColor themeColor];
+    UITableViewRowAction *keepWorking = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
+                                                                          title:NSLocalizedString(@"Keep\nWorking", @"Keep working action title")
+                                                                        handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+                                                                            task.status = PWDTaskStatusOnGoing;
+                                                                            [taskManager saveContext];
+                                                                            [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
+                                                                        }];
+    keepWorking.backgroundColor = [UIColor keepWorkingColor];
+    UITableViewRowAction *postpone = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive
+                                                                           title:NSLocalizedString(@"Postpone", @"postpone action title")
+                                                                         handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+                                                                             task.dueDate = [NSDate distantFuture];
+                                                                             task.status = PWDTaskStatusInPlan;
+                                                                             [taskManager saveContext];
+                                                                             [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
+                                                                         }];
+    
+    switch (task.status) {
+        case PWDTaskStatusOnGoing: {
+            actions = @[complete,postpone];
+        }
+            break;
+            
+        case PWDTaskStatusCompleted: {
+            actions = @[keepWorking,postpone];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    return actions;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
 }
 
 #pragma mark - UITableViewDataSource

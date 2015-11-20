@@ -45,4 +45,12 @@
     return color;
 }
 
++ (UIColor *)postponeColor {
+    return [UIColor colorFromHexString:@"e74c3c"];
+}
+
++ (UIColor *)keepWorkingColor {
+    return [UIColor colorFromHexString:@"f39c12"];
+}
+
 @end
