@@ -56,8 +56,8 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
     self.fetchedResultsController = controller;
     
     UITableView *tableView = self.tableView;
-    tableView.rowHeight = 64;
-    tableView.estimatedRowHeight = 64;
+    tableView.rowHeight = 44;
+    tableView.estimatedRowHeight = 44;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
     //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSignificantTimeChange:) name:UIApplicationSignificantTimeChangeNotification object:nil];
@@ -75,37 +75,44 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
 #pragma mark - Functions
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     PWDTask *task = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = task.title;
+    NSNumber *strikeThrough = task.status == PWDTaskStatusCompleted ? @(NSUnderlineStyleSingle) : @(NSUnderlineStyleNone);
+    UIColor *completeColor = task.status == PWDTaskStatusCompleted ? [UIColor lightGrayColor] : [UIColor blackColor];
+    NSAttributedString *taskTitle = [[NSAttributedString alloc] initWithString:task.title attributes:@{NSStrikethroughStyleAttributeName:strikeThrough,
+                                                                                                       NSForegroundColorAttributeName:completeColor}];
+    cell.textLabel.attributedText = taskTitle;
     PWDTaskDifficultyIndicator *difficultyView = [[PWDTaskDifficultyIndicator alloc] initWithFrame:CGRectMake(0, 0, 48, 20)];
     difficultyView.backgroundColor = [UIColor clearColor];
     difficultyView.difficulty = task.difficulty;
     cell.accessoryView = difficultyView;
 }
 #pragma mark - UITableViewDelegate
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     PWDTask *task = [self.fetchedResultsController objectAtIndexPath:indexPath];
     PWDTaskManager *taskManager = [PWDTaskManager sharedManager];
     
     NSArray *actions;
-    UITableViewRowAction *complete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault
-                                                                        title:NSLocalizedString(@"Complete", @"Complete action title")
+    UITableViewRowAction *done = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault
+                                                                        title:NSLocalizedString(@"Done", @"Complete action title")
                                                                       handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
                                                                           task.status = PWDTaskStatusCompleted;
                                                                           [taskManager saveContext];
                                                                           [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
                                                                       }];
-    complete.backgroundColor = [UIColor themeColor];
-    UITableViewRowAction *keepWorking = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
-                                                                          title:NSLocalizedString(@"Keep\nWorking", @"Keep working action title")
+    done.backgroundColor = [UIColor themeColor];
+    UITableViewRowAction *redo = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
+                                                                          title:NSLocalizedString(@"Redo", @"Redo action title")
                                                                         handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
                                                                             task.status = PWDTaskStatusOnGoing;
                                                                             [taskManager saveContext];
                                                                             [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
                                                                         }];
-    keepWorking.backgroundColor = [UIColor keepWorkingColor];
-    UITableViewRowAction *postpone = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive
-                                                                           title:NSLocalizedString(@"Postpone", @"postpone action title")
+    redo.backgroundColor = [UIColor flatOrangeColor];
+    UITableViewRowAction *later = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
+                                                                           title:NSLocalizedString(@"Later", @"postpone action title")
                                                                          handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
                                                                              task.dueDate = [NSDate distantFuture];
                                                                              task.status = PWDTaskStatusInPlan;
@@ -115,12 +122,12 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
     
     switch (task.status) {
         case PWDTaskStatusOnGoing: {
-            actions = @[complete,postpone];
+            actions = @[done,later];
         }
             break;
             
         case PWDTaskStatusCompleted: {
-            actions = @[keepWorking,postpone];
+            actions = @[redo,later];
         }
             break;
             

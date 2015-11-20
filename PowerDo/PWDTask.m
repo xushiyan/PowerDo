@@ -50,13 +50,13 @@
     NSString *text;
     switch (self.dueDateGroup) {
         case PWDTaskDueDateGroupToday:
-            text = NSLocalizedString(@"Today", @"PWDTaskDueDateGroupToday");
+            text = NSLocalizedString(@"Due Today", @"PWDTaskDueDateGroupToday");
             break;
         case PWDTaskDueDateGroupTomorrow:
-            text = NSLocalizedString(@"Tomorrow", @"PWDTaskDueDateGroupTomorrow");
+            text = NSLocalizedString(@"Due Tomorrow", @"PWDTaskDueDateGroupTomorrow");
             break;
         case PWDTaskDueDateGroupSomeDay:
-            text = NSLocalizedString(@"Someday", @"PWDTaskDueDateGroupSomeDay");
+            text = NSLocalizedString(@"Due Someday", @"PWDTaskDueDateGroupSomeDay");
             break;
     }
     return text;

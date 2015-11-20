@@ -16,7 +16,6 @@
 + (UIColor *)happyMoodColor;
 + (UIColor *)unhappyMoodColor;
 + (UIColor *)colorFromTaskDifficulty:(PWDTaskDifficulty)difficulty;
-+ (UIColor *)postponeColor;
-+ (UIColor *)keepWorkingColor;
++ (UIColor *)flatOrangeColor;
 
 @end

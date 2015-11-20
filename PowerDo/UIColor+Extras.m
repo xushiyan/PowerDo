@@ -45,11 +45,7 @@
     return color;
 }
 
-+ (UIColor *)postponeColor {
-    return [UIColor colorFromHexString:@"e74c3c"];
-}
-
-+ (UIColor *)keepWorkingColor {
++ (UIColor *)flatOrangeColor {
     return [UIColor colorFromHexString:@"f39c12"];
 }
 
