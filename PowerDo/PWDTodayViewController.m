@@ -55,9 +55,16 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
     controller.delegate = self;
     self.fetchedResultsController = controller;
     
+    
     UITableView *tableView = self.tableView;
     tableView.rowHeight = 44;
     tableView.estimatedRowHeight = 44;
+    UILabel *powerValue = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 64)];
+    powerValue.text = [NSString stringWithFormat:@"Power %.2lf", .0f];
+    powerValue.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    powerValue.textAlignment = NSTextAlignmentCenter;
+    powerValue.textColor = [UIColor themeColor];
+    tableView.tableHeaderView = powerValue;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
     //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSignificantTimeChange:) name:UIApplicationSignificantTimeChangeNotification object:nil];
