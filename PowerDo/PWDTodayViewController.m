@@ -10,6 +10,7 @@
 #import "PWDTask.h"
 #import "PWDTaskManager.h"
 #import "PWDTaskDifficultyIndicator.h"
+#import "PWDDailyRecord.h"
 #import "PWDConstants.h"
 #import "NSDate+PWDExtras.h"
 #import "UIColor+Extras.h"
@@ -60,7 +61,8 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
     tableView.rowHeight = 44;
     tableView.estimatedRowHeight = 44;
     UILabel *powerValue = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 64)];
-    powerValue.text = [NSString stringWithFormat:@"Power %.2lf", .0f];
+    PWDDailyRecord *todayRecord = [taskManager fetchTodayRecord];
+    powerValue.text = [NSString stringWithFormat:@"Power %3.2lf", todayRecord.power];
     powerValue.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     powerValue.textAlignment = NSTextAlignmentCenter;
     powerValue.textColor = [UIColor themeColor];

@@ -93,6 +93,20 @@
 }
 
 #pragma mark - Fetch
+- (PWDDailyRecord *)fetchTodayRecord {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDDailyRecord class]) inManagedObjectContext:self.managedObjectContext];
+    request.fetchLimit = 1;
+    request.predicate = [NSPredicate predicateWithFormat:@"%K == %llf", NSStringFromSelector(@selector(dateRaw)), [[NSDate dateOfTodayNoon] timeIntervalSince1970]];
+    
+    NSError *error;
+    PWDDailyRecord *record = [[self.managedObjectContext executeFetchRequest:request error:&error] firstObject];
+    if (error) {
+        NSLog(@"fetchTodayRecord error: %@", error);
+    }
+    return record;
+}
+
 - (NSUInteger)fetchOnGoingTodayTasksCountInContext:(NSManagedObjectContext * _Nonnull)moc {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDTask class]) inManagedObjectContext:moc];
@@ -144,7 +158,9 @@
     [tasksTomorrow enumerateObjectsUsingBlock:^(PWDTask * _Nonnull task, NSUInteger idx, BOOL * _Nonnull stop) {
         powerUnits += task.difficulty;
     }];
-    powerUnits = 100/powerUnits;
+    if (powerUnits > 0) {
+        powerUnits = 100/powerUnits;
+    }
     [self insertNewDailyRecordWithPowerUnits:powerUnits inContext:moc];
 }
 

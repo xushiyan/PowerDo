@@ -10,6 +10,7 @@
 @import CoreData;
 @import UIKit;
 
+@class PWDDailyRecord;
 @interface PWDTaskManager : NSObject
 
 + (instancetype _Nonnull)sharedManager;
@@ -25,5 +26,6 @@
 - (BOOL)insertNewTaskForTomorrowWithTitle:(NSString  * _Nonnull)title inContext:(NSManagedObjectContext * _Nonnull)moc;
 
 #pragma mark - Fetch
+- (PWDDailyRecord * _Nullable)fetchTodayRecord;
 
 @end
