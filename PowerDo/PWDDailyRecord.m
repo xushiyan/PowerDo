@@ -7,8 +7,16 @@
 //
 
 #import "PWDDailyRecord.h"
+#import "NSDate+PWDExtras.h"
 
 @implementation PWDDailyRecord
+
+- (void)awakeFromInsert {
+    NSDate *now = [NSDate date];
+    self.date = [NSDate dateOfTodayNoonFromNowDate:now];
+    self.power = 0;
+    self.powerUnits = 0;
+}
 
 -(void)setDate:(NSDate *)date {
     self.dateRaw = [date timeIntervalSince1970];

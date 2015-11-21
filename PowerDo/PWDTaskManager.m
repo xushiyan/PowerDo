@@ -88,7 +88,6 @@
 - (BOOL)insertNewDailyRecordWithPowerUnits:(float)powerUnits inContext:(NSManagedObjectContext * _Nonnull)moc {
     PWDDailyRecord *record = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([PWDDailyRecord class]) inManagedObjectContext:moc];
     record.powerUnits = powerUnits;
-    record.date = [NSDate dateOfTodayNoon];
     return record != nil && [self saveContext];
 }
 
@@ -97,8 +96,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDDailyRecord class]) inManagedObjectContext:self.managedObjectContext];
     request.fetchLimit = 1;
-    request.predicate = [NSPredicate predicateWithFormat:@"%K == %llf", NSStringFromSelector(@selector(dateRaw)), [[NSDate dateOfTodayNoon] timeIntervalSince1970]];
-    
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(dateRaw)) ascending:NO]];
     NSError *error;
     PWDDailyRecord *record = [[self.managedObjectContext executeFetchRequest:request error:&error] firstObject];
     if (error) {

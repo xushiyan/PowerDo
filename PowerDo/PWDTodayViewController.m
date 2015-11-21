@@ -18,6 +18,7 @@
 @interface PWDTodayViewController ()
 
 @property (nonatomic,strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic,strong) PWDDailyRecord *todayRecord;
 
 @end
 
@@ -62,7 +63,8 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
     tableView.estimatedRowHeight = 44;
     UILabel *powerValue = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 64)];
     PWDDailyRecord *todayRecord = [taskManager fetchTodayRecord];
-    powerValue.text = [NSString stringWithFormat:@"Power %3.2lf", todayRecord.power];
+    powerValue.text = [NSString stringWithFormat:@"Power %3.2f", todayRecord.power];
+    self.todayRecord = todayRecord;
     powerValue.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     powerValue.textAlignment = NSTextAlignmentCenter;
     powerValue.textColor = [UIColor themeColor];
