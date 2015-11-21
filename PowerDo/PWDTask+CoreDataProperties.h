@@ -10,6 +10,7 @@
 //
 
 #import "PWDTask.h"
+@class PWDDailyRecord;
 
 NS_ASSUME_NONNULL_BEGIN
 

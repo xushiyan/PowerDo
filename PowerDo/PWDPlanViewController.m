@@ -324,8 +324,8 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
         NSString *taskTitle = textField.text;
         if (taskTitle.length) {
             PWDTaskManager *taskManager = [PWDTaskManager sharedManager];
-            BOOL success = [taskManager insertNewTaskForTomorrowWithTitle:taskTitle inContext:taskManager.managedObjectContext];
-            if (success) {
+            PWDTask *task = [taskManager insertNewTaskForTomorrowWithTitle:taskTitle inContext:taskManager.managedObjectContext];
+            if (task) {
                 textField.text = nil;
             }
             return NO;

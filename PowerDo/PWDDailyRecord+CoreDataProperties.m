@@ -16,6 +16,7 @@
 @dynamic dateRaw;
 @dynamic power;
 @dynamic powerUnits;
+@dynamic createDateRaw;
 @dynamic tasks;
 
 @end

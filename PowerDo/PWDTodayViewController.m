@@ -97,6 +97,9 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
 #pragma mark - Handler
 - (void)responseToSignificantTimeChange:(NSNotification *)notification {
     _todayRecord = nil;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.powerLabel.text = @"Power 0";
+    });
 }
 
 #pragma mark - Functions

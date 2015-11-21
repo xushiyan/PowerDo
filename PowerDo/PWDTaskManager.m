@@ -68,14 +68,13 @@
     return self;
 }
 
-- (BOOL)saveContext {
+- (void)saveContext {
     NSError *error;
     BOOL success = [self.managedObjectContext save:&error];
-    if (!success) {
+    if ([self.managedObjectContext hasChanges] && !success) {
         NSLog(@"managedObjectContext save error %@, %@", error, [error userInfo]);
         abort();
     }
-    return success;
 }
 
 - (NSURL *)applicationDocumentsDirectory {
@@ -83,23 +82,34 @@
 }
 
 #pragma mark - Insert
-- (BOOL)insertNewTaskForTomorrowWithTitle:(NSString  * _Nonnull)title inContext:(NSManagedObjectContext * _Nonnull)moc {
+- (PWDTask *)insertNewTaskForTodayWithTitle:(NSString  * _Nonnull)title inContext:(NSManagedObjectContext * _Nonnull)moc {
     PWDTask *task = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([PWDTask class]) inManagedObjectContext:moc];
     task.title = title;
-    return task != nil && [self saveContext];
+    task.dueDate = [NSDate dateOfTodayEnd];
+    task.status = PWDTaskStatusOnGoing;
+    [self saveContext];
+    return task;
 }
 
-- (BOOL)insertNewDailyRecordWithTasks:(NSArray <PWDTask *>* _Nullable)tasks inContext:(NSManagedObjectContext * _Nonnull)moc {
+- (PWDTask *)insertNewTaskForTomorrowWithTitle:(NSString  * _Nonnull)title inContext:(NSManagedObjectContext * _Nonnull)moc {
+    PWDTask *task = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([PWDTask class]) inManagedObjectContext:moc];
+    task.title = title;
+    [self saveContext];
+    return task;
+}
+
+- (PWDDailyRecord *)insertNewDailyRecordWithTasks:(NSSet <PWDTask *>* _Nullable)tasks inContext:(NSManagedObjectContext * _Nonnull)moc {
     NSDate * const now = [NSDate date];
-    [tasks enumerateObjectsUsingBlock:^(PWDTask * _Nonnull task, NSUInteger idx, BOOL * _Nonnull stop) {
+    [tasks enumerateObjectsUsingBlock:^(PWDTask * _Nonnull task, BOOL * _Nonnull stop) {
         task.dueDate = [NSDate dateOfTodayEndFromNowDate:now];
         task.status = PWDTaskStatusOnGoing;
     }];
 
     PWDDailyRecord *record = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([PWDDailyRecord class]) inManagedObjectContext:moc];
-    [record addTasks:[NSSet setWithArray:tasks]];
+    [record addTasks:tasks];
     [record updatePowerAndPowerUnits];
-    return record != nil && [self saveContext];
+    [self saveContext];
+    return record;
 }
 
 #pragma mark - Fetch
@@ -107,7 +117,8 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDDailyRecord class]) inManagedObjectContext:self.managedObjectContext];
     request.fetchLimit = 1;
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(dateRaw)) ascending:NO]];
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(createDateRaw)) ascending:NO];
+    request.sortDescriptors = @[sort];
     NSError *error;
     PWDDailyRecord *record = [[self.managedObjectContext executeFetchRequest:request error:&error] firstObject];
     if (error) {
@@ -132,11 +143,12 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDTask class]) inManagedObjectContext:moc];
     request.includesSubentities = NO;
-    request.predicate = [NSPredicate predicateWithFormat:@"%K == %ld AND %K == %ld",
+    request.predicate = [NSPredicate predicateWithFormat:@"%K == %ld AND %K == %ld AND %K == NO",
                          NSStringFromSelector(@selector(dueDateGroup)),
                          PWDTaskDueDateGroupToday,
                          NSStringFromSelector(@selector(status)),
-                         PWDTaskStatusOnGoing];
+                         PWDTaskStatusOnGoing,
+                         NSStringFromSelector(@selector(sealed))];
     NSError *error;
     NSUInteger count = [moc countForFetchRequest:request error:&error];
     if (count == NSNotFound) {
@@ -182,8 +194,20 @@
 
 - (void)handleSignificantTimeChange:(NSNotification *)notification {
     NSManagedObjectContext *moc = self.managedObjectContext;
-    NSArray *tasks = [self fetchInPlanTaskForTomorrowInContext:moc];
-    [self insertNewDailyRecordWithTasks:tasks inContext:moc];
+    NSArray *inPlanTasks = [self fetchInPlanTaskForTomorrowInContext:moc];
+    NSMutableSet *newTodayTaskSet = [NSMutableSet setWithArray:inPlanTasks];
+    
+    NSMutableSet *oldTodayTaskSet = [NSMutableSet setWithArray:[self fetchTodayTasks]];
+    [oldTodayTaskSet enumerateObjectsUsingBlock:^(PWDTask * _Nonnull task, BOOL * _Nonnull stop) {
+        if (task.status == PWDTaskStatusOnGoing) {
+            PWDTask *onGoingTaskClone = [self insertNewTaskForTodayWithTitle:task.title inContext:moc];
+            onGoingTaskClone.difficulty = task.difficulty;
+            [newTodayTaskSet addObject:onGoingTaskClone];
+        }
+    }];
+    [oldTodayTaskSet makeObjectsPerformSelector:@selector(setSealed:) withObject:@YES];
+
+    [self insertNewDailyRecordWithTasks:newTodayTaskSet inContext:moc];
 }
 
 

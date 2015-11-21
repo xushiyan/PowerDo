@@ -14,6 +14,7 @@
 
 - (void)awakeFromInsert {
     NSDate *now = [NSDate date];
+    self.createDateRaw = [now timeIntervalSince1970];
     self.date = [NSDate dateOfTodayNoonFromNowDate:now];
     self.power = 0;
     self.powerUnits = 0;

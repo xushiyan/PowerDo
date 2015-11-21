@@ -20,11 +20,11 @@
 @property (nonatomic,strong,readonly) NSManagedObjectModel * _Nonnull managedObjectModel;
 @property (nonatomic,strong,readonly) NSPersistentStoreCoordinator * _Nonnull persistentStoreCoordinator;
 
-- (BOOL)saveContext;
+- (void)saveContext;
 - (NSURL * _Nonnull)applicationDocumentsDirectory;
 
 #pragma mark - Insert
-- (BOOL)insertNewTaskForTomorrowWithTitle:(NSString  * _Nonnull)title inContext:(NSManagedObjectContext * _Nonnull)moc;
+- (PWDTask * _Nonnull)insertNewTaskForTomorrowWithTitle:(NSString  * _Nonnull)title inContext:(NSManagedObjectContext * _Nonnull)moc;
 
 #pragma mark - Fetch
 - (PWDDailyRecord * _Nullable)fetchTodayRecord;
