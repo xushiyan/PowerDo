@@ -53,6 +53,11 @@
                                                  selector:@selector(postUpdateForTodayTasksCount:)
                                                      name:PWDTodayBadgeValueNeedsUpdateNotification
                                                    object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(handleSignificantTimeChange:)
+                                                     name:UIApplicationSignificantTimeChangeNotification
+                                                   object:nil];
+        
     }
     return self;
 }
@@ -69,13 +74,17 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
-- (NSUInteger)fetchOnGoingTodayTasksCount {
+- (NSUInteger)fetchOnGoingTodayTasksCountInContext:(NSManagedObjectContext * _Nonnull)moc {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDTask class]) inManagedObjectContext:self.managedObjectContext];
+    request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDTask class]) inManagedObjectContext:moc];
     request.includesSubentities = NO;
-    request.predicate = [NSPredicate predicateWithFormat:@"dueDateGroup == %ld AND status == %ld", PWDTaskDueDateGroupToday, PWDTaskStatusOnGoing];
+    request.predicate = [NSPredicate predicateWithFormat:@"%@ == %ld AND %@ == %ld",
+                         NSStringFromSelector(@selector(dueDateGroup)),
+                         NSStringFromSelector(@selector(status)),
+                         PWDTaskDueDateGroupToday,
+                         PWDTaskStatusOnGoing];
     NSError *error;
-    NSUInteger count = [self.managedObjectContext countForFetchRequest:request error:&error];
+    NSUInteger count = [moc countForFetchRequest:request error:&error];
     if (count == NSNotFound) {
         NSLog(@"fetch count for %@ error: %@", [PWDTask class], error);
     }
@@ -83,12 +92,40 @@
 }
 
 - (void)postUpdateForTodayTasksCount:(NSNotification *)notification {
+    NSManagedObjectContext *moc = self.managedObjectContext;
     if (notification.name == PWDTodayBadgeValueNeedsUpdateNotification) {
-        NSUInteger count = [self fetchOnGoingTodayTasksCount];
+        NSUInteger count = [self fetchOnGoingTodayTasksCountInContext:moc];
         if (count != NSNotFound) {
             [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueChangeNotification object:@(count)];
         }
     }
+}
+
+- (NSArray <PWDTask *> *)fetchInPlanTaskForTomorrowInContext:(NSManagedObjectContext  * _Nonnull)moc {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDTask class]) inManagedObjectContext:moc];
+    request.predicate = [NSPredicate predicateWithFormat:@"%@ == %ld AND %@ == %ld",
+                         NSStringFromSelector(@selector(dueDateGroup)),
+                         NSStringFromSelector(@selector(status)),
+                         PWDTaskDueDateGroupTomorrow,
+                         PWDTaskStatusInPlan];
+    NSError *error;
+    NSArray *results = [moc executeFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"fetchInPlanTaskForTomorrow error: %@", error);
+    }
+    return results;
+}
+
+- (void)handleSignificantTimeChange:(NSNotification *)notification {
+    NSManagedObjectContext *moc = self.managedObjectContext;
+    NSArray *tasksTomorrow = [self fetchInPlanTaskForTomorrowInContext:moc];
+    __block float powerUnits = .0f;
+    [tasksTomorrow enumerateObjectsUsingBlock:^(PWDTask * _Nonnull task, NSUInteger idx, BOOL * _Nonnull stop) {
+        powerUnits += task.difficulty;
+    }];
+    powerUnits = 100/powerUnits;
+    NSLog(@"power units: %lf", powerUnits);
 }
 
 @end

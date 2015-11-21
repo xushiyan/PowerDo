@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @import CoreData;
+@import UIKit;
 
 @interface PWDTaskManager : NSObject
 
