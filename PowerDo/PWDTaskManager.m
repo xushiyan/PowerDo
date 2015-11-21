@@ -9,6 +9,8 @@
 #import "PWDTaskManager.h"
 #import "PWDConstants.h"
 #import "PWDTask.h"
+#import "PWDDailyRecord.h"
+#import "NSDate+PWDExtras.h"
 
 @implementation PWDTaskManager
 
@@ -62,18 +64,35 @@
     return self;
 }
 
-- (void)saveContext {
+- (BOOL)saveContext {
     NSError *error;
-    if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
+    BOOL success = [self.managedObjectContext save:&error];
+    if (!success) {
         NSLog(@"managedObjectContext save error %@, %@", error, [error userInfo]);
         abort();
     }
+    return success;
 }
 
 - (NSURL *)applicationDocumentsDirectory {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+#pragma mark - Insert
+- (BOOL)insertNewTaskForTomorrowWithTitle:(NSString  * _Nonnull)title inContext:(NSManagedObjectContext * _Nonnull)moc {
+    PWDTask *task = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([PWDTask class]) inManagedObjectContext:moc];
+    task.title = title;
+    return task != nil && [self saveContext];
+}
+
+- (BOOL)insertNewDailyRecordWithPowerUnits:(float)powerUnits inContext:(NSManagedObjectContext * _Nonnull)moc {
+    PWDDailyRecord *record = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([PWDDailyRecord class]) inManagedObjectContext:moc];
+    record.powerUnits = powerUnits;
+    record.date = [NSDate dateOfTodayNoon];
+    return record != nil && [self saveContext];
+}
+
+#pragma mark - Fetch
 - (NSUInteger)fetchOnGoingTodayTasksCountInContext:(NSManagedObjectContext * _Nonnull)moc {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDTask class]) inManagedObjectContext:moc];
@@ -89,16 +108,6 @@
         NSLog(@"fetch count for %@ error: %@", [PWDTask class], error);
     }
     return count;
-}
-
-- (void)postUpdateForTodayTasksCount:(NSNotification *)notification {
-    NSManagedObjectContext *moc = self.managedObjectContext;
-    if (notification.name == PWDTodayBadgeValueNeedsUpdateNotification) {
-        NSUInteger count = [self fetchOnGoingTodayTasksCountInContext:moc];
-        if (count != NSNotFound) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueChangeNotification object:@(count)];
-        }
-    }
 }
 
 - (NSArray <PWDTask *> *)fetchInPlanTaskForTomorrowInContext:(NSManagedObjectContext  * _Nonnull)moc {
@@ -117,6 +126,17 @@
     return results;
 }
 
+#pragma mark - Actions
+- (void)postUpdateForTodayTasksCount:(NSNotification *)notification {
+    NSManagedObjectContext *moc = self.managedObjectContext;
+    if (notification.name == PWDTodayBadgeValueNeedsUpdateNotification) {
+        NSUInteger count = [self fetchOnGoingTodayTasksCountInContext:moc];
+        if (count != NSNotFound) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueChangeNotification object:@(count)];
+        }
+    }
+}
+
 - (void)handleSignificantTimeChange:(NSNotification *)notification {
     NSManagedObjectContext *moc = self.managedObjectContext;
     NSArray *tasksTomorrow = [self fetchInPlanTaskForTomorrowInContext:moc];
@@ -125,7 +145,7 @@
         powerUnits += task.difficulty;
     }];
     powerUnits = 100/powerUnits;
-    NSLog(@"power units: %lf", powerUnits);
+    [self insertNewDailyRecordWithPowerUnits:powerUnits inContext:moc];
 }
 
 @end

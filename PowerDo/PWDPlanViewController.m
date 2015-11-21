@@ -337,11 +337,10 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
         NSString *taskTitle = textField.text;
         if (taskTitle.length) {
             PWDTaskManager *taskManager = [PWDTaskManager sharedManager];
-            NSEntityDescription *entityDescription = [taskManager.managedObjectModel entitiesByName][NSStringFromClass([PWDTask class])];
-            PWDTask *task = [[PWDTask alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:taskManager.managedObjectContext];
-            task.title = taskTitle;
-            textField.text = nil;
-            [taskManager saveContext];
+            BOOL success = [taskManager insertNewTaskForTomorrowWithTitle:taskTitle inContext:taskManager.managedObjectContext];
+            if (success) {
+                textField.text = nil;
+            }
             return NO;
         } else {
             [self animateScrollView:tableView forContentInsetsTop:0];

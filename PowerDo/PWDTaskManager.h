@@ -18,7 +18,9 @@
 @property (nonatomic,strong,readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic,strong,readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-- (void)saveContext;
+- (BOOL)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+
+- (BOOL)insertNewTaskForTomorrowWithTitle:(NSString  * _Nonnull)title inContext:(NSManagedObjectContext * _Nonnull)moc;
 
 @end

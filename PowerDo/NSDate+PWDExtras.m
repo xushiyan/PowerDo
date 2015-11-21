@@ -10,6 +10,15 @@
 
 @implementation NSDate (PWDExtras)
 
++ (instancetype)dateOfTodayNoon {
+    return [self dateOfTodayNoonFromNowDate:[NSDate date]];
+}
+
++ (instancetype)dateOfTodayNoonFromNowDate:(NSDate *)nowDate {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    return [calendar dateBySettingHour:12 minute:0 second:0 ofDate:nowDate options:0];
+}
+
 + (instancetype)dateOfTodayEnd {
     return [self dateOfTodayEndFromNowDate:[NSDate date]];
 }

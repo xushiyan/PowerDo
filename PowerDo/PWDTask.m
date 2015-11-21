@@ -11,7 +11,6 @@
 
 @implementation PWDTask
 
-// Insert code here to add functionality to your managed object subclass
 - (void)awakeFromInsert {
     self.title = @"";
     NSDate *now = [NSDate date];
