@@ -97,10 +97,10 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDTask class]) inManagedObjectContext:moc];
     request.includesSubentities = NO;
-    request.predicate = [NSPredicate predicateWithFormat:@"%@ == %ld AND %@ == %ld",
+    request.predicate = [NSPredicate predicateWithFormat:@"%K == %ld AND %K == %ld",
                          NSStringFromSelector(@selector(dueDateGroup)),
-                         NSStringFromSelector(@selector(status)),
                          PWDTaskDueDateGroupToday,
+                         NSStringFromSelector(@selector(status)),
                          PWDTaskStatusOnGoing];
     NSError *error;
     NSUInteger count = [moc countForFetchRequest:request error:&error];
@@ -113,10 +113,10 @@
 - (NSArray <PWDTask *> *)fetchInPlanTaskForTomorrowInContext:(NSManagedObjectContext  * _Nonnull)moc {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDTask class]) inManagedObjectContext:moc];
-    request.predicate = [NSPredicate predicateWithFormat:@"%@ == %ld AND %@ == %ld",
+    request.predicate = [NSPredicate predicateWithFormat:@"%K == %ld AND %K == %ld",
                          NSStringFromSelector(@selector(dueDateGroup)),
-                         NSStringFromSelector(@selector(status)),
                          PWDTaskDueDateGroupTomorrow,
+                         NSStringFromSelector(@selector(status)),
                          PWDTaskStatusInPlan];
     NSError *error;
     NSArray *results = [moc executeFetchRequest:request error:&error];

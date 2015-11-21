@@ -12,15 +12,18 @@
 
 @interface PWDTaskManager : NSObject
 
-+ (instancetype)sharedManager;
++ (instancetype _Nonnull)sharedManager;
 
-@property (nonatomic,strong,readonly) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic,strong,readonly) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic,strong,readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic,strong,readonly) NSManagedObjectContext * _Nonnull managedObjectContext;
+@property (nonatomic,strong,readonly) NSManagedObjectModel * _Nonnull managedObjectModel;
+@property (nonatomic,strong,readonly) NSPersistentStoreCoordinator * _Nonnull persistentStoreCoordinator;
 
 - (BOOL)saveContext;
-- (NSURL *)applicationDocumentsDirectory;
+- (NSURL * _Nonnull)applicationDocumentsDirectory;
 
+#pragma mark - Insert
 - (BOOL)insertNewTaskForTomorrowWithTitle:(NSString  * _Nonnull)title inContext:(NSManagedObjectContext * _Nonnull)moc;
+
+#pragma mark - Fetch
 
 @end

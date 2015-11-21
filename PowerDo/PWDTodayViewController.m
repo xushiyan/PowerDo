@@ -33,7 +33,7 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
     NSEntityDescription *entityDescription = [taskManager.managedObjectModel entitiesByName][NSStringFromClass([PWDTask class])];
     fetchRequest.entity = entityDescription;
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dueDateGroup == %ld", PWDTaskDueDateGroupToday];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", NSStringFromSelector(@selector(dueDateGroup)),PWDTaskDueDateGroupToday];
     fetchRequest.predicate = predicate;
     
     NSSortDescriptor *sortDescriptorPrimary = [[NSSortDescriptor alloc] initWithKey:NSStringFromSelector(@selector(status)) ascending:YES];
