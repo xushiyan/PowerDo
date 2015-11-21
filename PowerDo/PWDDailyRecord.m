@@ -8,6 +8,7 @@
 
 #import "PWDDailyRecord.h"
 #import "NSDate+PWDExtras.h"
+#import "PWDTask.h"
 
 @implementation PWDDailyRecord
 
@@ -24,6 +25,41 @@
 
 - (NSDate *)date {
     return [NSDate dateWithTimeIntervalSince1970:self.dateRaw];
+}
+
+- (void)updatePowerAndPowerUnits {
+    NSSet *tasks = self.tasks;
+    float oldPowerUnits = self.powerUnits;
+    __block float newPowerUnits = .0f;
+    [tasks enumerateObjectsUsingBlock:^(PWDTask * _Nonnull task, BOOL * _Nonnull stop) {
+        newPowerUnits += task.difficulty;
+    }];
+    
+    if (newPowerUnits > 0) {
+        newPowerUnits = 100/newPowerUnits;
+        if (oldPowerUnits > 0) {
+            float multiple = self.power / oldPowerUnits;
+            self.power = newPowerUnits * multiple;
+        } else {
+            self.power = .0f;
+        }
+    } else {
+        self.power = .0f;
+    }
+    self.powerUnits = newPowerUnits;
+}
+
+- (void)updatePower {
+    NSSet *tasks = self.tasks;
+    __block float newPower = .0f;
+    float const powerUnits = self.powerUnits;
+    [tasks enumerateObjectsUsingBlock:^(PWDTask * _Nonnull task, BOOL * _Nonnull stop) {
+        if (task.status == PWDTaskStatusCompleted) {
+            newPower += task.difficulty * powerUnits;
+        }
+    }];
+    newPower = MIN(100, newPower);
+    self.power = newPower;
 }
 
 @end

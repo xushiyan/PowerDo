@@ -16,6 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 // Insert code here to declare functionality of your managed object subclass
 @property (nonatomic,strong) NSDate *date;
 
+- (void)updatePowerAndPowerUnits;
+- (void)updatePower;
+
 @end
 
 NS_ASSUME_NONNULL_END

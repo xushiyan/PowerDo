@@ -2,7 +2,7 @@
 //  PWDTask+CoreDataProperties.m
 //  PowerDo
 //
-//  Created by XU SHIYAN on 17/11/15.
+//  Created by XU SHIYAN on 21/11/15.
 //  Copyright © 2015 xushiyan. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,11 +15,12 @@
 
 @dynamic createDateRaw;
 @dynamic difficulty;
+@dynamic dueDateGroup;
 @dynamic dueDateRaw;
-@dynamic title;
+@dynamic points;
 @dynamic sealed;
 @dynamic status;
-@dynamic points;
-@dynamic dueDateGroup;
+@dynamic title;
+@dynamic dailyRecord;
 
 @end

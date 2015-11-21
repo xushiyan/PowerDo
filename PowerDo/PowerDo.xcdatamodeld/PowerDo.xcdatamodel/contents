@@ -4,6 +4,7 @@
         <attribute name="dateRaw" attributeType="Date" syncable="YES"/>
         <attribute name="power" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="powerUnits" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PWDTask" inverseName="dailyRecord" inverseEntity="PWDTask" syncable="YES"/>
     </entity>
     <entity name="PWDTask" representedClassName="PWDTask" syncable="YES">
         <attribute name="createDateRaw" attributeType="Date" syncable="YES"/>
@@ -14,9 +15,10 @@
         <attribute name="sealed" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
+        <relationship name="dailyRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PWDDailyRecord" inverseName="tasks" inverseEntity="PWDDailyRecord" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PWDTask" positionX="-63" positionY="-18" width="128" height="165"/>
-        <element name="PWDDailyRecord" positionX="-63" positionY="45" width="128" height="90"/>
+        <element name="PWDTask" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="PWDDailyRecord" positionX="-63" positionY="45" width="128" height="105"/>
     </elements>
 </model>

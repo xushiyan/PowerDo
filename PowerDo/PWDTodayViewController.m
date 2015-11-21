@@ -18,7 +18,9 @@
 @interface PWDTodayViewController ()
 
 @property (nonatomic,strong) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic,strong) PWDDailyRecord *todayRecord;
+@property (nonatomic,strong,readonly) PWDDailyRecord *todayRecord;
+
+@property (nonatomic,weak) UILabel *powerLabel;
 
 @end
 
@@ -61,14 +63,16 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
     UITableView *tableView = self.tableView;
     tableView.rowHeight = 44;
     tableView.estimatedRowHeight = 44;
-    UILabel *powerValue = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 64)];
-    PWDDailyRecord *todayRecord = [taskManager fetchTodayRecord];
-    powerValue.text = [NSString stringWithFormat:@"Power %3.2f", todayRecord.power];
-    self.todayRecord = todayRecord;
-    powerValue.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    powerValue.textAlignment = NSTextAlignmentCenter;
-    powerValue.textColor = [UIColor themeColor];
-    tableView.tableHeaderView = powerValue;
+    UILabel *powerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 64)];
+    PWDDailyRecord *todayRecord = self.todayRecord;
+    powerLabel.text = [NSString stringWithFormat:@"Power %.0f", todayRecord.power];
+    powerLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    powerLabel.textAlignment = NSTextAlignmentCenter;
+    powerLabel.textColor = [UIColor themeColor];
+    self.powerLabel = powerLabel;
+    tableView.tableHeaderView = powerLabel;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responseToSignificantTimeChange:) name:UIApplicationSignificantTimeChangeNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
 }
@@ -82,7 +86,25 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Accessor
+@synthesize todayRecord = _todayRecord;
+- (PWDDailyRecord *)todayRecord {
+    if (!_todayRecord) {
+        _todayRecord = [[PWDTaskManager sharedManager] fetchTodayRecord];
+    }
+    return _todayRecord;
+}
+
+#pragma mark - Handler
+- (void)responseToSignificantTimeChange:(NSNotification *)notification {
+    _todayRecord = nil;
+}
+
 #pragma mark - Functions
+- (void)updateTodayRecordLabel {
+    self.powerLabel.text = [NSString stringWithFormat:@"Power %.0f", self.todayRecord.power];
+}
+
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     PWDTask *task = [self.fetchedResultsController objectAtIndexPath:indexPath];
     NSNumber *strikeThrough = task.status == PWDTaskStatusCompleted ? @(NSUnderlineStyleSingle) : @(NSUnderlineStyleNone);
@@ -103,14 +125,17 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     PWDTask *task = [self.fetchedResultsController objectAtIndexPath:indexPath];
     PWDTaskManager *taskManager = [PWDTaskManager sharedManager];
-    
     NSArray *actions;
     UITableViewRowAction *done = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault
                                                                         title:NSLocalizedString(@"Done", @"Complete action title")
                                                                       handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
                                                                           task.status = PWDTaskStatusCompleted;
                                                                           [taskManager saveContext];
+                                                                          [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayTasksManualChangeNotification object:nil];
                                                                           [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
+                                                                          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                                                              [self updateTodayRecordLabel];
+                                                                          });
                                                                       }];
     done.backgroundColor = [UIColor themeColor];
     UITableViewRowAction *redo = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
@@ -118,7 +143,11 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
                                                                         handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
                                                                             task.status = PWDTaskStatusOnGoing;
                                                                             [taskManager saveContext];
+                                                                            [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayTasksManualChangeNotification object:nil];
                                                                             [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
+                                                                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                                                                [self updateTodayRecordLabel];
+                                                                            });
                                                                         }];
     redo.backgroundColor = [UIColor flatOrangeColor];
     UITableViewRowAction *later = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
@@ -127,7 +156,11 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
                                                                              task.dueDate = [NSDate distantFuture];
                                                                              task.status = PWDTaskStatusInPlan;
                                                                              [taskManager saveContext];
+                                                                             [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayTasksManualChangeNotification object:nil];
                                                                              [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
+                                                                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                                                                 [self updateTodayRecordLabel];
+                                                                             });
                                                                          }];
     
     switch (task.status) {

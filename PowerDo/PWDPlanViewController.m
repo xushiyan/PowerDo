@@ -68,7 +68,13 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelAction:)];
     
     self.navigationItem.leftBarButtonItem = editButton;
+#ifdef DEBUG
+    UIBarButtonItem *simulateButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(simulateSignificantTimeChange:)];
+    self.navigationItem.rightBarButtonItems = @[addButton,simulateButton];
+#else
     self.navigationItem.rightBarButtonItem = addButton;
+#endif
+
     self.editButton = editButton;
     self.addButton = addButton;
     self.deleteButton = deleteButton;
@@ -96,7 +102,6 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 
     [self updateBarButtonItems];
 
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSignificantTimeChange:) name:UIApplicationSignificantTimeChangeNotification object:nil];
 }
 
 - (void)dealloc {
@@ -108,6 +113,11 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     // Dispose of any resources that can be recreated.
 }
 #pragma mark - Action methods
+#ifdef DEBUG
+- (void)simulateSignificantTimeChange:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationSignificantTimeChangeNotification object:nil];
+}
+#endif
 
 - (void)editAction:(id)sender {
     [self.tableView setEditing:YES animated:YES];
@@ -173,29 +183,6 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     }
 }
 
-/*
-- (void)handleSignificantTimeChange:(NSNotification *)note {
-    NSMutableArray *tomorrowTasks = self.taskLists[PWDPlanSectionTomorrow];
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSMutableArray *indexPaths = [NSMutableArray array];
-    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
-    [tomorrowTasks enumerateObjectsUsingBlock:^(PWDTask * _Nonnull task, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([calendar isDateInToday:task.dueDate]) {
-            [indexSet addIndex:idx];
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:idx inSection:PWDPlanSectionTomorrow];
-            [indexPaths addObject:indexPath];
-        }
-    }];
-    [tomorrowTasks removeObjectsAtIndexes:indexSet];
-    __weak UITableView *tableView = self.tableView;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [tableView beginUpdates];
-        [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-        [tableView endUpdates];
-    });
-
-}
-*/
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     PWDTask *task = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = task.title;

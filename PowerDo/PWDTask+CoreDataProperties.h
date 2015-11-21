@@ -2,7 +2,7 @@
 //  PWDTask+CoreDataProperties.h
 //  PowerDo
 //
-//  Created by XU SHIYAN on 17/11/15.
+//  Created by XU SHIYAN on 21/11/15.
 //  Copyright © 2015 xushiyan. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -10,6 +10,7 @@
 //
 
 #import "PWDTask.h"
+@class PWDDailyRecord;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,12 +18,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) NSTimeInterval createDateRaw;
 @property (nonatomic) int16_t difficulty;
+@property (nonatomic) int16_t dueDateGroup;
 @property (nonatomic) NSTimeInterval dueDateRaw;
-@property (nullable, nonatomic, retain) NSString *title;
+@property (nonatomic) float points;
 @property (nonatomic) BOOL sealed;
 @property (nonatomic) int16_t status;
-@property (nonatomic) float points;
-@property (nonatomic) int16_t dueDateGroup;
+@property (nullable, nonatomic, retain) NSString *title;
+@property (nullable, nonatomic, retain) PWDDailyRecord *dailyRecord;
 
 @end
 

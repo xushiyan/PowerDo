@@ -11,6 +11,7 @@
 @import UIKit;
 
 @class PWDDailyRecord;
+@class PWDTask;
 @interface PWDTaskManager : NSObject
 
 + (instancetype _Nonnull)sharedManager;
@@ -27,5 +28,6 @@
 
 #pragma mark - Fetch
 - (PWDDailyRecord * _Nullable)fetchTodayRecord;
+- (NSArray <PWDTask *> * _Nullable)fetchTodayTasks;
 
 @end

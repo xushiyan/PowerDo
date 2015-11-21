@@ -10,6 +10,7 @@
 //
 
 #import "PWDDailyRecord.h"
+@class PWDTask;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,6 +19,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSTimeInterval dateRaw;
 @property (nonatomic) float power;
 @property (nonatomic) float powerUnits;
+@property (nullable, nonatomic, retain) NSSet<PWDTask *> *tasks;
+
+@end
+
+@interface PWDDailyRecord (CoreDataGeneratedAccessors)
+
+- (void)addTasksObject:(PWDTask *)value;
+- (void)removeTasksObject:(PWDTask *)value;
+- (void)addTasks:(NSSet<PWDTask *> *)values;
+- (void)removeTasks:(NSSet<PWDTask *> *)values;
 
 @end
 

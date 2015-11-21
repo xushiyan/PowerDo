@@ -59,7 +59,10 @@
                                                  selector:@selector(handleSignificantTimeChange:)
                                                      name:UIApplicationSignificantTimeChangeNotification
                                                    object:nil];
-        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(handleTodayTasksManualChange:)
+                                                     name:PWDTodayTasksManualChangeNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -85,9 +88,16 @@
     return task != nil && [self saveContext];
 }
 
-- (BOOL)insertNewDailyRecordWithPowerUnits:(float)powerUnits inContext:(NSManagedObjectContext * _Nonnull)moc {
+- (BOOL)insertNewDailyRecordWithTasks:(NSArray <PWDTask *>* _Nullable)tasks inContext:(NSManagedObjectContext * _Nonnull)moc {
+    NSDate * const now = [NSDate date];
+    [tasks enumerateObjectsUsingBlock:^(PWDTask * _Nonnull task, NSUInteger idx, BOOL * _Nonnull stop) {
+        task.dueDate = [NSDate dateOfTodayEndFromNowDate:now];
+        task.status = PWDTaskStatusOnGoing;
+    }];
+
     PWDDailyRecord *record = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([PWDDailyRecord class]) inManagedObjectContext:moc];
-    record.powerUnits = powerUnits;
+    [record addTasks:[NSSet setWithArray:tasks]];
+    [record updatePowerAndPowerUnits];
     return record != nil && [self saveContext];
 }
 
@@ -103,6 +113,20 @@
         NSLog(@"fetchTodayRecord error: %@", error);
     }
     return record;
+}
+
+- (NSArray <PWDTask *> *)fetchTodayTasks {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDTask class]) inManagedObjectContext:self.managedObjectContext];
+    request.predicate = [NSPredicate predicateWithFormat:@"%K == %ld",
+                         NSStringFromSelector(@selector(dueDateGroup)),
+                         PWDTaskDueDateGroupToday];
+    NSError *error;
+    NSArray *todayTasks = [self.managedObjectContext executeFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"fetch today tasks error: %@", error);
+    }
+    return todayTasks;
 }
 
 - (NSUInteger)fetchOnGoingTodayTasksCountInContext:(NSManagedObjectContext * _Nonnull)moc {
@@ -122,7 +146,7 @@
     return count;
 }
 
-- (NSArray <PWDTask *> *)fetchInPlanTaskForTomorrowInContext:(NSManagedObjectContext  * _Nonnull)moc {
+- (NSArray <PWDTask *> * _Nullable)fetchInPlanTaskForTomorrowInContext:(NSManagedObjectContext  * _Nonnull)moc {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDTask class]) inManagedObjectContext:moc];
     request.predicate = [NSPredicate predicateWithFormat:@"%K == %ld AND %K == %ld",
@@ -149,17 +173,20 @@
     }
 }
 
+- (void)handleTodayTasksManualChange:(NSNotification *)notification {
+    NSArray *todayTasks = [self fetchTodayTasks];
+    PWDDailyRecord *todayRecord = [self fetchTodayRecord];
+    [todayRecord addTasks:[NSSet setWithArray:todayTasks]];
+    [todayRecord updatePower];
+    [self saveContext];
+}
+
 - (void)handleSignificantTimeChange:(NSNotification *)notification {
     NSManagedObjectContext *moc = self.managedObjectContext;
-    NSArray *tasksTomorrow = [self fetchInPlanTaskForTomorrowInContext:moc];
-    __block float powerUnits = .0f;
-    [tasksTomorrow enumerateObjectsUsingBlock:^(PWDTask * _Nonnull task, NSUInteger idx, BOOL * _Nonnull stop) {
-        powerUnits += task.difficulty;
-    }];
-    if (powerUnits > 0) {
-        powerUnits = 100/powerUnits;
-    }
-    [self insertNewDailyRecordWithPowerUnits:powerUnits inContext:moc];
+    NSArray *tasks = [self fetchInPlanTaskForTomorrowInContext:moc];
+    [self insertNewDailyRecordWithTasks:tasks inContext:moc];
 }
+
+
 
 @end

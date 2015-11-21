@@ -10,6 +10,7 @@
 
 extern NSString * const PWDTodayBadgeValueNeedsUpdateNotification;
 extern NSString * const PWDTodayBadgeValueChangeNotification;
+extern NSString * const PWDTodayTasksManualChangeNotification;
 
 @interface PWDConstants : NSObject
 
