@@ -20,7 +20,6 @@
     self.dueDateGroup = PWDTaskDueDateGroupTomorrow;
     self.difficulty = PWDTaskDifficultyEasy;
     self.status = PWDTaskStatusInPlan;
-    self.points = .0f;
     self.sealed = NO;
 }
 

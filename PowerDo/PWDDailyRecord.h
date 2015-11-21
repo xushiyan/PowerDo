@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "PWDTask.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

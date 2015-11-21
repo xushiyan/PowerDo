@@ -10,7 +10,6 @@
 //
 
 #import "PWDTask.h"
-@class PWDDailyRecord;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,7 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) int16_t difficulty;
 @property (nonatomic) int16_t dueDateGroup;
 @property (nonatomic) NSTimeInterval dueDateRaw;
-@property (nonatomic) float points;
 @property (nonatomic) BOOL sealed;
 @property (nonatomic) int16_t status;
 @property (nullable, nonatomic, retain) NSString *title;

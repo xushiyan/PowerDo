@@ -11,14 +11,13 @@
         <attribute name="difficulty" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="dueDateGroup" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="dueDateRaw" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="points" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="sealed" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
         <relationship name="dailyRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PWDDailyRecord" inverseName="tasks" inverseEntity="PWDDailyRecord" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PWDTask" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="PWDTask" positionX="-63" positionY="-18" width="128" height="165"/>
         <element name="PWDDailyRecord" positionX="-63" positionY="45" width="128" height="105"/>
     </elements>
 </model>

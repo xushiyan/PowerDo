@@ -14,6 +14,7 @@
 #import "PWDConstants.h"
 #import "NSDate+PWDExtras.h"
 #import "UIColor+Extras.h"
+#import "NSPredicate+PWDExtras.h"
 
 @interface PWDTodayViewController ()
 
@@ -36,9 +37,7 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entityDescription = [taskManager.managedObjectModel entitiesByName][NSStringFromClass([PWDTask class])];
     fetchRequest.entity = entityDescription;
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %ld", NSStringFromSelector(@selector(dueDateGroup)),PWDTaskDueDateGroupToday];
-    fetchRequest.predicate = predicate;
+    fetchRequest.predicate = [NSPredicate predicateForTodayTasks];
     
     NSSortDescriptor *sortDescriptorPrimary = [[NSSortDescriptor alloc] initWithKey:NSStringFromSelector(@selector(status)) ascending:YES];
     NSSortDescriptor *sortDescriptorSecondary = [[NSSortDescriptor alloc] initWithKey:NSStringFromSelector(@selector(createDateRaw)) ascending:NO];

@@ -11,6 +11,7 @@
 #import "PWDTask.h"
 #import "PWDDailyRecord.h"
 #import "NSDate+PWDExtras.h"
+#import "NSPredicate+PWDExtras.h"
 
 @implementation PWDTaskManager
 
@@ -118,9 +119,7 @@
 - (NSArray <PWDTask *> *)fetchTodayTasks {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDTask class]) inManagedObjectContext:self.managedObjectContext];
-    request.predicate = [NSPredicate predicateWithFormat:@"%K == %ld",
-                         NSStringFromSelector(@selector(dueDateGroup)),
-                         PWDTaskDueDateGroupToday];
+    request.predicate = [NSPredicate predicateForTodayTasks];
     NSError *error;
     NSArray *todayTasks = [self.managedObjectContext executeFetchRequest:request error:&error];
     if (error) {

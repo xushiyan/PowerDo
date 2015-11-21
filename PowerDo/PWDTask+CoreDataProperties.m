@@ -17,7 +17,6 @@
 @dynamic difficulty;
 @dynamic dueDateGroup;
 @dynamic dueDateRaw;
-@dynamic points;
 @dynamic sealed;
 @dynamic status;
 @dynamic title;
