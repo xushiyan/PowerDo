@@ -11,6 +11,7 @@
 
 @interface PWDChartScrollView : UIScrollView
 
+- (void)updateChartDisplay;
 - (void)updateChartWithRecords:(NSArray <PWDDailyRecord *> * _Nullable)records;
 - (void)unhighlightRecordAtIndex:(NSUInteger)index;
 - (void)highlightRecordAtIndex:(NSUInteger)index;

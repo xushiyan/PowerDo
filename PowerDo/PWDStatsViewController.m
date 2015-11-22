@@ -13,12 +13,17 @@
 #import "PWDTaskManager.h"
 #import "PWDChartScrollView.h"
 
-@interface PWDStatsViewController () <UITableViewDataSource,UITableViewDelegate,NSFetchedResultsControllerDelegate>
+@interface PWDStatsViewController () <UITableViewDataSource,UITableViewDelegate,NSFetchedResultsControllerDelegate> {
+    CGFloat _headerHeight;
+}
 
 @property (nonatomic,weak) PWDChartScrollView *chartScrollView;
 @property (nonatomic,weak) UITableView *tableView;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic,strong,readonly) NSDateFormatter *dateFormatter;
+
+@property (nonatomic,strong) NSLayoutConstraint *collapsedConstraint;
+@property (nonatomic,strong) NSLayoutConstraint *expandedConstraint;
 
 @end
 
@@ -34,13 +39,19 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
     chartScrollView.translatesAutoresizingMaskIntoConstraints = NO;
     self.chartScrollView = chartScrollView;
     
-    
+    _headerHeight = 32;
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     tableView.translatesAutoresizingMaskIntoConstraints = NO;
     tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.estimatedRowHeight = 44;
     tableView.delegate = self;
     tableView.dataSource = self;
+    UIButton *expandButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    expandButton.frame = CGRectMake(0, 0, 0, _headerHeight);
+    [expandButton setImage:[UIImage imageNamed:@"ic_keyboard_arrow_up"] forState:UIControlStateNormal];
+    [expandButton addTarget:self action:@selector(toggleTableView:) forControlEvents:UIControlEventTouchUpInside];
+    tableView.tableHeaderView = expandButton;
+    
     self.tableView = tableView;
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
@@ -55,10 +66,21 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
     [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[chartScrollView]|" options:0 metrics:nil views:viewDict]];
     [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[tableView]|" options:0 metrics:nil views:viewDict]];
     [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[top][chartScrollView][tableView][bottom]" options:0 metrics:nil views:viewDict]];
-    [view addConstraint:[NSLayoutConstraint constraintWithItem:tableView attribute:NSLayoutAttributeHeight
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:chartScrollView attribute:NSLayoutAttributeHeight
-                                                    multiplier:kPWDGoldenRatio constant:0]];
+    NSLayoutConstraint *collapsedConstraint = [NSLayoutConstraint constraintWithItem:tableView attribute:NSLayoutAttributeHeight
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:chartScrollView attribute:NSLayoutAttributeHeight
+                                                                          multiplier:0 constant:_headerHeight];
+    [view addConstraint:collapsedConstraint];
+    self.collapsedConstraint = collapsedConstraint;
+    NSLayoutConstraint *expandedConstraint = [NSLayoutConstraint constraintWithItem:tableView attribute:NSLayoutAttributeHeight
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:chartScrollView attribute:NSLayoutAttributeHeight
+                                                                         multiplier:kPWDGoldenRatio constant:0];
+    [view addConstraint:expandedConstraint];
+    self.expandedConstraint = expandedConstraint;
+    collapsedConstraint.active = YES;
+    expandedConstraint.active = NO;
+    tableView.scrollEnabled = NO;
 }
 
 - (void)viewDidLoad {
@@ -127,6 +149,28 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
     powerLabel.text = record.powerText;
     [powerLabel sizeToFit];
     cell.accessoryView = powerLabel;
+}
+
+- (void)toggleTableView:(id)sender {
+    self.tableView.scrollEnabled = !self.tableView.scrollEnabled;
+    if (self.collapsedConstraint.active) {
+        self.collapsedConstraint.active = NO;
+        self.expandedConstraint.active = YES;
+    } else {
+        self.expandedConstraint.active = NO;
+        self.collapsedConstraint.active = YES;
+    }
+    
+    [UIView animateWithDuration:.5f
+                          delay:0
+         usingSpringWithDamping:0.75f
+          initialSpringVelocity:0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         [self.view layoutIfNeeded];
+                         [self.chartScrollView updateChartDisplay];
+                     }
+                     completion:nil];
 }
 
 #pragma mark - UITableViewDataSource

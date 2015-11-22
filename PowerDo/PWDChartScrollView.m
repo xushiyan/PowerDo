@@ -27,10 +27,20 @@
     return self;
 }
 
+- (void)updateChartDisplay {
+    CGSize size = self.bounds.size;
+    CGRect chartViewFrame = _chartView.frame;
+    chartViewFrame.size.height = size.height;
+    _chartView.frame = chartViewFrame;
+    self.contentSize = _chartView.frame.size;
+    [self setNeedsDisplay];
+    [self setNeedsLayout];
+}
+
 - (void)updateChartWithRecords:(NSArray <PWDDailyRecord *> * _Nullable)records {
-    CGSize viewSize = self.bounds.size;
+    CGSize size = self.bounds.size;
     CGFloat width = [_chartView updateRecords:records];
-    _chartView.frame = CGRectMake(0, 0, width, viewSize.height);
+    _chartView.frame = CGRectMake(0, 0, width, size.height);
     self.contentSize = _chartView.frame.size;
     [self setNeedsDisplay];
     [self setNeedsLayout];
