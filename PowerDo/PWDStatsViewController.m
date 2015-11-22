@@ -88,9 +88,6 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
     NSEntityDescription *entityDescription = [taskManager.managedObjectModel entitiesByName][NSStringFromClass([PWDDailyRecord class])];
     fetchRequest.entity = entityDescription;
     NSString *sortKey = NSStringFromSelector(@selector(dateRaw));
-#ifdef DEBUG
-    sortKey = NSStringFromSelector(@selector(createDateRaw));
-#endif
     NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:NO];
     NSArray *sortDescriptors = @[sort1];
     fetchRequest.sortDescriptors = sortDescriptors;
@@ -153,9 +150,6 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     PWDDailyRecord *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
     NSDate *recordDate = record.date;
-#ifdef DEBUG
-    recordDate = [NSDate dateWithTimeIntervalSince1970:record.createDateRaw];
-#endif
     cell.textLabel.text = [self.dateFormatter stringFromDate:recordDate];
     UILabel *powerLabel = [UILabel new];
     powerLabel.text = record.powerText;
@@ -165,6 +159,7 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
 
 - (void)toggleTableView:(id)sender {
     self.tableView.scrollEnabled = !self.tableView.scrollEnabled;
+    BOOL expanding = self.tableView.scrollEnabled;
     if (self.collapsedConstraint.active) {
         self.collapsedConstraint.active = NO;
         self.expandedConstraint.active = YES;
@@ -172,10 +167,15 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
         self.expandedConstraint.active = NO;
         self.collapsedConstraint.active = YES;
     }
+    self.chartScrollView.chartView.showTrendLine = !expanding;
+    [self.chartScrollView setNeedsDisplay];
+    [self.chartScrollView setNeedsLayout];
+    [self.chartScrollView.chartView setNeedsDisplay];
+    [self.chartScrollView.chartView setNeedsLayout];
     
     [UIView animateWithDuration:.5f
                           delay:0
-         usingSpringWithDamping:0.75f
+         usingSpringWithDamping:.75f
           initialSpringVelocity:0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{

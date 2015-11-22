@@ -9,17 +9,16 @@
 #import "PWDChartScrollView.h"
 #import "PWDChartView.h"
 
-@implementation PWDChartScrollView {
-    __weak PWDChartView *_chartView;
-}
+@implementation PWDChartScrollView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         PWDChartView *chartView = [[PWDChartView alloc] initWithFrame:CGRectZero];
+        chartView.showTrendLine = YES;
         chartView.backgroundColor = [UIColor whiteColor];
         chartView.opaque = YES;
         [self addSubview:chartView];
-        _chartView = chartView;
+        self.chartView = chartView;
         self.backgroundColor = [UIColor whiteColor];
         self.showsHorizontalScrollIndicator = NO;
         self.showsVerticalScrollIndicator = NO;
@@ -33,8 +32,6 @@
     chartViewFrame.size.height = size.height;
     _chartView.frame = chartViewFrame;
     self.contentSize = _chartView.frame.size;
-    [self setNeedsDisplay];
-    [self setNeedsLayout];
 }
 
 - (void)updateChartWithRecords:(NSArray <PWDDailyRecord *> * _Nullable)records {

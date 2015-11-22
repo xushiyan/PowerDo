@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "PWDDailyRecord.h"
+#import "PWDChartView.h"
 
 @interface PWDChartScrollView : UIScrollView
+
+@property (nonatomic,weak) PWDChartView *chartView;
 
 - (void)updateChartDisplay;
 - (void)updateChartWithRecords:(NSArray <PWDDailyRecord *> * _Nullable)records;

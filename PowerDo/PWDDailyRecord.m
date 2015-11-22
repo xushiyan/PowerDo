@@ -25,8 +25,18 @@
 }
 
 - (NSDate *)date {
+#ifdef DEBUG
+    return [NSDate dateWithTimeIntervalSince1970:self.createDateRaw];
+#else
     return [NSDate dateWithTimeIntervalSince1970:self.dateRaw];
+#endif
 }
+
+#ifdef DEBUG
+- (NSTimeInterval)dateRaw {
+    return self.createDateRaw;
+}
+#endif
 
 - (void)updatePowerAndPowerUnits {
     NSSet *tasks = self.tasks;
@@ -67,6 +77,17 @@
     return [NSString stringWithFormat:@"%.0f", self.power];
 }
 
-@synthesize highlighted = _highlighted;
+- (NSString *)dateTextForChart {
+    return [self.chartDateFormatter stringFromDate:self.date];
+}
 
+@synthesize highlighted = _highlighted;
+@synthesize chartDateFormatter = _chartDateFormatter;
+- (NSDateFormatter *)chartDateFormatter {
+    if (!_chartDateFormatter) {
+        _chartDateFormatter = [[NSDateFormatter alloc] init];
+        _chartDateFormatter.dateFormat = @"dd\nMMM";
+    }
+    return _chartDateFormatter;
+}
 @end
