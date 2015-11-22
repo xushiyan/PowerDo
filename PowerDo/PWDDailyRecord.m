@@ -67,4 +67,6 @@
     return [NSString stringWithFormat:@"%.0f", self.power];
 }
 
+@synthesize highlighted = _highlighted;
+
 @end
