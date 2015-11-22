@@ -9,14 +9,14 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, PWDSettingsSection) {
+    PWDSettingsSectionHelp,
     PWDSettingsSectionFeedback,
     PWDSettingsSectionEnd
 };
 
 typedef NS_ENUM(NSInteger, PWDFeedbackRow) {
-    PWDFeedbackRowHelp,
     PWDFeedbackRowFeedback,
-    PWDFeedbackRowAbout,
+    PWDFeedbackRowRateIt,
     PWDFeedbackRowEnd
 };
 

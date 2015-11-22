@@ -7,16 +7,15 @@
 //
 
 #import "PWDSettingsViewController.h"
-#import "PWDDatePickerCell.h"
 #import "PWDConstants.h"
 #import "PWDTaskManager.h"
-#import "PWDAboutViewController.h"
 #import "PWDFeedbackViewController.h"
 #import "PWDHelpViewController.h"
+#import "PWDTableViewCell.h"
 
-@implementation PWDSettingsViewController {
-    
-}
+NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
+
+@implementation PWDSettingsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,9 +24,9 @@
     self.navigationItem.backBarButtonItem = backButtonItem;
     
     UITableView *tableView = self.tableView;
+    tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.estimatedRowHeight = 44;
     [PWDTableViewCell registerClassForTableView:tableView];
-    [PWDDatePickerCell registerNibForTableView:tableView];
 }
 
 #pragma mark - UITableViewDelegate
@@ -37,70 +36,26 @@
     NSInteger row = indexPath.row;
     
     switch (section) {
+        case PWDSettingsSectionHelp: {
+            PWDHelpViewController *help_vc = [[PWDHelpViewController alloc] initWithNibName:NSStringFromClass([PWDHelpViewController class]) bundle:nil];
+            [self showViewController:help_vc sender:nil];
+        }
+            break;
         case PWDSettingsSectionFeedback:
             switch (row) {
-                case PWDFeedbackRowHelp: {
-                    PWDHelpViewController *help_vc = [[PWDHelpViewController alloc] initWithNibName:NSStringFromClass([PWDHelpViewController class]) bundle:nil];
-                    [self showViewController:help_vc sender:nil];
-                }
-                    break;
                 case PWDFeedbackRowFeedback: {
                     PWDFeedbackViewController *feedback_vc = [[PWDFeedbackViewController alloc] initWithNibName:NSStringFromClass([PWDFeedbackViewController class]) bundle:nil];
                     [self showViewController:feedback_vc sender:nil];
                 }
                     break;
-                case PWDFeedbackRowAbout: {
-                    PWDAboutViewController *about_vc = [[PWDAboutViewController alloc] initWithNibName:NSStringFromClass([PWDAboutViewController class]) bundle:nil];
-                    [self showViewController:about_vc sender:nil];
+                case PWDFeedbackRowRateIt: {
+                    NSURL *appStoreURL = [NSURL URLWithString:@"itms-apps://itunes.com/apps/PowerDo"];
+                    [[UIApplication sharedApplication] openURL:appStoreURL];
                 }
                     break;
             }
             break;
     }
-}
-
-- (BOOL)tableView:(nonnull UITableView *)tableView shouldHighlightRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    NSInteger section = indexPath.section;
-    NSInteger row = indexPath.row;
-    
-    BOOL highlight = YES;
-    switch (section) {
-        case PWDSettingsSectionFeedback:
-            switch (row) {
-                case PWDFeedbackRowFeedback: {
-                    
-                }
-                    break;
-                case PWDFeedbackRowAbout: {
-                    
-                }
-                    break;
-            }
-            break;
-    }
-    return highlight;
-}
-
-- (CGFloat)tableView:(nonnull UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    NSInteger section = indexPath.section;
-    NSInteger row = indexPath.row;
-    
-    CGFloat height = UITableViewAutomaticDimension;
-    switch (section) {
-        case PWDSettingsSectionFeedback:
-            switch (row) {
-                case PWDFeedbackRowFeedback: {
-                    
-                }
-                    break;
-                case PWDFeedbackRowAbout: {
-                    
-                }
-                    break;
-            }
-            break;
-    }
-    return height;
 }
 
 #pragma mark - UITableViewDataSource
@@ -112,6 +67,10 @@
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger num = 0;
     switch (section) {
+        case PWDSettingsSectionHelp: {
+            num = 1;
+        }
+            break;
         case PWDSettingsSectionFeedback: {
             num = PWDFeedbackRowEnd;
         }
@@ -121,27 +80,26 @@
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    UITableViewCell *xCell = nil;
+    UITableViewCell *xCell = [tableView dequeueReusableCellWithIdentifier:[PWDTableViewCell identifier] forIndexPath:indexPath];;
     
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
     switch (section) {
+        case PWDSettingsSectionHelp: {
+            xCell.textLabel.text = NSLocalizedString(@"How to gain Power?", @"Settings cell label");
+            xCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+            break;
         case PWDSettingsSectionFeedback: {
-            xCell = [tableView dequeueReusableCellWithIdentifier:[PWDTableViewCell identifier] forIndexPath:indexPath];
             xCell.accessoryView = nil;
             switch (row) {
-                case PWDFeedbackRowHelp: {
-                    xCell.textLabel.text = NSLocalizedString(@"How to gain Power?", @"Settings cell label");
-                    xCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                }
-                    break;
                 case PWDFeedbackRowFeedback: {
                     xCell.textLabel.text = NSLocalizedString(@"Feedback", @"Settings cell label");
                     xCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 }
                     break;
-                case PWDFeedbackRowAbout: {
-                    xCell.textLabel.text = NSLocalizedString(@"About", @"Settings cell label");
+                case PWDFeedbackRowRateIt: {
+                    xCell.textLabel.text = NSLocalizedString(@"Rate It", @"Settings cell label");
                     xCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 }
                     break;
