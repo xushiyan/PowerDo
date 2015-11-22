@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4E575F671BFA14560099DDEB /* PWDTaskDifficultyIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E575F661BFA14560099DDEB /* PWDTaskDifficultyIndicator.m */; };
 		4EB1112A1B9C0D4900BF5656 /* PowerDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4EB111281B9C0D4900BF5656 /* PowerDo.xcdatamodeld */; };
+		4EF5F5F21C019ACD00BF6CBE /* UIViewController+PWDExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5F5F11C019ACD00BF6CBE /* UIViewController+PWDExtras.m */; };
 		4EFBB9181BF9BFF200F0BBA6 /* NSDate+PWDExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFBB9171BF9BFF200F0BBA6 /* NSDate+PWDExtras.m */; };
 		4EFBB91A1BF9C0B300F0BBA6 /* PWDNSDateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFBB9191BF9C0B300F0BBA6 /* PWDNSDateTests.m */; };
 		8621A00A1B9B1FBA0082B853 /* PWDTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621A0091B9B1FBA0082B853 /* PWDTaskManager.m */; };
@@ -62,6 +63,8 @@
 		4E575F651BFA14560099DDEB /* PWDTaskDifficultyIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTaskDifficultyIndicator.h; sourceTree = "<group>"; };
 		4E575F661BFA14560099DDEB /* PWDTaskDifficultyIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTaskDifficultyIndicator.m; sourceTree = "<group>"; };
 		4EB111291B9C0D4900BF5656 /* PowerDo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PowerDo.xcdatamodel; sourceTree = "<group>"; };
+		4EF5F5F01C019ACD00BF6CBE /* UIViewController+PWDExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PWDExtras.h"; sourceTree = "<group>"; };
+		4EF5F5F11C019ACD00BF6CBE /* UIViewController+PWDExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PWDExtras.m"; sourceTree = "<group>"; };
 		4EFBB9161BF9BFF200F0BBA6 /* NSDate+PWDExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+PWDExtras.h"; sourceTree = "<group>"; };
 		4EFBB9171BF9BFF200F0BBA6 /* NSDate+PWDExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+PWDExtras.m"; sourceTree = "<group>"; };
 		4EFBB9191BF9C0B300F0BBA6 /* PWDNSDateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDNSDateTests.m; sourceTree = "<group>"; };
@@ -158,6 +161,8 @@
 				86AF08DC1C00738600F70D5A /* NSPredicate+PWDExtras.m */,
 				86B0F7E91C0176B100724324 /* UITableViewCell+PWDExtras.h */,
 				86B0F7EA1C0176B100724324 /* UITableViewCell+PWDExtras.m */,
+				4EF5F5F01C019ACD00BF6CBE /* UIViewController+PWDExtras.h */,
+				4EF5F5F11C019ACD00BF6CBE /* UIViewController+PWDExtras.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -457,6 +462,7 @@
 				4EB1112A1B9C0D4900BF5656 /* PowerDo.xcdatamodeld in Sources */,
 				86F043C81BF738ED0048FADB /* PWDPlanViewController.m in Sources */,
 				86AF08DA1C00271100F70D5A /* PWDDailyRecord.m in Sources */,
+				4EF5F5F21C019ACD00BF6CBE /* UIViewController+PWDExtras.m in Sources */,
 				E2C426551B9DDD9500E3BC92 /* PWDTodayViewController.m in Sources */,
 				86485B201B973A4C0027D01A /* main.m in Sources */,
 				E2DAC0331BA8744000C33CBD /* PWDFeedbackTextField.m in Sources */,

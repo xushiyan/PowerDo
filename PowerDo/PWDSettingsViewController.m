@@ -6,14 +6,20 @@
 //  Copyright © 2015 xushiyan. All rights reserved.
 //
 
+@import MessageUI;
 #import "PWDSettingsViewController.h"
 #import "PWDConstants.h"
 #import "PWDTaskManager.h"
 #import "PWDFeedbackViewController.h"
 #import "PWDHelpViewController.h"
 #import "UITableViewCell+PWDExtras.h"
+#import "UIViewController+PWDExtras.h"
 
 NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
+
+@interface PWDSettingsViewController () <MFMailComposeViewControllerDelegate>
+
+@end
 
 @implementation PWDSettingsViewController
 
@@ -44,11 +50,35 @@ NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
         case PWDSettingsSectionFeedback:
             switch (row) {
                 case PWDFeedbackRowFeedback: {
-                    PWDFeedbackViewController *feedback_vc = [[PWDFeedbackViewController alloc] initWithNibName:NSStringFromClass([PWDFeedbackViewController class]) bundle:nil];
-                    [self showViewController:feedback_vc sender:nil];
+                    if ([MFMailComposeViewController canSendMail]) {
+                        MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
+                        mail.mailComposeDelegate = self;
+                        [mail setToRecipients:@[@"feedback-powerlog@outlook.com"]];
+                        [mail setSubject:NSLocalizedString(@"Feedback for PowerDo", @"Email subject for feedback.")];
+                        
+                        NSBundle *bundle = [NSBundle mainBundle];
+                        UIDevice *device = [UIDevice currentDevice];
+                        NSLocale *locale = [NSLocale currentLocale];
+                        UIScreen *screen = [UIScreen mainScreen];
+                        NSMutableString *body = [NSMutableString stringWithString:NSLocalizedString(@"Hi\n\nI would like to provide the following feedback.\n\n\n\n\n", @"Feedback email body")];
+                        [body appendFormat:@"%@: %@ build %@\n", NSLocalizedString(@"App version", @""), [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], [bundle objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey]];
+                        [body appendFormat:@"%@: %@ %@\n", NSLocalizedString(@"OS version", @""),[device systemName], [device systemVersion]];
+                        [body appendFormat:@"%@: %@\n", NSLocalizedString(@"Device", @""), [device localizedModel]];
+                        [body appendFormat:@"%@: %@\n", NSLocalizedString(@"Device locale", @""), [locale localeIdentifier]];
+                        [body appendFormat:@"%@: %@\n", NSLocalizedString(@"App locale", @""), [[bundle preferredLocalizations] firstObject]];
+                        [body appendFormat:@"%@: %@\n", NSLocalizedString(@"Screen Size", @""), NSStringFromCGRect(screen.bounds)];
+                        [body appendFormat:@"%@: %.1lf\n", NSLocalizedString(@"Screen Scale", @""), screen.scale];
+                        [mail setMessageBody:body isHTML:NO];
+                        
+                        [self presentViewController:mail animated:YES completion:NULL];
+                    } else {
+                        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+                        [self presentNoMailAlert];
+                    }
                 }
                     break;
                 case PWDFeedbackRowRateIt: {
+                    [tableView deselectRowAtIndexPath:indexPath animated:YES];
                     NSURL *appStoreURL = [NSURL URLWithString:@"itms-apps://itunes.com/apps/PowerDo"];
                     [[UIApplication sharedApplication] openURL:appStoreURL];
                 }
@@ -99,7 +129,6 @@ NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
                 }
                     break;
                 case PWDFeedbackRowRateIt: {
-                    [tableView deselectRowAtIndexPath:indexPath animated:YES];
                     xCell.textLabel.text = NSLocalizedString(@"Rate It", @"Settings cell label");
                     xCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 }
@@ -113,5 +142,27 @@ NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
 
 #pragma mark - Actions
 
+#pragma mark - MFMailComposeViewControllerDelegate
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    switch (result) {
+        case MFMailComposeResultSent:
+            NSLog(@"You sent the email.");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"You saved a draft of this email");
+            break;
+        case MFMailComposeResultCancelled:
+            NSLog(@"You cancelled sending this email.");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail failed:  An error occurred when trying to compose this email");
+            break;
+        default:
+            NSLog(@"An error occurred when trying to compose this email");
+            break;
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
 
 @end
