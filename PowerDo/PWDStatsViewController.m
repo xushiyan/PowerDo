@@ -11,10 +11,11 @@
 #import "PWDConstants.h"
 #import "PWDDailyRecord.h"
 #import "PWDTaskManager.h"
+#import "PWDChartScrollView.h"
 
 @interface PWDStatsViewController () <UITableViewDataSource,UITableViewDelegate,NSFetchedResultsControllerDelegate>
 
-@property (nonatomic,weak) UIView *chartView;
+@property (nonatomic,weak) PWDChartScrollView *chartScrollView;
 @property (nonatomic,weak) UITableView *tableView;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic,strong,readonly) NSDateFormatter *dateFormatter;
@@ -26,6 +27,14 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
 @implementation PWDStatsViewController
 
 - (void)loadView {
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+
+    PWDChartScrollView *chartScrollView = [[PWDChartScrollView alloc] initWithFrame:CGRectZero];
+    chartScrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.chartScrollView = chartScrollView;
+    
+    
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     tableView.translatesAutoresizingMaskIntoConstraints = NO;
     tableView.rowHeight = UITableViewAutomaticDimension;
@@ -36,15 +45,19 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
     view.backgroundColor = [UIColor whiteColor];
+    [view addSubview:chartScrollView];
     [view addSubview:tableView];
     self.view = view;
     
-    NSDictionary *viewDict = NSDictionaryOfVariableBindings(tableView);
+    id<UILayoutSupport> top = self.topLayoutGuide;
+    id<UILayoutSupport> bottom = self.bottomLayoutGuide;
+    NSDictionary *viewDict = NSDictionaryOfVariableBindings(top,bottom,chartScrollView,tableView);
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[chartScrollView]|" options:0 metrics:nil views:viewDict]];
     [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[tableView]|" options:0 metrics:nil views:viewDict]];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[tableView]|" options:0 metrics:nil views:viewDict]];
-    [view addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[top][chartScrollView][tableView][bottom]" options:0 metrics:nil views:viewDict]];
+    [view addConstraint:[NSLayoutConstraint constraintWithItem:tableView attribute:NSLayoutAttributeHeight
                                                      relatedBy:NSLayoutRelationEqual
-                                                        toItem:tableView attribute:NSLayoutAttributeHeight
+                                                        toItem:chartScrollView attribute:NSLayoutAttributeHeight
                                                     multiplier:kPWDGoldenRatio constant:0]];
 }
 
@@ -78,7 +91,11 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
     }
     controller.delegate = self;
     self.fetchedResultsController = controller;
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.chartScrollView updateChartWithRecords:self.fetchedResultsController.fetchedObjects];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -192,6 +209,7 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
+    [self.chartScrollView updateChartWithRecords:controller.fetchedObjects];
 }
 
 #pragma mark - 
