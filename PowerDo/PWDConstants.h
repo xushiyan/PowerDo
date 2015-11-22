@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+@import UIKit;
 
 extern NSString * const PWDTodayBadgeValueNeedsUpdateNotification;
 extern NSString * const PWDTodayBadgeValueChangeNotification;
 extern NSString * const PWDTodayTasksManualChangeNotification;
+extern CGFloat const kPWDGoldenRatio;
 
 @interface NSObject (PWDExtras)
 

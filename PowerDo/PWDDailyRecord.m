@@ -63,4 +63,8 @@
     self.power = newPower;
 }
 
+- (NSString *)powerText {
+    return [NSString stringWithFormat:@"%.0f", self.power];
+}
+
 @end

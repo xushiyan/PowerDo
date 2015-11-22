@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)updatePowerAndPowerUnits;
 - (void)updatePower;
+- (NSString *)powerText;
 
 @end
 

@@ -11,6 +11,7 @@
 NSString * const PWDTodayBadgeValueNeedsUpdateNotification = @"PWDTodayBadgeValueNeedsUpdateNotification";
 NSString * const PWDTodayBadgeValueChangeNotification = @"PWDTodayBadgeValueChangeNotification";
 NSString * const PWDTodayTasksManualChangeNotification = @"PWDTodayTasksManualChangeNotification";
+CGFloat const kPWDGoldenRatio = 1.618f;
 
 @implementation NSObject (PWDExtras)
 
