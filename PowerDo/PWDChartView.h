@@ -11,6 +11,9 @@
 
 @interface PWDChartView : UIView
 
+@property (nonatomic,copy) NSArray * _Nullable records;
+
 - (CGFloat)updateRecords:(NSArray <PWDDailyRecord *> * _Nullable)records;
+- (CGRect)viewingRectForRecord:(PWDDailyRecord * _Nonnull)record;
 
 @end

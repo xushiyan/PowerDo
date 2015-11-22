@@ -34,9 +34,27 @@
     self.contentSize = _chartView.frame.size;
     [self setNeedsDisplay];
     [self setNeedsLayout];
-    
-    CGRect endRect = CGRectMake(self.contentSize.width-1, self.contentSize.height-1, 1, 1);
-    [self scrollRectToVisible:endRect animated:YES];
+}
+
+- (void)scrollToRecord:(PWDDailyRecord *)record {
+    CGRect viewingRect = [_chartView viewingRectForRecord:record];
+    [self scrollRectToVisible:viewingRect animated:YES];
+}
+
+- (void)unhighlightRecordAtIndex:(NSUInteger)index {
+    PWDDailyRecord *record = _chartView.records[index];
+    record.highlighted = NO;
+    [_chartView setNeedsDisplay];
+}
+
+- (void)highlightRecordAtIndex:(NSUInteger)index {
+    PWDDailyRecord *record = _chartView.records[index];
+    record.highlighted = YES;
+    [_chartView setNeedsDisplay];
+}
+
+- (void)scrollToMostRight {
+    [self scrollRectToVisible:CGRectMake(self.contentSize.width-1, self.contentSize.height-1, 1, 1) animated:YES];
 }
 
 @end

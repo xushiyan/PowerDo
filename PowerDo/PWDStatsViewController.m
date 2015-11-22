@@ -96,11 +96,23 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self.chartScrollView updateChartWithRecords:self.fetchedResultsController.fetchedObjects];
+    [self.chartScrollView scrollToMostRight];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.chartScrollView unhighlightRecordAtIndex:indexPath.row];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.chartScrollView highlightRecordAtIndex:indexPath.row];
+    [self.chartScrollView scrollToRecord:[self.fetchedResultsController objectAtIndexPath:indexPath]];
 }
 
 #pragma mark - Functions
@@ -209,7 +221,7 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
-    [self.chartScrollView updateChartWithRecords:controller.fetchedObjects];
+    [self.chartScrollView scrollToMostRight];
 }
 
 #pragma mark - 

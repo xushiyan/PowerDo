@@ -11,13 +11,12 @@
 
 CGFloat const ChartBarWidth = 40.0f;
 CGFloat const ChartBarSpacing = 8.0f;
+CGFloat const ChartBarTopMargin = 20.0f;
 
-@implementation PWDChartView {
-    NSArray <PWDDailyRecord *>*_records;
-}
+@implementation PWDChartView
 
 - (CGFloat)updateRecords:(NSArray <PWDDailyRecord *> * _Nullable)records {
-    _records = records;
+    self.records = records;
     
     CGFloat newWidth = records.count * (ChartBarWidth + ChartBarSpacing) + ChartBarSpacing;
     
@@ -27,11 +26,21 @@ CGFloat const ChartBarSpacing = 8.0f;
     return newWidth;
 }
 
+- (CGRect)viewingRectForRecord:(PWDDailyRecord *)record {
+    NSUInteger index = [_records indexOfObject:record];
+    CGFloat recordBottomCenter = (_records.count - 1 - index) * (ChartBarWidth+ChartBarSpacing) + ChartBarWidth/2+ChartBarSpacing;
+    CGRect rectToView = CGRectMake(recordBottomCenter - ChartBarWidth/2 - ChartBarSpacing,
+                                   0,
+                                   ChartBarWidth + 2*ChartBarSpacing,
+                                   CGRectGetHeight(self.bounds));
+    return rectToView;
+}
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     CGFloat yAxis0 = CGRectGetMaxY(rect);
-    CGFloat pointsPerPower = CGRectGetHeight(rect) / 100;
+    CGFloat pointsPerPower = (CGRectGetHeight(rect)-ChartBarTopMargin) / 100;
     NSUInteger count = _records.count;
     [_records enumerateObjectsUsingBlock:^(PWDDailyRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIBezierPath *path = [UIBezierPath bezierPath];
@@ -39,7 +48,12 @@ CGFloat const ChartBarSpacing = 8.0f;
         [path moveToPoint:barBottomCenter];
         CGPoint barTopCenter = CGPointMake(barBottomCenter.x, yAxis0 - pointsPerPower * obj.power);
         [path addLineToPoint:barTopCenter];
-        [[UIColor themeColor] setStroke];
+        if (obj.highlighted) {
+            [[UIColor flatOrangeColor] setStroke];
+        } else {
+            [[UIColor themeColor] setStroke];
+        }
+        
         path.lineWidth = ChartBarWidth;
         [path stroke];
     }];
