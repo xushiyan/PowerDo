@@ -19,6 +19,7 @@
 
 @property (nonatomic,weak) PWDChartScrollView *chartScrollView;
 @property (nonatomic,weak) UITableView *tableView;
+@property (nonatomic,strong) UIButton *expandButton;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic,strong,readonly) NSDateFormatter *dateFormatter;
 
@@ -46,12 +47,6 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
     tableView.estimatedRowHeight = 44;
     tableView.delegate = self;
     tableView.dataSource = self;
-    UIButton *expandButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    expandButton.frame = CGRectMake(0, 0, 0, _headerHeight);
-    [expandButton setImage:[UIImage imageNamed:@"ic_keyboard_arrow_up"] forState:UIControlStateNormal];
-    [expandButton addTarget:self action:@selector(toggleTableView:) forControlEvents:UIControlEventTouchUpInside];
-    tableView.tableHeaderView = expandButton;
-    
     self.tableView = tableView;
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
@@ -68,7 +63,7 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
     [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[top][chartScrollView][tableView][bottom]" options:0 metrics:nil views:viewDict]];
     NSLayoutConstraint *collapsedConstraint = [NSLayoutConstraint constraintWithItem:tableView attribute:NSLayoutAttributeHeight
                                                                            relatedBy:NSLayoutRelationEqual
-                                                                              toItem:chartScrollView attribute:NSLayoutAttributeHeight
+                                                                              toItem:nil attribute:NSLayoutAttributeNotAnAttribute
                                                                           multiplier:0 constant:_headerHeight];
     [view addConstraint:collapsedConstraint];
     self.collapsedConstraint = collapsedConstraint;
@@ -137,6 +132,23 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
     [self.chartScrollView scrollToRecord:[self.fetchedResultsController objectAtIndexPath:indexPath]];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return _headerHeight;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UITableViewHeaderFooterView *view = [[UITableViewHeaderFooterView alloc] init];
+    UIButton *expandButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [expandButton setTintColor:[UIColor grayColor]];
+    [expandButton setImage:[UIImage imageNamed:@"ic_keyboard_arrow_up"] forState:UIControlStateNormal];
+    [expandButton addTarget:self action:@selector(toggleTableView:) forControlEvents:UIControlEventTouchUpInside];
+    expandButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.expandButton = expandButton;
+    
+    [view.contentView addSubview:expandButton];
+    return view;
+}
+
 #pragma mark - Functions
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     PWDDailyRecord *record = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -169,6 +181,7 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
                      animations:^{
                          [self.view layoutIfNeeded];
                          [self.chartScrollView updateChartDisplay];
+                         self.expandButton.transform = CGAffineTransformRotate(self.expandButton.transform, M_PI);
                      }
                      completion:nil];
 }
@@ -186,6 +199,9 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
         return 0;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return nil;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:PWDStatsTableCellIdentifier];
@@ -195,14 +211,6 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
     [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if ([[self.fetchedResultsController sections] count] > 0) {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-        return [sectionInfo name];
-    } else
-        return nil;
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate

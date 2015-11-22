@@ -12,6 +12,7 @@
 @interface PWDChartView : UIView
 
 @property (nonatomic,copy) NSArray * _Nullable records;
+@property (nonatomic) BOOL showTrendLine;
 
 - (CGFloat)updateRecords:(NSArray <PWDDailyRecord *> * _Nullable)records;
 - (CGRect)viewingRectForRecord:(PWDDailyRecord * _Nonnull)record;
