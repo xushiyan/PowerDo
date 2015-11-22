@@ -1,14 +1,14 @@
 //
-//  PWDTableViewCell.m
+//  UITableViewCell+PWDExtras.m
 //  PowerDo
 //
-//  Created by XU SHIYAN on 9/11/15.
+//  Created by XU SHIYAN on 22/11/15.
 //  Copyright © 2015 xushiyan. All rights reserved.
 //
 
-#import "PWDTableViewCell.h"
+#import "UITableViewCell+PWDExtras.h"
 
-@implementation PWDTableViewCell
+@implementation UITableViewCell (PWDExtras)
 
 + (NSString *)identifier {
     return NSStringFromClass(self);

@@ -11,7 +11,7 @@
 #import "PWDTaskManager.h"
 #import "PWDFeedbackViewController.h"
 #import "PWDHelpViewController.h"
-#import "PWDTableViewCell.h"
+#import "UITableViewCell+PWDExtras.h"
 
 NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
 
@@ -26,7 +26,7 @@ NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
     UITableView *tableView = self.tableView;
     tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.estimatedRowHeight = 44;
-    [PWDTableViewCell registerClassForTableView:tableView];
+    [UITableViewCell registerClassForTableView:tableView];
 }
 
 #pragma mark - UITableViewDelegate
@@ -80,7 +80,7 @@ NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    UITableViewCell *xCell = [tableView dequeueReusableCellWithIdentifier:[PWDTableViewCell identifier] forIndexPath:indexPath];;
+    UITableViewCell *xCell = [tableView dequeueReusableCellWithIdentifier:[UITableViewCell identifier] forIndexPath:indexPath];;
     
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
@@ -99,6 +99,7 @@ NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
                 }
                     break;
                 case PWDFeedbackRowRateIt: {
+                    [tableView deselectRowAtIndexPath:indexPath animated:YES];
                     xCell.textLabel.text = NSLocalizedString(@"Rate It", @"Settings cell label");
                     xCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 }

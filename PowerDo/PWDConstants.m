@@ -12,6 +12,6 @@ NSString * const PWDTodayBadgeValueNeedsUpdateNotification = @"PWDTodayBadgeValu
 NSString * const PWDTodayBadgeValueChangeNotification = @"PWDTodayBadgeValueChangeNotification";
 NSString * const PWDTodayTasksManualChangeNotification = @"PWDTodayTasksManualChangeNotification";
 
-@implementation PWDConstants
+@implementation NSObject (PWDExtras)
 
 @end
