@@ -143,6 +143,8 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UITableViewHeaderFooterView *view = [[UITableViewHeaderFooterView alloc] init];
     UIButton *expandButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    expandButton.hidden = !self.fetchedResultsController.fetchedObjects.count;
+    expandButton.enabled = !expandButton.hidden;
     [expandButton setTintColor:[UIColor flatOrangeColor]];
     [expandButton setImage:[UIImage imageNamed:@"ic_keyboard_arrow_up"] forState:UIControlStateNormal];
     [expandButton addTarget:self action:@selector(toggleTableView:) forControlEvents:UIControlEventTouchUpInside];
@@ -296,6 +298,8 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
+    self.expandButton.hidden = !controller.fetchedObjects.count;
+    self.expandButton.enabled = !self.expandButton.hidden;
     [self.chartScrollView scrollToMostRight];
 }
 
