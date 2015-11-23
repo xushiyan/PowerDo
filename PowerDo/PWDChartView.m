@@ -156,7 +156,9 @@ CGFloat const ChartTrendDotYOffset = ChartBarBaseHeight + ChartBarDateTextRectHe
 
 - (void)clearHighlights {
     _lastHighlightRecord = nil;
-    [_records makeObjectsPerformSelector:@selector(setHighlighted:) withObject:@NO];
+    [_records enumerateObjectsUsingBlock:^(PWDDailyRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.highlighted = NO;
+    }];
     [self setNeedsDisplay];
 }
 

@@ -12,6 +12,7 @@
 #import "NSDate+PWDExtras.h"
 #import "PWDTaskDifficultyIndicator.h"
 #import "PWDConstants.h"
+#import "PWDDailyRecord.h"
 
 @interface PWDPlanViewController () <UITextFieldDelegate> {
     CGFloat _headerHeight;
@@ -372,6 +373,8 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
                                                                     handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
                                                                         task.dueDate = [NSDate dateOfTodayEnd];
                                                                         task.status = PWDTaskStatusOnGoing;
+                                                                        PWDDailyRecord *todayRecord = [taskManager fetchTodayRecord];
+                                                                        [todayRecord addTasksObject:task];
                                                                         [taskManager saveContext];
                                                                         [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
                                                                     }];

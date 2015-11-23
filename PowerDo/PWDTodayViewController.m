@@ -158,6 +158,7 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
                                                                          handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
                                                                              task.dueDate = [NSDate distantFuture];
                                                                              task.status = PWDTaskStatusInPlan;
+                                                                             task.dailyRecord = nil;
                                                                              [taskManager saveContext];
                                                                              [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayTasksManualChangeNotification object:nil];
                                                                              [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];

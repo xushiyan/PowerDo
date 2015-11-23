@@ -172,7 +172,6 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
     chartScrollView.chartView.showTrendLine = !expanding;
     if (expanding) {
         [self.expandButton setTintColor:[UIColor grayColor]];
-        [self.chartScrollView.chartView clearHighlights];
     } else {
         [self.expandButton setTintColor:[UIColor flatCarrotColor]];
         [chartScrollView unhighlightRecordAtIndex:_lastSelectedIndexPath.row];
