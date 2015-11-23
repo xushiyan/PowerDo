@@ -76,7 +76,7 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
         tableView.backgroundView = self.backgroundMessage;
     }
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responseToSignificantTimeChange:) name:UIApplicationSignificantTimeChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responseToDayChange:) name:NSCalendarDayChangedNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
 }
@@ -119,7 +119,7 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
 }
 
 #pragma mark - Handler
-- (void)responseToSignificantTimeChange:(NSNotification *)notification {
+- (void)responseToDayChange:(NSNotification *)notification {
     _todayRecord = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
         self.powerBar.todayRecord = nil;

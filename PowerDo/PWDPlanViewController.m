@@ -71,7 +71,7 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     
     self.navigationItem.leftBarButtonItem = editButton;
 #ifdef DEBUG
-    UIBarButtonItem *simulateButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(simulateSignificantTimeChange:)];
+    UIBarButtonItem *simulateButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(simulateDayChange:)];
     self.navigationItem.rightBarButtonItems = @[addButton,simulateButton];
 #else
     self.navigationItem.rightBarButtonItem = addButton;
@@ -120,8 +120,8 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 }
 #pragma mark - Action methods
 #ifdef DEBUG
-- (void)simulateSignificantTimeChange:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationSignificantTimeChangeNotification object:nil];
+- (void)simulateDayChange:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:NSCalendarDayChangedNotification object:nil];
 }
 #endif
 

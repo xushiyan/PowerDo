@@ -57,8 +57,8 @@
                                                      name:PWDTodayBadgeValueNeedsUpdateNotification
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(handleSignificantTimeChange:)
-                                                     name:UIApplicationSignificantTimeChangeNotification
+                                                 selector:@selector(handleDayChange:)
+                                                     name:NSCalendarDayChangedNotification
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleTodayTasksManualChange:)
@@ -192,7 +192,7 @@
     [self saveContext];
 }
 
-- (void)handleSignificantTimeChange:(NSNotification *)notification {
+- (void)handleDayChange:(NSNotification *)notification {
     NSManagedObjectContext *moc = self.managedObjectContext;
     NSArray *inPlanTasks = [self fetchInPlanTaskForTomorrowInContext:moc];
     NSMutableSet *newTodayTaskSet = [NSMutableSet setWithArray:inPlanTasks];
