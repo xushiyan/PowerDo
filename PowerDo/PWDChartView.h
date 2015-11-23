@@ -15,6 +15,6 @@
 @property (nonatomic) BOOL showTrendLine;
 
 - (CGFloat)updateRecords:(NSArray <PWDDailyRecord *> * _Nullable)records;
-- (CGRect)viewingRectForRecord:(PWDDailyRecord * _Nonnull)record;
+- (CGRect)barRectForRecord:(PWDDailyRecord * _Nonnull)record;
 
 @end

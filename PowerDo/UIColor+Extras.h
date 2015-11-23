@@ -17,5 +17,7 @@
 + (UIColor *)unhappyMoodColor;
 + (UIColor *)colorFromTaskDifficulty:(PWDTaskDifficulty)difficulty;
 + (UIColor *)flatOrangeColor;
++ (UIColor *)flatSunflowerColor;
++ (UIColor *)flatCarrotColor;
 
 @end

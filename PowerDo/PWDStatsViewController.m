@@ -12,6 +12,7 @@
 #import "PWDDailyRecord.h"
 #import "PWDTaskManager.h"
 #import "PWDChartScrollView.h"
+#import "UIColor+Extras.h"
 
 @interface PWDStatsViewController () <UITableViewDataSource,UITableViewDelegate,NSFetchedResultsControllerDelegate> {
     CGFloat _headerHeight;
@@ -126,6 +127,8 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.expandButton.tintColor = [UIColor flatOrangeColor];
+
     [self.chartScrollView highlightRecordAtIndex:indexPath.row];
     [self.chartScrollView scrollToRecord:[self.fetchedResultsController objectAtIndexPath:indexPath]];
     _lastSelectedIndexPath = indexPath;
@@ -138,7 +141,7 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UITableViewHeaderFooterView *view = [[UITableViewHeaderFooterView alloc] init];
     UIButton *expandButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [expandButton setTintColor:[UIColor grayColor]];
+    [expandButton setTintColor:[UIColor flatOrangeColor]];
     [expandButton setImage:[UIImage imageNamed:@"ic_keyboard_arrow_up"] forState:UIControlStateNormal];
     [expandButton addTarget:self action:@selector(toggleTableView:) forControlEvents:UIControlEventTouchUpInside];
     expandButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -167,11 +170,16 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
     chartScrollView.chartView.showTrendLine = !expanding;
     if (expanding) {
         if (_lastSelectedIndexPath) {
+            self.expandButton.tintColor = [UIColor flatOrangeColor];
+
             [chartScrollView highlightRecordAtIndex:_lastSelectedIndexPath.row];
             [chartScrollView scrollToRecord:[self.fetchedResultsController objectAtIndexPath:_lastSelectedIndexPath]];
             [tableView selectRowAtIndexPath:_lastSelectedIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+        } else {
+            self.expandButton.tintColor = [UIColor grayColor];
         }
     } else {
+        self.expandButton.tintColor = [UIColor flatOrangeColor];
         [chartScrollView unhighlightRecordAtIndex:_lastSelectedIndexPath.row];
         [tableView deselectRowAtIndexPath:_lastSelectedIndexPath animated:YES];
     }
@@ -196,6 +204,10 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
                          [self.view layoutIfNeeded];
                          [chartScrollView updateChartDisplay];
                          self.expandButton.transform = CGAffineTransformRotate(self.expandButton.transform, M_PI);
+                         if (_lastSelectedIndexPath) {
+                             PWDDailyRecord *record = [self.fetchedResultsController objectAtIndexPath:_lastSelectedIndexPath];
+                             [chartScrollView scrollToRecord:record];
+                         }
                      }
                      completion:nil];
 }

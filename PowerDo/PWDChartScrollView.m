@@ -28,24 +28,38 @@
 
 - (void)updateChartDisplay {
     CGSize size = self.bounds.size;
-    CGRect chartViewFrame = _chartView.frame;
-    chartViewFrame.size.height = size.height;
-    _chartView.frame = chartViewFrame;
-    self.contentSize = _chartView.frame.size;
+    CGRect chartFrame = _chartView.frame;
+    CGSize contentSize = self.contentSize;
+    contentSize = CGSizeMake(CGRectGetWidth(chartFrame) + size.width, size.height);
+    self.contentSize = contentSize;
+    
+    chartFrame.size.height = size.height;
+    _chartView.frame = chartFrame;
+    
+    CGPoint center = _chartView.center;
+    center.x = contentSize.width/2;
+    _chartView.center = center;
 }
 
 - (void)updateChartWithRecords:(NSArray <PWDDailyRecord *> * _Nullable)records {
     CGSize size = self.bounds.size;
-    CGFloat width = [_chartView updateRecords:records];
-    _chartView.frame = CGRectMake(0, 0, width, size.height);
-    self.contentSize = _chartView.frame.size;
+    CGFloat chartWidth = [_chartView updateRecords:records];
+    self.contentSize = CGSizeMake(chartWidth + size.width, size.height);
+    CGRect chartFrame = CGRectMake(0, 0, chartWidth, size.height);
+    _chartView.frame = chartFrame;
+    _chartView.center = CGPointMake(self.contentSize.width/2, _chartView.center.y);
+
     [self setNeedsDisplay];
     [self setNeedsLayout];
 }
 
 - (void)scrollToRecord:(PWDDailyRecord *)record {
-    CGRect viewingRect = [_chartView viewingRectForRecord:record];
-    [self scrollRectToVisible:viewingRect animated:YES];
+    CGRect barRect = [_chartView barRectForRecord:record];
+    CGRect convertedRect = [self convertRect:barRect fromView:_chartView];
+    CGFloat midX = CGRectGetMidX(convertedRect);
+    CGRect bounds = self.bounds;
+    CGRect recordRect = CGRectMake(midX-CGRectGetWidth(bounds)/2, 0, CGRectGetWidth(bounds), CGRectGetHeight(bounds));
+    [self scrollRectToVisible:recordRect animated:YES];
 }
 
 - (void)unhighlightRecordAtIndex:(NSUInteger)index {

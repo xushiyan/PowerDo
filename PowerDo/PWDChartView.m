@@ -31,14 +31,11 @@ CGFloat const ChartTrendDotYOffset = ChartBarBaseHeight + ChartBarDateTextRectHe
     return newWidth;
 }
 
-- (CGRect)viewingRectForRecord:(PWDDailyRecord *)record {
+- (CGRect)barRectForRecord:(PWDDailyRecord *)record {
     NSUInteger index = [_records indexOfObject:record];
     CGFloat recordBottomCenter = (_records.count - 1 - index) * (ChartBarWidth+ChartBarSpacing) + ChartBarWidth/2+ChartBarSpacing;
-    CGRect rectToView = CGRectMake(recordBottomCenter - ChartBarWidth/2 - ChartBarSpacing,
-                                   0,
-                                   ChartBarWidth + 2*ChartBarSpacing,
-                                   CGRectGetHeight(self.bounds));
-    return rectToView;
+    CGRect centerRect = CGRectMake(recordBottomCenter-ChartBarWidth/2, 0, ChartBarWidth, CGRectGetHeight(self.bounds));
+    return centerRect;
 }
 
 // Only override drawRect: if you perform custom drawing.

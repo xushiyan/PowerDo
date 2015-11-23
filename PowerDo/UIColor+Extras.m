@@ -49,4 +49,11 @@
     return [UIColor colorFromHexString:@"f39c12"];
 }
 
++ (UIColor *)flatSunflowerColor {
+    return [UIColor colorFromHexString:@"f1c40f"];
+}
+
++ (UIColor *)flatCarrotColor {
+    return [UIColor colorFromHexString:@"e67e22"];
+}
 @end
