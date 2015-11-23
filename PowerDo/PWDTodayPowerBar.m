@@ -44,7 +44,6 @@
     [path stroke];
     
     CGRect textRect = CGRectMake(end.x, end.y-12.0f, barEndMargin, barWidth);
-    NSLog(@"%@", NSStringFromCGRect(textRect));
     NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
     paragraph.alignment = NSTextAlignmentCenter;
     [powerText drawInRect:textRect withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],
