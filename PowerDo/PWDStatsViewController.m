@@ -15,6 +15,7 @@
 
 @interface PWDStatsViewController () <UITableViewDataSource,UITableViewDelegate,NSFetchedResultsControllerDelegate> {
     CGFloat _headerHeight;
+    NSIndexPath *_lastSelectedIndexPath;
 }
 
 @property (nonatomic,weak) PWDChartScrollView *chartScrollView;
@@ -127,6 +128,7 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.chartScrollView highlightRecordAtIndex:indexPath.row];
     [self.chartScrollView scrollToRecord:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+    _lastSelectedIndexPath = indexPath;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -158,8 +160,21 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
 }
 
 - (void)toggleTableView:(id)sender {
-    self.tableView.scrollEnabled = !self.tableView.scrollEnabled;
-    BOOL expanding = self.tableView.scrollEnabled;
+    PWDChartScrollView *chartScrollView = self.chartScrollView;
+    UITableView *tableView = self.tableView;
+    tableView.scrollEnabled = !tableView.scrollEnabled;
+    BOOL expanding = tableView.scrollEnabled;
+    chartScrollView.chartView.showTrendLine = !expanding;
+    if (expanding) {
+        if (_lastSelectedIndexPath) {
+            [chartScrollView highlightRecordAtIndex:_lastSelectedIndexPath.row];
+            [chartScrollView scrollToRecord:[self.fetchedResultsController objectAtIndexPath:_lastSelectedIndexPath]];
+            [tableView selectRowAtIndexPath:_lastSelectedIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+        }
+    } else {
+        [chartScrollView unhighlightRecordAtIndex:_lastSelectedIndexPath.row];
+        [tableView deselectRowAtIndexPath:_lastSelectedIndexPath animated:YES];
+    }
     if (self.collapsedConstraint.active) {
         self.collapsedConstraint.active = NO;
         self.expandedConstraint.active = YES;
@@ -167,11 +182,10 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
         self.expandedConstraint.active = NO;
         self.collapsedConstraint.active = YES;
     }
-    self.chartScrollView.chartView.showTrendLine = !expanding;
-    [self.chartScrollView setNeedsDisplay];
-    [self.chartScrollView setNeedsLayout];
-    [self.chartScrollView.chartView setNeedsDisplay];
-    [self.chartScrollView.chartView setNeedsLayout];
+    [chartScrollView setNeedsDisplay];
+    [chartScrollView setNeedsLayout];
+    [chartScrollView.chartView setNeedsDisplay];
+    [chartScrollView.chartView setNeedsLayout];
     
     [UIView animateWithDuration:.5f
                           delay:0
@@ -180,7 +194,7 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          [self.view layoutIfNeeded];
-                         [self.chartScrollView updateChartDisplay];
+                         [chartScrollView updateChartDisplay];
                          self.expandButton.transform = CGAffineTransformRotate(self.expandButton.transform, M_PI);
                      }
                      completion:nil];
