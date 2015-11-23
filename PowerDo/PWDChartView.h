@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "PWDDailyRecord.h"
 
-@interface PWDChartView : UIView
+@interface PWDChartView : UIView <UIScrollViewDelegate>
 
 @property (nonatomic,copy) NSArray * _Nullable records;
 @property (nonatomic) BOOL showTrendLine;
 
 - (CGFloat)updateRecords:(NSArray <PWDDailyRecord *> * _Nullable)records;
 - (CGRect)barRectForRecord:(PWDDailyRecord * _Nonnull)record;
+- (void)redrawForScrollOffset:(CGFloat)offsetX;
+- (void)clearHighlights;
 
 @end

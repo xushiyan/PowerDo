@@ -18,9 +18,12 @@ CGFloat const ChartTrendDotRadius = 4.0f;
 CGFloat const ChartBarBaseHeight = 10.0f;
 CGFloat const ChartTrendDotYOffset = ChartBarBaseHeight + ChartBarDateTextRectHeight + ChartBarBaseHeight;
 
-@implementation PWDChartView
+@implementation PWDChartView {
+    PWDDailyRecord *_lastHighlightRecord;
+}
 
 - (CGFloat)updateRecords:(NSArray <PWDDailyRecord *> * _Nullable)records {
+    
     self.records = records;
     
     CGFloat newWidth = records.count * (ChartBarWidth + ChartBarSpacing) + ChartBarSpacing;
@@ -123,5 +126,46 @@ CGFloat const ChartTrendDotYOffset = ChartBarBaseHeight + ChartBarDateTextRectHe
 
 }
 
+- (void)redrawForScrollOffset:(CGFloat)offsetX {
+    NSUInteger idx = offsetX/(ChartBarWidth+ChartBarSpacing);
+    if (idx < _records.count) {
+        PWDDailyRecord *record = _records[_records.count - 1 - idx];
+        CGRect rect = [self barRectForRecord:record];
+        CGFloat minx = CGRectGetMinX(rect);
+        CGFloat maxx = CGRectGetMaxX(rect);
+        if (offsetX > minx && offsetX < maxx) {
+            if (record.highlighted == NO) {
+                record.highlighted = YES;
+                
+                if (!_lastHighlightRecord) {
+                    _lastHighlightRecord = record;
+                }
+                if (_lastHighlightRecord != record) {
+                    _lastHighlightRecord.highlighted = NO;
+                    CGRect rectUnhighlight = [self barRectForRecord:_lastHighlightRecord];
+                    rect = CGRectUnion(rect, rectUnhighlight);
+                    _lastHighlightRecord = record;
+                }
+                [self setNeedsDisplayInRect:rect];
+                
+            }
+            
+        }
+    }
+}
+
+- (void)clearHighlights {
+    _lastHighlightRecord = nil;
+    [_records makeObjectsPerformSelector:@selector(setHighlighted:) withObject:@NO];
+    [self setNeedsDisplay];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (self.showTrendLine) {
+        [self redrawForScrollOffset:scrollView.contentOffset.x];
+    }
+}
 
 @end

@@ -17,8 +17,10 @@
         chartView.showTrendLine = YES;
         chartView.backgroundColor = [UIColor whiteColor];
         chartView.opaque = YES;
+        
         [self addSubview:chartView];
         self.chartView = chartView;
+        self.delegate = chartView;
         self.backgroundColor = [UIColor whiteColor];
         self.showsHorizontalScrollIndicator = NO;
         self.showsVerticalScrollIndicator = NO;

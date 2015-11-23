@@ -127,8 +127,6 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.expandButton.tintColor = [UIColor flatOrangeColor];
-
     [self.chartScrollView highlightRecordAtIndex:indexPath.row];
     [self.chartScrollView scrollToRecord:[self.fetchedResultsController objectAtIndexPath:indexPath]];
     _lastSelectedIndexPath = indexPath;
@@ -169,17 +167,10 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
     BOOL expanding = tableView.scrollEnabled;
     chartScrollView.chartView.showTrendLine = !expanding;
     if (expanding) {
-        if (_lastSelectedIndexPath) {
-            self.expandButton.tintColor = [UIColor flatOrangeColor];
-
-            [chartScrollView highlightRecordAtIndex:_lastSelectedIndexPath.row];
-            [chartScrollView scrollToRecord:[self.fetchedResultsController objectAtIndexPath:_lastSelectedIndexPath]];
-            [tableView selectRowAtIndexPath:_lastSelectedIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-        } else {
-            self.expandButton.tintColor = [UIColor grayColor];
-        }
+        [self.expandButton setTintColor:[UIColor grayColor]];
+        [self.chartScrollView.chartView clearHighlights];
     } else {
-        self.expandButton.tintColor = [UIColor flatOrangeColor];
+        [self.expandButton setTintColor:[UIColor flatCarrotColor]];
         [chartScrollView unhighlightRecordAtIndex:_lastSelectedIndexPath.row];
         [tableView deselectRowAtIndexPath:_lastSelectedIndexPath animated:YES];
     }
@@ -204,12 +195,15 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
                          [self.view layoutIfNeeded];
                          [chartScrollView updateChartDisplay];
                          self.expandButton.transform = CGAffineTransformRotate(self.expandButton.transform, M_PI);
-                         if (_lastSelectedIndexPath) {
-                             PWDDailyRecord *record = [self.fetchedResultsController objectAtIndexPath:_lastSelectedIndexPath];
-                             [chartScrollView scrollToRecord:record];
-                         }
+
                      }
-                     completion:nil];
+                     completion:^(BOOL finished) {
+                         if (expanding) {
+                             [self.chartScrollView.chartView clearHighlights];
+                         } else {
+                             [self.chartScrollView.chartView redrawForScrollOffset:chartScrollView.contentOffset.x];
+                         }
+                     }];
 }
 
 #pragma mark - UITableViewDataSource
