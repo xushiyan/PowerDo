@@ -23,6 +23,7 @@
 
 @property (nonatomic,strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic,strong,readonly) PWDDailyRecord *todayRecord;
+@property (nonatomic,strong,readonly) UILabel *backgroundMessage;
 
 @property (nonatomic,weak) PWDTodayPowerBar *powerBar;
 
@@ -69,7 +70,12 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
     powerBar.backgroundColor = tableView.backgroundColor;
     self.powerBar = powerBar;
     tableView.tableHeaderView = powerBar;
-    
+    if (controller.fetchedObjects.count > 0) {
+        tableView.backgroundView = nil;
+    } else {
+        tableView.backgroundView = self.backgroundMessage;
+    }
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responseToSignificantTimeChange:) name:UIApplicationSignificantTimeChangeNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
@@ -90,6 +96,20 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
 }
 
 #pragma mark - Accessor
+@synthesize backgroundMessage = _backgroundMessage;
+- (UILabel *)backgroundMessage {
+    if (!_backgroundMessage) {
+        UILabel *backgroundMessage = [UILabel new];
+        backgroundMessage.text = NSLocalizedString(@"No Task", @"Today vc background message");
+        backgroundMessage.textColor = [UIColor lightGrayColor];
+        backgroundMessage.font = [UIFont preferredFontForTextStyle:UIFontTextStyleTitle1];
+        backgroundMessage.textAlignment = NSTextAlignmentCenter;
+        backgroundMessage.numberOfLines = 0;
+        [backgroundMessage sizeToFit];
+        _backgroundMessage = backgroundMessage;
+    }
+    return _backgroundMessage;
+}
 @synthesize todayRecord = _todayRecord;
 - (PWDDailyRecord *)todayRecord {
     if (!_todayRecord) {
@@ -289,6 +309,12 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
+    if (controller.fetchedObjects.count > 0) {
+        self.tableView.backgroundView = nil;
+    } else {
+        self.tableView.backgroundView = self.backgroundMessage;
+    }
+
     [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
 }
 

@@ -19,6 +19,7 @@
 }
 @property (nonatomic,strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic,weak) UITextField *addTaskField;
+@property (nonatomic,strong,readonly) UILabel *backgroundMessage;
 
 @property (nonatomic,strong) UIBarButtonItem *editButton;
 @property (nonatomic,strong) UIBarButtonItem *addButton;
@@ -100,7 +101,11 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     tableView.estimatedRowHeight = 44;
     tableView.allowsSelectionDuringEditing = YES;
     tableView.allowsMultipleSelectionDuringEditing = YES;
-
+    if (controller.fetchedObjects.count > 0) {
+        tableView.backgroundView = nil;
+    } else {
+        tableView.backgroundView = self.backgroundMessage;
+    }
     [self updateBarButtonItems];
 
 }
@@ -154,6 +159,21 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     
     [self.tableView setEditing:NO animated:YES];
     [self updateBarButtonItems];
+}
+#pragma mark - Accessor
+@synthesize backgroundMessage = _backgroundMessage;
+- (UILabel *)backgroundMessage {
+    if (!_backgroundMessage) {
+        UILabel *backgroundMessage = [UILabel new];
+        backgroundMessage.text = NSLocalizedString(@"Pull down\nto add new task", @"Plan vc background message");
+        backgroundMessage.textColor = [UIColor lightGrayColor];
+        backgroundMessage.font = [UIFont preferredFontForTextStyle:UIFontTextStyleTitle2];
+        backgroundMessage.textAlignment = NSTextAlignmentCenter;
+        backgroundMessage.numberOfLines = 0;
+        [backgroundMessage sizeToFit];
+        _backgroundMessage = backgroundMessage;
+    }
+    return _backgroundMessage;
 }
 
 #pragma mark - Functions
@@ -315,6 +335,11 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
+    if (controller.fetchedObjects.count > 0) {
+        self.tableView.backgroundView = nil;
+    } else {
+        self.tableView.backgroundView = self.backgroundMessage;
+    }
     [self updateBarButtonItems];
 }
 
