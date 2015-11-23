@@ -11,7 +11,6 @@
 #import "PWDConstants.h"
 #import "PWDTaskManager.h"
 #import "PWDFeedbackViewController.h"
-#import "PWDHelpViewController.h"
 #import "UITableViewCell+PWDExtras.h"
 #import "UIViewController+PWDExtras.h"
 
@@ -42,11 +41,6 @@ NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
     NSInteger row = indexPath.row;
     
     switch (section) {
-        case PWDSettingsSectionHelp: {
-            PWDHelpViewController *help_vc = [[PWDHelpViewController alloc] initWithNibName:NSStringFromClass([PWDHelpViewController class]) bundle:nil];
-            [self showViewController:help_vc sender:nil];
-        }
-            break;
         case PWDSettingsSectionFeedback:
             switch (row) {
                 case PWDFeedbackRowFeedback: {
@@ -97,10 +91,6 @@ NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger num = 0;
     switch (section) {
-        case PWDSettingsSectionHelp: {
-            num = 1;
-        }
-            break;
         case PWDSettingsSectionFeedback: {
             num = PWDFeedbackRowEnd;
         }
@@ -115,11 +105,6 @@ NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
     switch (section) {
-        case PWDSettingsSectionHelp: {
-            xCell.textLabel.text = NSLocalizedString(@"How to gain Power?", @"Settings cell label");
-            xCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
-            break;
         case PWDSettingsSectionFeedback: {
             xCell.accessoryView = nil;
             switch (row) {

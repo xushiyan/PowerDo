@@ -39,8 +39,6 @@
 		E23664D61BAB11A60035C0D2 /* UIColor+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = E23664D51BAB11A60035C0D2 /* UIColor+Extras.m */; };
 		E262CCEA1BA0881A00A82C98 /* PWDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E262CCE91BA0881A00A82C98 /* PWDSettingsViewController.m */; };
 		E2C426551B9DDD9500E3BC92 /* PWDTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C426541B9DDD9500E3BC92 /* PWDTodayViewController.m */; };
-		E2C56EA81BA9B886000B6622 /* PWDHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C56EA61BA9B886000B6622 /* PWDHelpViewController.m */; };
-		E2C56EA91BA9B886000B6622 /* PWDHelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2C56EA71BA9B886000B6622 /* PWDHelpViewController.xib */; };
 		E2DAC0331BA8744000C33CBD /* PWDFeedbackTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAC0321BA8744000C33CBD /* PWDFeedbackTextField.m */; };
 /* End PBXBuildFile section */
 
@@ -122,9 +120,6 @@
 		E262CCE91BA0881A00A82C98 /* PWDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDSettingsViewController.m; sourceTree = "<group>"; };
 		E2C426531B9DDD9500E3BC92 /* PWDTodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTodayViewController.h; sourceTree = "<group>"; };
 		E2C426541B9DDD9500E3BC92 /* PWDTodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTodayViewController.m; sourceTree = "<group>"; };
-		E2C56EA51BA9B886000B6622 /* PWDHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDHelpViewController.h; sourceTree = "<group>"; };
-		E2C56EA61BA9B886000B6622 /* PWDHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDHelpViewController.m; sourceTree = "<group>"; };
-		E2C56EA71BA9B886000B6622 /* PWDHelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PWDHelpViewController.xib; sourceTree = "<group>"; };
 		E2DAC0311BA8744000C33CBD /* PWDFeedbackTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDFeedbackTextField.h; sourceTree = "<group>"; };
 		E2DAC0321BA8744000C33CBD /* PWDFeedbackTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDFeedbackTextField.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -310,9 +305,6 @@
 				E22319051BA486D400C1C21F /* PWDFeedbackViewController.h */,
 				E22319061BA486D400C1C21F /* PWDFeedbackViewController.m */,
 				E22319071BA486D400C1C21F /* PWDFeedbackViewController.xib */,
-				E2C56EA51BA9B886000B6622 /* PWDHelpViewController.h */,
-				E2C56EA61BA9B886000B6622 /* PWDHelpViewController.m */,
-				E2C56EA71BA9B886000B6622 /* PWDHelpViewController.xib */,
 				86F043C61BF738ED0048FADB /* PWDPlanViewController.h */,
 				86F043C71BF738ED0048FADB /* PWDPlanViewController.m */,
 				8621D1A11BFCBF5D00995C36 /* PWDRootViewController.h */,
@@ -430,7 +422,6 @@
 				86485B311B973A4C0027D01A /* LaunchScreen.storyboard in Resources */,
 				86485B2E1B973A4C0027D01A /* Assets.xcassets in Resources */,
 				E22319091BA486D400C1C21F /* PWDFeedbackViewController.xib in Resources */,
-				E2C56EA91BA9B886000B6622 /* PWDHelpViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,7 +457,6 @@
 				E22319081BA486D400C1C21F /* PWDFeedbackViewController.m in Sources */,
 				86485B231B973A4C0027D01A /* AppDelegate.m in Sources */,
 				86AF08DD1C00738600F70D5A /* NSPredicate+PWDExtras.m in Sources */,
-				E2C56EA81BA9B886000B6622 /* PWDHelpViewController.m in Sources */,
 				86E8D95B1BFB6A0700E93E7F /* PWDTask.m in Sources */,
 				E23664D31BAB0C810035C0D2 /* PWDFeedbackService.m in Sources */,
 				86658E621BA3372700FE67B3 /* PWDStatsViewController.m in Sources */,

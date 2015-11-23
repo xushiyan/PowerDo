@@ -60,7 +60,7 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
     
     
     UITableView *tableView = self.tableView;
-    tableView.rowHeight = 44;
+    tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.estimatedRowHeight = 44;
     UILabel *powerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 64)];
     PWDDailyRecord *todayRecord = self.todayRecord;

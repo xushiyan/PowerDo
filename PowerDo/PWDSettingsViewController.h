@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, PWDSettingsSection) {
-    PWDSettingsSectionHelp,
     PWDSettingsSectionFeedback,
     PWDSettingsSectionEnd
 };
