@@ -32,12 +32,6 @@
 #endif
 }
 
-#ifdef DEBUG
-- (NSTimeInterval)dateRaw {
-    return self.createDateRaw;
-}
-#endif
-
 - (void)updatePowerAndPowerUnits {
     NSSet *tasks = self.tasks;
     float oldPowerUnits = self.powerUnits;

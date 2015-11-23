@@ -15,13 +15,16 @@
 #import "NSDate+PWDExtras.h"
 #import "UIColor+Extras.h"
 #import "NSPredicate+PWDExtras.h"
+#import "PWDTodayPowerBar.h"
 
-@interface PWDTodayViewController ()
+@interface PWDTodayViewController () {
+    CGFloat _headerHeight;
+}
 
 @property (nonatomic,strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic,strong,readonly) PWDDailyRecord *todayRecord;
 
-@property (nonatomic,weak) UILabel *powerLabel;
+@property (nonatomic,weak) PWDTodayPowerBar *powerBar;
 
 @end
 
@@ -58,18 +61,14 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
     controller.delegate = self;
     self.fetchedResultsController = controller;
     
-    
+    _headerHeight = 64;
     UITableView *tableView = self.tableView;
     tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.estimatedRowHeight = 44;
-    UILabel *powerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 64)];
-    PWDDailyRecord *todayRecord = self.todayRecord;
-    powerLabel.text = [NSString stringWithFormat:@"Power %.0f", todayRecord.power];
-    powerLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    powerLabel.textAlignment = NSTextAlignmentCenter;
-    powerLabel.textColor = [UIColor themeColor];
-    self.powerLabel = powerLabel;
-    tableView.tableHeaderView = powerLabel;
+    PWDTodayPowerBar *powerBar = [[PWDTodayPowerBar alloc] initWithFrame:CGRectMake(0, 0, 0, _headerHeight)];
+    powerBar.backgroundColor = tableView.backgroundColor;
+    self.powerBar = powerBar;
+    tableView.tableHeaderView = powerBar;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responseToSignificantTimeChange:) name:UIApplicationSignificantTimeChangeNotification object:nil];
     
@@ -85,6 +84,11 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.powerBar.todayRecord = self.todayRecord;
+}
+
 #pragma mark - Accessor
 @synthesize todayRecord = _todayRecord;
 - (PWDDailyRecord *)todayRecord {
@@ -98,14 +102,11 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
 - (void)responseToSignificantTimeChange:(NSNotification *)notification {
     _todayRecord = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.powerLabel.text = @"Power 0";
+        self.powerBar.todayRecord = nil;
     });
 }
 
 #pragma mark - Functions
-- (void)updateTodayRecordLabel {
-    self.powerLabel.text = [NSString stringWithFormat:@"Power %.0f", self.todayRecord.power];
-}
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     PWDTask *task = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -136,7 +137,7 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
                                                                           [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayTasksManualChangeNotification object:nil];
                                                                           [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
                                                                           dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                                                              [self updateTodayRecordLabel];
+                                                                              self.powerBar.todayRecord = self.todayRecord;
                                                                           });
                                                                       }];
     done.backgroundColor = [UIColor themeColor];
@@ -148,7 +149,7 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
                                                                             [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayTasksManualChangeNotification object:nil];
                                                                             [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
                                                                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                                                                [self updateTodayRecordLabel];
+                                                                                self.powerBar.todayRecord = self.todayRecord;
                                                                             });
                                                                         }];
     redo.backgroundColor = [UIColor flatOrangeColor];
@@ -161,7 +162,7 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
                                                                              [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayTasksManualChangeNotification object:nil];
                                                                              [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
                                                                              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                                                                 [self updateTodayRecordLabel];
+                                                                                 self.powerBar.todayRecord = self.todayRecord;
                                                                              });
                                                                          }];
     
