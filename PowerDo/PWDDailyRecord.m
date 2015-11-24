@@ -54,6 +54,11 @@
     self.powerUnits = newPowerUnits;
 }
 
+- (void)resetPowerAndPowerUnits {
+    self.power = 0;
+    self.powerUnits = 0;
+}
+
 - (void)updatePower {
     NSSet *tasks = self.tasks;
     __block float newPower = .0f;

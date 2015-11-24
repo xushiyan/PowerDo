@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong,readonly) NSDateFormatter *chartDateFormatter;
 
 - (void)updatePowerAndPowerUnits;
+- (void)resetPowerAndPowerUnits;
 - (void)updatePower;
 - (NSString *)powerText;
 - (NSString *)dateTextForChart;

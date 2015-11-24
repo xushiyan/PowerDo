@@ -192,6 +192,7 @@
         [todayRecord updatePower];
     } else {
         todayRecord = [self insertNewDailyRecordWithTasks:[NSSet setWithArray:todayTasks] inContext:self.managedObjectContext];
+        [todayRecord resetPowerAndPowerUnits];
     }
     [self saveContext];
 }
