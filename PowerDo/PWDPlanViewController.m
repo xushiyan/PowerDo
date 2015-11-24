@@ -14,6 +14,7 @@
 #import "PWDTaskDifficultyIndicator.h"
 #import "PWDConstants.h"
 #import "PWDDailyRecord.h"
+#import "PWDDetailViewController.h"
 
 @interface PWDPlanViewController () <UITextFieldDelegate> {
     CGFloat _headerHeight;
@@ -385,15 +386,13 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
         [self updateDeleteButtonTitle];
 
     } else {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
         PWDTask *task = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        NSInteger difficulty = task.difficulty;
-        difficulty++;
-        if (difficulty > PWDTaskDifficultyHard) {
-            difficulty -= PWDTaskDifficultyHard;
-        }
-        task.difficulty = difficulty;
-        [[PWDTaskManager sharedManager] saveContext];
+
+        PWDDetailViewController *details = [[PWDDetailViewController alloc] initWithNibName:NSStringFromClass([PWDDetailViewController class]) bundle:nil];
+        details.task = task;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:details];
+        nav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        [self presentViewController:nav animated:YES completion:nil];
     }
 }
 

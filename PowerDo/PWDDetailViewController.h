@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PWDTask.h"
+#import "PWDTaskManager.h"
 
 @interface PWDDetailViewController : UIViewController
+
+@property (nonatomic,strong) PWDTask *task;
+@property (weak, nonatomic) IBOutlet UITextView *titleTextView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *difficultySelector;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *dueDateGroupSelector;
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 
 @end

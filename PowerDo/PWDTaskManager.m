@@ -187,8 +187,12 @@
 - (void)handleTodayTasksManualChange:(NSNotification *)notification {
     NSArray *todayTasks = [self fetchTodayTasks];
     PWDDailyRecord *todayRecord = [self fetchTodayRecord];
-    [todayRecord addTasks:[NSSet setWithArray:todayTasks]];
-    [todayRecord updatePower];
+    if (todayRecord) {
+        [todayRecord addTasks:[NSSet setWithArray:todayTasks]];
+        [todayRecord updatePower];
+    } else {
+        todayRecord = [self insertNewDailyRecordWithTasks:[NSSet setWithArray:todayTasks] inContext:self.managedObjectContext];
+    }
     [self saveContext];
 }
 

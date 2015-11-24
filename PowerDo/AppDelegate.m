@@ -25,7 +25,6 @@
     
     UIWindow *mainWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     mainWindow.rootViewController = [[PWDRootViewController alloc] init];
-    mainWindow.backgroundColor = [UIColor whiteColor];
     mainWindow.tintColor = [UIColor themeColor];
     self.window = mainWindow;
     [mainWindow makeKeyAndVisible];

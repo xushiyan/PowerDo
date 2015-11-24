@@ -33,7 +33,7 @@
     UIColor *color;
     switch (difficulty) {
         case PWDTaskDifficultyEasy:
-            color = [UIColor flatNephritisColor];
+            color = [UIColor flatSunflowerColor];
             break;
         case PWDTaskDifficultyMedium:
             color = [UIColor flatCarrotColor];

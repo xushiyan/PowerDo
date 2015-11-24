@@ -6,6 +6,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PWDDetailViewController">
             <connections>
+                <outlet property="difficultySelector" destination="zap-4Q-Eic" id="Pwi-bx-yvp"/>
+                <outlet property="dueDateGroupSelector" destination="Y7T-9z-TS8" id="T6T-H2-0ko"/>
+                <outlet property="messageLabel" destination="SoA-da-QOE" id="Rsv-4e-FuA"/>
+                <outlet property="titleTextView" destination="eoG-d1-tYZ" id="v8i-eQ-eIc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -14,54 +18,60 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jyh-B1-Ejm">
-                    <rect key="frame" x="20" y="20" width="560" height="414"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="jyh-B1-Ejm">
+                    <rect key="frame" x="20" y="20" width="560" height="329"/>
                     <subviews>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eoG-d1-tYZ">
-                            <rect key="frame" x="0.0" y="0.0" width="560" height="120"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="18k-sc-AcO">
+                            <rect key="frame" x="0.0" y="0.0" width="560" height="200"/>
+                            <subviews>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eoG-d1-tYZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="560" height="200"/>
+                                    <animations/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                </textView>
+                            </subviews>
                             <animations/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="120" id="GYS-Pg-71J"/>
+                                <constraint firstAttribute="height" constant="200" id="YkM-BL-VZD"/>
                             </constraints>
-                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                        </textView>
+                        </stackView>
                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zap-4Q-Eic">
-                            <rect key="frame" x="0.0" y="130" width="560" height="29"/>
+                            <rect key="frame" x="0.0" y="224" width="560" height="29"/>
                             <animations/>
                             <segments>
                                 <segment title="Easy"/>
                                 <segment title="Medium"/>
                                 <segment title="Hard"/>
                             </segments>
+                            <connections>
+                                <action selector="handleDifficultyChangeEvent:" destination="-1" eventType="valueChanged" id="hiS-Dn-37k"/>
+                            </connections>
                         </segmentedControl>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fwY-gH-kOp">
-                            <rect key="frame" x="0.0" y="168" width="560" height="246"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Uni-VS-yr4">
+                            <rect key="frame" x="0.0" y="276" width="560" height="53"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="GNV-NP-Zoa">
-                                    <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1R-0E-3rF">
-                                            <rect key="frame" x="0.0" y="0.0" width="280" height="30"/>
-                                            <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O6z-2r-N30">
-                                            <rect key="frame" x="280" y="0.0" width="280" height="30"/>
-                                            <animations/>
-                                            <state key="normal" title="Button"/>
-                                        </button>
-                                    </subviews>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Y7T-9z-TS8">
+                                    <rect key="frame" x="0.0" y="0.0" width="560" height="29"/>
                                     <animations/>
-                                </stackView>
-                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQF-jR-Zsi">
-                                    <rect key="frame" x="0.0" y="30" width="560" height="216"/>
+                                    <segments>
+                                        <segment title="Today"/>
+                                        <segment title="Tomorrow"/>
+                                        <segment title="Someday"/>
+                                    </segments>
+                                    <connections>
+                                        <action selector="handleDueDateGroupChangeEvent:" destination="-1" eventType="valueChanged" id="efZ-sT-ytR"/>
+                                    </connections>
+                                </segmentedControl>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Warning message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SoA-da-QOE">
+                                    <rect key="frame" x="0.0" y="38" width="560" height="15"/>
                                     <animations/>
-                                </pickerView>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <animations/>
                         </stackView>
