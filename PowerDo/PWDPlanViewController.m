@@ -10,6 +10,7 @@
 #import "PWDTaskManager.h"
 #import "PWDTask.h"
 #import "NSDate+PWDExtras.h"
+#import "UIColor+Extras.h"
 #import "PWDTaskDifficultyIndicator.h"
 #import "PWDConstants.h"
 #import "PWDDailyRecord.h"
@@ -208,6 +209,7 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     PWDTask *task = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = task.title;
     cell.detailTextLabel.text = task.difficultyText;
+    cell.detailTextLabel.textColor = [UIColor colorFromTaskDifficulty:task.difficulty];
     PWDTaskDifficultyIndicator *difficultyView = [[PWDTaskDifficultyIndicator alloc] initWithFrame:CGRectMake(0, 0, 48, 20)];
     difficultyView.backgroundColor = [UIColor clearColor];
     difficultyView.difficulty = task.difficulty;
