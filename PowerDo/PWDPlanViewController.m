@@ -208,9 +208,7 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     PWDTask *task = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = task.title;
-    cell.detailTextLabel.text = task.difficultyText;
-    cell.detailTextLabel.textColor = [UIColor colorFromTaskDifficulty:task.difficulty];
-    PWDTaskDifficultyIndicator *difficultyView = [[PWDTaskDifficultyIndicator alloc] initWithFrame:CGRectMake(0, 0, 48, 20)];
+    PWDTaskDifficultyIndicator *difficultyView = [[PWDTaskDifficultyIndicator alloc] initWithFixedFrame];
     difficultyView.backgroundColor = [UIColor clearColor];
     difficultyView.difficulty = task.difficulty;
     cell.accessoryView = difficultyView;

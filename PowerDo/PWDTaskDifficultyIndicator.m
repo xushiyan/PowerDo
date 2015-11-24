@@ -11,10 +11,14 @@
 
 @implementation PWDTaskDifficultyIndicator
 
+- (instancetype)initWithFixedFrame {
+    return [self initWithFrame:CGRectMake(0, 0, 60, 20)];
+}
+
 - (void)drawRect:(CGRect)rect {
     PWDTaskDifficulty difficulty = self.difficulty;
     UIBezierPath *path = [UIBezierPath bezierPath];
-    CGPoint start = CGPointMake(CGRectGetMinX(rect), CGRectGetMidY(rect));
+    CGPoint start = CGPointMake(CGRectGetMinX(rect)+8.0f, CGRectGetMidY(rect));
     [path moveToPoint:start];
     CGPoint end = CGPointMake(CGRectGetMaxX(rect) * difficulty/PWDTaskDifficultyHard, CGRectGetMidY(rect));
     [path addLineToPoint:end];

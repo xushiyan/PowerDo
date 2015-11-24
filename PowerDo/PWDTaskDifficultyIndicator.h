@@ -11,6 +11,7 @@
 
 @interface PWDTaskDifficultyIndicator : UIView
 
+- (instancetype)initWithFixedFrame;
 @property (nonatomic) PWDTaskDifficulty difficulty;
 
 @end

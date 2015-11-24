@@ -33,16 +33,20 @@
     UIColor *color;
     switch (difficulty) {
         case PWDTaskDifficultyEasy:
-            color = [UIColor colorFromHexString:@"EB9A91"];
+            color = [UIColor flatNephritisColor];
             break;
         case PWDTaskDifficultyMedium:
-            color = [UIColor colorFromHexString:@"e9594a"];
+            color = [UIColor flatCarrotColor];
             break;
         case PWDTaskDifficultyHard:
-            color = [UIColor colorFromHexString:@"B6463A"];
+            color = [UIColor flatPomegranateColor];
             break;
     }
     return color;
+}
+
++ (UIColor *)flatNephritisColor {
+    return [UIColor colorFromHexString:@"27ae60"];
 }
 
 + (UIColor *)flatOrangeColor {
@@ -56,4 +60,17 @@
 + (UIColor *)flatCarrotColor {
     return [UIColor colorFromHexString:@"e67e22"];
 }
+
++ (UIColor *)flatPumpkinColor {
+    return [UIColor colorFromHexString:@"d35400"];
+}
+
++ (UIColor *)flatPomegranateColor {
+    return [UIColor colorFromHexString:@"c0392b"];
+}
+
++ (UIColor *)flatGreenSeaColor {
+    return [UIColor colorFromHexString:@"16a085"];
+}
+
 @end

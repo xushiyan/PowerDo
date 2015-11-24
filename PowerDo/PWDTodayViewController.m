@@ -135,7 +135,7 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
     NSAttributedString *taskTitle = [[NSAttributedString alloc] initWithString:task.title attributes:@{NSStrikethroughStyleAttributeName:strikeThrough,
                                                                                                        NSForegroundColorAttributeName:completeColor}];
     cell.textLabel.attributedText = taskTitle;
-    PWDTaskDifficultyIndicator *difficultyView = [[PWDTaskDifficultyIndicator alloc] initWithFrame:CGRectMake(0, 0, 48, 20)];
+    PWDTaskDifficultyIndicator *difficultyView = [[PWDTaskDifficultyIndicator alloc] initWithFixedFrame];
     difficultyView.backgroundColor = [UIColor clearColor];
     difficultyView.difficulty = task.difficulty;
     cell.accessoryView = difficultyView;
