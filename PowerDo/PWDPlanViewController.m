@@ -391,7 +391,6 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
         PWDDetailViewController *details = [[PWDDetailViewController alloc] initWithNibName:NSStringFromClass([PWDDetailViewController class]) bundle:nil];
         details.task = task;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:details];
-        nav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         [self presentViewController:nav animated:YES completion:nil];
     }
 }

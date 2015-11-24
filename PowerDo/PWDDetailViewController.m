@@ -41,6 +41,12 @@ NSUInteger const PWDTaskTitleMaxCharCount = 200;
     self.messageLabel.text = nil;
     
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.titleTextView becomeFirstResponder];
+    [super viewWillAppear:animated];
+}
+
 - (void)dismissFromPresentation:(UIBarButtonItem *)sender {
     UITextView *titleTextView = self.titleTextView;
     [titleTextView endEditing:YES];
