@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E4A783F1C0422D000314390 /* PWDDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4A783D1C0422D000314390 /* PWDDetailViewController.m */; };
+		4E4A78401C0422D000314390 /* PWDDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E4A783E1C0422D000314390 /* PWDDetailViewController.xib */; };
 		4E575F671BFA14560099DDEB /* PWDTaskDifficultyIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E575F661BFA14560099DDEB /* PWDTaskDifficultyIndicator.m */; };
 		4EB1112A1B9C0D4900BF5656 /* PowerDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4EB111281B9C0D4900BF5656 /* PowerDo.xcdatamodeld */; };
 		4EC7ECC81C035F04003C5259 /* PWDTodayPowerBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC7ECC71C035F04003C5259 /* PWDTodayPowerBar.m */; };
@@ -61,6 +63,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E4A783C1C0422D000314390 /* PWDDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDDetailViewController.h; sourceTree = "<group>"; };
+		4E4A783D1C0422D000314390 /* PWDDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDDetailViewController.m; sourceTree = "<group>"; };
+		4E4A783E1C0422D000314390 /* PWDDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PWDDetailViewController.xib; sourceTree = "<group>"; };
 		4E575F651BFA14560099DDEB /* PWDTaskDifficultyIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTaskDifficultyIndicator.h; sourceTree = "<group>"; };
 		4E575F661BFA14560099DDEB /* PWDTaskDifficultyIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTaskDifficultyIndicator.m; sourceTree = "<group>"; };
 		4EB111291B9C0D4900BF5656 /* PowerDo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PowerDo.xcdatamodel; sourceTree = "<group>"; };
@@ -314,6 +319,9 @@
 				86F043C71BF738ED0048FADB /* PWDPlanViewController.m */,
 				8621D1A11BFCBF5D00995C36 /* PWDRootViewController.h */,
 				8621D1A21BFCBF5D00995C36 /* PWDRootViewController.m */,
+				4E4A783C1C0422D000314390 /* PWDDetailViewController.h */,
+				4E4A783D1C0422D000314390 /* PWDDetailViewController.m */,
+				4E4A783E1C0422D000314390 /* PWDDetailViewController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -425,6 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86485B311B973A4C0027D01A /* LaunchScreen.storyboard in Resources */,
+				4E4A78401C0422D000314390 /* PWDDetailViewController.xib in Resources */,
 				86485B2E1B973A4C0027D01A /* Assets.xcassets in Resources */,
 				E22319091BA486D400C1C21F /* PWDFeedbackViewController.xib in Resources */,
 			);
@@ -476,6 +485,7 @@
 				8621D1A31BFCBF5D00995C36 /* PWDRootViewController.m in Sources */,
 				4E575F671BFA14560099DDEB /* PWDTaskDifficultyIndicator.m in Sources */,
 				86A75FAC1BA2E20700588730 /* PWDConstants.m in Sources */,
+				4E4A783F1C0422D000314390 /* PWDDetailViewController.m in Sources */,
 				4EC7ECC81C035F04003C5259 /* PWDTodayPowerBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
