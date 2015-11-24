@@ -89,11 +89,7 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entityDescription = [taskManager.managedObjectModel entitiesByName][NSStringFromClass([PWDDailyRecord class])];
     fetchRequest.entity = entityDescription;
-#ifdef DEBUG
-    NSString *sortKey = NSStringFromSelector(@selector(createDateRaw));
-#else
     NSString *sortKey = NSStringFromSelector(@selector(dateRaw));
-#endif
     NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:NO];
     NSArray *sortDescriptors = @[sort1];
     fetchRequest.sortDescriptors = sortDescriptors;
@@ -310,10 +306,6 @@ NSString * const PWDStatsTableCellIdentifier = @"PWDStatsTableCellIdentifier";
         _dateFormatter = [[NSDateFormatter alloc] init];
         _dateFormatter.dateStyle = NSDateFormatterMediumStyle;
         _dateFormatter.timeStyle = NSDateFormatterNoStyle;
-#ifdef DEBUG
-        _dateFormatter.timeStyle = NSDateFormatterMediumStyle;
-#endif
-
     }
     return _dateFormatter;
 }

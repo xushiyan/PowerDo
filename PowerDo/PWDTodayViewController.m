@@ -76,7 +76,7 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
         tableView.backgroundView = self.backgroundMessage;
     }
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responseToDayChange:) name:NSCalendarDayChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responseToDayChange:) name:UIApplicationSignificantTimeChangeNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
 }

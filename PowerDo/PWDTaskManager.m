@@ -58,12 +58,16 @@
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleDayChange:)
-                                                     name:NSCalendarDayChangedNotification
+                                                     name:UIApplicationSignificantTimeChangeNotification
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleTodayTasksManualChange:)
                                                      name:PWDTodayTasksManualChangeNotification
                                                    object:nil];
+#ifdef DEBUG
+        [self deleteAllEntities];
+        [self createSampleData];
+#endif
     }
     return self;
 }
@@ -117,7 +121,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDDailyRecord class]) inManagedObjectContext:self.managedObjectContext];
     request.fetchLimit = 1;
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(createDateRaw)) ascending:NO];
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(dateRaw)) ascending:NO];
     request.sortDescriptors = @[sort];
     NSError *error;
     PWDDailyRecord *record = [[self.managedObjectContext executeFetchRequest:request error:&error] firstObject];
@@ -126,6 +130,23 @@
     }
     return record;
 }
+
+#ifdef DEBUG
+- (PWDDailyRecord *)fetchLatestRecord {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDDailyRecord class]) inManagedObjectContext:self.managedObjectContext];
+    request.fetchLimit = 1;
+    NSSortDescriptor *sort1 = [NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(dateRaw)) ascending:NO];
+    NSSortDescriptor *sort2 = [NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(createDateRaw)) ascending:YES];
+    request.sortDescriptors = @[sort1,sort2];
+    NSError *error;
+    PWDDailyRecord *record = [[self.managedObjectContext executeFetchRequest:request error:&error] firstObject];
+    if (error) {
+        NSLog(@"fetchTodayRecord error: %@", error);
+    }
+    return record;
+}
+#endif
 
 - (NSArray <PWDTask *> *)fetchTodayTasks {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -173,7 +194,43 @@
     return results;
 }
 
+#pragma mark - Delete
+- (void)deleteAllEntities {
+    __block NSError *error = nil;
+    NSArray *entities = [self.managedObjectModel entities];
+    [entities enumerateObjectsUsingBlock:^(NSEntityDescription * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+
+        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:obj.name];
+        NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
+        [self.persistentStoreCoordinator executeRequest:delete withContext:self.managedObjectContext error:&error];
+        
+    }];
+    if (error) {
+        NSLog(@"Delete error: %@", error);
+    }
+}
+
 #pragma mark - Actions
+- (void)createSampleData {
+    NSManagedObjectContext *moc = self.managedObjectContext;
+    PWDTask *task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Shopping for Chirstmas", @"") inContext:moc];
+    task.difficulty = PWDTaskDifficultyMedium;
+    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Finish reading Chapter 6", @"") inContext:moc];
+    task.difficulty = PWDTaskDifficultyHard;
+    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Submit Problem Set 2", @"") inContext:moc];
+    task.difficulty = PWDTaskDifficultyHard;
+    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Book flight to China", @"") inContext:moc];
+    task.difficulty = PWDTaskDifficultyEasy;
+    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Cut hair", @"") inContext:moc];
+    task.difficulty = PWDTaskDifficultyEasy;
+    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Finish reading Chapter 7", @"") inContext:moc];
+    task.difficulty = PWDTaskDifficultyHard;
+    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Prepare final presentation", @"") inContext:moc];
+    task.difficulty = PWDTaskDifficultyHard;
+    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Send gift to Raymond", @"") inContext:moc];
+    task.difficulty = PWDTaskDifficultyMedium;
+}
+
 - (void)postUpdateForTodayTasksCount:(NSNotification *)notification {
     NSManagedObjectContext *moc = self.managedObjectContext;
     if (notification.name == PWDTodayBadgeValueNeedsUpdateNotification) {
@@ -212,7 +269,19 @@
     }];
     [oldTodayTaskSet makeObjectsPerformSelector:@selector(setSealed:) withObject:@YES];
 
+#ifdef DEBUG
+    PWDDailyRecord *record = [self insertNewDailyRecordWithTasks:newTodayTaskSet inContext:moc];
+    PWDDailyRecord *lastestRecord = [self fetchLatestRecord];
+    if (lastestRecord != record) {
+        NSCalendar *cal = [NSCalendar currentCalendar];
+        NSDate *newFakeDate = [cal dateByAddingUnit:NSCalendarUnitDay value:1 toDate:lastestRecord.date options:0];
+        record.date = newFakeDate;
+        [self saveContext];
+    }
+#else
     [self insertNewDailyRecordWithTasks:newTodayTaskSet inContext:moc];
+#endif
+    
 }
 
 

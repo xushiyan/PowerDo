@@ -25,11 +25,7 @@
 }
 
 - (NSDate *)date {
-#ifdef DEBUG
-    return [NSDate dateWithTimeIntervalSince1970:self.createDateRaw];
-#else
     return [NSDate dateWithTimeIntervalSince1970:self.dateRaw];
-#endif
 }
 
 - (void)updatePowerAndPowerUnits {
