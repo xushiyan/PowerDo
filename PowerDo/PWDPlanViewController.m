@@ -147,9 +147,24 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     NSArray *selectedRows = [self.tableView indexPathsForSelectedRows];
     PWDTaskManager *taskManager = [PWDTaskManager sharedManager];
     if (selectedRows.count == 0) {
-        [controller.fetchedObjects enumerateObjectsUsingBlock:^(PWDTask * _Nonnull task, NSUInteger idx, BOOL * _Nonnull stop) {
-            [taskManager.managedObjectContext deleteObject:task];
-        }];
+        UIAlertController* deleteAllConfirmAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Deleting All Tasks?", @"Delete all confirm alert")
+                                                                       message:nil
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* confirmAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Confirm", @"Delete all confirm action")
+                                                          style:UIAlertActionStyleDestructive
+                                                        handler:^(UIAlertAction * action) {
+                                                            [controller.fetchedObjects enumerateObjectsUsingBlock:^(PWDTask * _Nonnull task, NSUInteger idx, BOOL * _Nonnull stop) {
+                                                                [taskManager.managedObjectContext deleteObject:task];
+                                                            }];
+                                                        }];
+        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action")
+                                                         style:UIAlertActionStyleCancel
+                                                       handler:nil];
+        
+        [deleteAllConfirmAlert addAction:confirmAction];
+        [deleteAllConfirmAlert addAction:cancelAction];
+        [self presentViewController:deleteAllConfirmAlert animated:YES completion:nil];
     } else {
         [selectedRows enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull indexPath, NSUInteger idx, BOOL * _Nonnull stop) {
             PWDTask *task = [controller objectAtIndexPath:indexPath];
