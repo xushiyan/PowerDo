@@ -393,15 +393,11 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     PWDTaskManager *taskManager = [PWDTaskManager sharedManager];
 
     NSArray *actions;
-    UITableViewRowAction *dueToday = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive
-                                                                      title:NSLocalizedString(@"Today", @"Due Today action title")
+    UITableViewRowAction *delete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive
+                                                                      title:NSLocalizedString(@"Delete", @"Delete action title")
                                                                     handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-                                                                        task.dueDate = [NSDate dateOfTodayEnd];
-                                                                        task.status = PWDTaskStatusOnGoing;
-                                                                        PWDDailyRecord *todayRecord = [taskManager fetchTodayRecord];
-                                                                        [todayRecord addTasksObject:task];
+                                                                        [taskManager.managedObjectContext deleteObject:task];
                                                                         [taskManager saveContext];
-                                                                        [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
                                                                     }];
     UITableViewRowAction *dueSomeday = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal
                                                                       title:NSLocalizedString(@"Someday", @"Due Someday action title")
@@ -418,12 +414,12 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
     
     switch (task.dueDateGroup) {
         case PWDTaskDueDateGroupTomorrow: {
-            actions = @[dueToday,dueSomeday];
+            actions = @[delete,dueSomeday];
         }
             break;
             
         case PWDTaskDueDateGroupSomeDay: {
-            actions = @[dueToday,dueTomorrow];
+            actions = @[delete,dueTomorrow];
         }
             break;
             
