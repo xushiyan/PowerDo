@@ -213,22 +213,23 @@
 #pragma mark - Actions
 - (void)createSampleData {
     NSManagedObjectContext *moc = self.managedObjectContext;
-    PWDTask *task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Shopping for Chirstmas", @"") inContext:moc];
+    PWDTask *task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Shopping for Chirstmas", @"Sample task title") inContext:moc];
     task.difficulty = PWDTaskDifficultyMedium;
-    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Finish reading Chapter 6", @"") inContext:moc];
+    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Finish reading Chapter 6", @"Sample task title") inContext:moc];
     task.difficulty = PWDTaskDifficultyHard;
-    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Submit Problem Set 2", @"") inContext:moc];
+    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Submit Problem Set 2", @"Sample task title") inContext:moc];
     task.difficulty = PWDTaskDifficultyHard;
-    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Book flight to China", @"") inContext:moc];
+    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Book flight to China", @"Sample task title") inContext:moc];
     task.difficulty = PWDTaskDifficultyEasy;
-    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Cut hair", @"") inContext:moc];
+    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Cut hair", @"Sample task title") inContext:moc];
     task.difficulty = PWDTaskDifficultyEasy;
-    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Finish reading Chapter 7", @"") inContext:moc];
+    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Finish reading Chapter 7", @"Sample task title") inContext:moc];
     task.difficulty = PWDTaskDifficultyHard;
-    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Prepare final presentation", @"") inContext:moc];
+    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Prepare final presentation", @"Sample task title") inContext:moc];
     task.difficulty = PWDTaskDifficultyHard;
-    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Send gift to Raymond", @"") inContext:moc];
+    task = [self insertNewTaskForTomorrowWithTitle:NSLocalizedString(@"Send gift to Raymond", @"Sample task title") inContext:moc];
     task.difficulty = PWDTaskDifficultyMedium;
+    [self saveContext];
 }
 
 - (void)postUpdateForTodayTasksCount:(NSNotification *)notification {
