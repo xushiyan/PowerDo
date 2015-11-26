@@ -27,18 +27,26 @@
     if (latest) {
         NSCalendar *calendar = [NSCalendar currentCalendar];
         NSDate *latestDate = [NSDate dateWithTimeIntervalSince1970:latest.dateRaw];
-        if (![calendar isDateInToday:latestDate]) {
-            // if latest record not in today
-            [[NSNotificationCenter defaultCenter] postNotificationName:PWDDayChangeNotification object:[UIApplication sharedApplication]];
+        
+        // ignore if latestDate is some date in the future, meaning user time travelled to the past
+        
+        if ([latestDate timeIntervalSinceDate:[calendar startOfDayForDate:[NSDate date]]] < 0) {
+            // if latestDate is some date in the past
             
-            // fill up empty records
-            // move 1 day forward from latest date
-            latestDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:latestDate options:0];
-            while (![calendar isDateInToday:latestDate]) {
-                [taskManager insertNewDailyRecordWithTasks:nil date:latestDate inContext:taskManager.managedObjectContext];
+            if (![calendar isDateInToday:latestDate]) {
+                // if latest record not in today
+                [[NSNotificationCenter defaultCenter] postNotificationName:PWDDayChangeNotification object:[UIApplication sharedApplication]];
                 
+                // fill up empty records
+                // move 1 day forward from latest date
                 latestDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:latestDate options:0];
+                while (![calendar isDateInToday:latestDate]) {
+                    [taskManager insertNewDailyRecordWithTasks:nil date:latestDate inContext:taskManager.managedObjectContext];
+                    
+                    latestDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:latestDate options:0];
+                }
             }
+            
         }
     } else {
         // if no record exists, insert new one for today with no tasks
