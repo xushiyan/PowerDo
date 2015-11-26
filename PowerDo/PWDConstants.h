@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 @import UIKit;
 
+extern NSString * const PWDDayChangeNotification;
 extern NSString * const PWDTodayBadgeValueNeedsUpdateNotification;
 extern NSString * const PWDTodayBadgeValueChangeNotification;
 extern NSString * const PWDTodayTasksManualChangeNotification;

@@ -11,6 +11,8 @@
 #import "PWDRootViewController.h"
 #import "PWDConstants.h"
 #import "UIColor+Extras.h"
+#import "PWDDailyRecord.h"
+#import "NSDate+PWDExtras.h"
 
 @interface AppDelegate ()
 
@@ -18,10 +20,37 @@
 
 @implementation AppDelegate
 
+- (void) insertDailyRecordsIfNecessary {
+    PWDTaskManager *taskManager = [PWDTaskManager sharedManager];
+    
+    PWDDailyRecord *latest = [taskManager fetchLatestRecord];
+    if (latest) {
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDate *latestDate = [NSDate dateWithTimeIntervalSince1970:latest.dateRaw];
+        if (![calendar isDateInToday:latestDate]) {
+            // if latest record not in today
+            [[NSNotificationCenter defaultCenter] postNotificationName:PWDDayChangeNotification object:[UIApplication sharedApplication]];
+            
+            // fill up empty records
+            // move 1 day forward from latest date
+            latestDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:latestDate options:0];
+            while (![calendar isDateInToday:latestDate]) {
+                [taskManager insertNewDailyRecordWithTasks:nil date:latestDate inContext:taskManager.managedObjectContext];
+                
+                latestDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:latestDate options:0];
+            }
+        }
+    } else {
+        // if no record exists, insert new one for today with no tasks
+        [taskManager insertNewDailyRecordWithTasks:nil inContext:taskManager.managedObjectContext];
+    }
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.taskManager = [PWDTaskManager sharedManager];
+    
+    [self insertDailyRecordsIfNecessary];
     
     UIWindow *mainWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     mainWindow.rootViewController = [[PWDRootViewController alloc] init];
@@ -30,6 +59,11 @@
     [mainWindow makeKeyAndVisible];
     
     return YES;
+}
+
+- (void)applicationSignificantTimeChange:(UIApplication *)application {
+    // this will be triggered when day changes and app is in foreground
+    [self insertDailyRecordsIfNecessary];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

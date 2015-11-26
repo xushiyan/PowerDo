@@ -76,7 +76,7 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
         tableView.backgroundView = self.backgroundMessage;
     }
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responseToDayChange:) name:UIApplicationSignificantTimeChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(responseToDayChange:) name:PWDDayChangeNotification object:[UIApplication sharedApplication]];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
 }
@@ -113,7 +113,7 @@ NSString * const PWDTodayTaskCellIdentifier = @"PWDTodayTaskCellIdentifier";
 @synthesize todayRecord = _todayRecord;
 - (PWDDailyRecord *)todayRecord {
     if (!_todayRecord) {
-        _todayRecord = [[PWDTaskManager sharedManager] fetchTodayRecord];
+        _todayRecord = [[PWDTaskManager sharedManager] fetchLatestRecord];
     }
     return _todayRecord;
 }

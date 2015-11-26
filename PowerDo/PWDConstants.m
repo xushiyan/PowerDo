@@ -8,6 +8,7 @@
 
 #import "PWDConstants.h"
 
+NSString * const PWDDayChangeNotification = @"PWDDayChangeNotification";
 NSString * const PWDTodayBadgeValueNeedsUpdateNotification = @"PWDTodayBadgeValueNeedsUpdateNotification";
 NSString * const PWDTodayBadgeValueChangeNotification = @"PWDTodayBadgeValueChangeNotification";
 NSString * const PWDTodayTasksManualChangeNotification = @"PWDTodayTasksManualChangeNotification";

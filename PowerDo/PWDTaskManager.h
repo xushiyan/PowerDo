@@ -25,9 +25,11 @@
 
 #pragma mark - Insert
 - (PWDTask * _Nonnull)insertNewTaskForTomorrowWithTitle:(NSString  * _Nonnull)title inContext:(NSManagedObjectContext * _Nonnull)moc;
+- (PWDDailyRecord * _Nonnull)insertNewDailyRecordWithTasks:(NSSet <PWDTask *>* _Nullable)tasks inContext:(NSManagedObjectContext * _Nonnull)moc;
+- (PWDDailyRecord * _Nonnull)insertNewDailyRecordWithTasks:(NSSet <PWDTask *>* _Nullable)tasks date:(NSDate * _Nonnull)date inContext:(NSManagedObjectContext * _Nonnull)moc;
 
 #pragma mark - Fetch
-- (PWDDailyRecord * _Nullable)fetchTodayRecord;
+- (PWDDailyRecord * _Nullable)fetchLatestRecord;
 - (NSArray <PWDTask *> * _Nullable)fetchTodayTasks;
 
 @end

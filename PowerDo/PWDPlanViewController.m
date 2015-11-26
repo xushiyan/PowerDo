@@ -123,7 +123,7 @@ NSString * const PWDPlanTaskCellIdentifier = @"PWDPlanTaskCellIdentifier";
 #pragma mark - Action methods
 #ifdef DEBUG
 - (void)simulateDayChange:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationSignificantTimeChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:PWDDayChangeNotification object:[UIApplication sharedApplication]];
 }
 #endif
 

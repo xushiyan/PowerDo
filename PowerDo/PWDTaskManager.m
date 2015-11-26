@@ -58,8 +58,8 @@
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleDayChange:)
-                                                     name:UIApplicationSignificantTimeChangeNotification
-                                                   object:nil];
+                                                     name:PWDDayChangeNotification
+                                                   object:[UIApplication sharedApplication]];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleTodayTasksManualChange:)
                                                      name:PWDTodayTasksManualChangeNotification
@@ -102,6 +102,13 @@
     return task;
 }
 
+- (PWDDailyRecord *)insertNewDailyRecordWithTasks:(NSSet <PWDTask *>* _Nullable)tasks date:(NSDate * _Nonnull)date inContext:(NSManagedObjectContext * _Nonnull)moc {
+    PWDDailyRecord *record = [self insertNewDailyRecordWithTasks:tasks inContext:moc];
+    record.date = date;
+    [self saveContext];
+    return record;
+}
+
 - (PWDDailyRecord *)insertNewDailyRecordWithTasks:(NSSet <PWDTask *>* _Nullable)tasks inContext:(NSManagedObjectContext * _Nonnull)moc {
     NSDate * const now = [NSDate date];
     [tasks enumerateObjectsUsingBlock:^(PWDTask * _Nonnull task, BOOL * _Nonnull stop) {
@@ -117,36 +124,25 @@
 }
 
 #pragma mark - Fetch
-- (PWDDailyRecord *)fetchTodayRecord {
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDDailyRecord class]) inManagedObjectContext:self.managedObjectContext];
-    request.fetchLimit = 1;
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(dateRaw)) ascending:NO];
-    request.sortDescriptors = @[sort];
-    NSError *error;
-    PWDDailyRecord *record = [[self.managedObjectContext executeFetchRequest:request error:&error] firstObject];
-    if (error) {
-        NSLog(@"fetchTodayRecord error: %@", error);
-    }
-    return record;
-}
 
-#ifdef DEBUG
 - (PWDDailyRecord *)fetchLatestRecord {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = [NSEntityDescription entityForName:NSStringFromClass([PWDDailyRecord class]) inManagedObjectContext:self.managedObjectContext];
     request.fetchLimit = 1;
     NSSortDescriptor *sort1 = [NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(dateRaw)) ascending:NO];
+#ifdef DEBUG
     NSSortDescriptor *sort2 = [NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(createDateRaw)) ascending:YES];
     request.sortDescriptors = @[sort1,sort2];
+#else
+    request.sortDescriptors = @[sort1];
+#endif
     NSError *error;
     PWDDailyRecord *record = [[self.managedObjectContext executeFetchRequest:request error:&error] firstObject];
     if (error) {
-        NSLog(@"fetchTodayRecord error: %@", error);
+        NSLog(@"fetchLatestRecord error: %@", error);
     }
     return record;
 }
-#endif
 
 - (NSArray <PWDTask *> *)fetchTodayTasks {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -244,7 +240,7 @@
 
 - (void)handleTodayTasksManualChange:(NSNotification *)notification {
     NSArray *todayTasks = [self fetchTodayTasks];
-    PWDDailyRecord *todayRecord = [self fetchTodayRecord];
+    PWDDailyRecord *todayRecord = [self fetchLatestRecord];
     if (todayRecord) {
         [todayRecord addTasks:[NSSet setWithArray:todayTasks]];
         [todayRecord updatePower];
@@ -282,7 +278,7 @@
 #else
     [self insertNewDailyRecordWithTasks:newTodayTaskSet inContext:moc];
 #endif
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:PWDTodayBadgeValueNeedsUpdateNotification object:nil];
 }
 
 
