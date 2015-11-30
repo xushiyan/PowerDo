@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E3433E51C0C345500D3D284 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 4E3433E41C0C345500D3D284 /* Podfile */; };
 		4E4A783F1C0422D000314390 /* PWDDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4A783D1C0422D000314390 /* PWDDetailViewController.m */; };
 		4E4A78401C0422D000314390 /* PWDDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E4A783E1C0422D000314390 /* PWDDetailViewController.xib */; };
 		4E575F671BFA14560099DDEB /* PWDTaskDifficultyIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E575F661BFA14560099DDEB /* PWDTaskDifficultyIndicator.m */; };
@@ -17,6 +18,7 @@
 		4EF5F5F81C01CB8900BF6CBE /* PWDChartScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5F5F71C01CB8900BF6CBE /* PWDChartScrollView.m */; };
 		4EFBB9181BF9BFF200F0BBA6 /* NSDate+PWDExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFBB9171BF9BFF200F0BBA6 /* NSDate+PWDExtras.m */; };
 		4EFBB91A1BF9C0B300F0BBA6 /* PWDNSDateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFBB9191BF9C0B300F0BBA6 /* PWDNSDateTests.m */; };
+		73270F9F6ED5A07D53047273 /* libPods-PowerDoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 019FBC688CC2449A41991D45 /* libPods-PowerDoTests.a */; };
 		8621A00A1B9B1FBA0082B853 /* PWDTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621A0091B9B1FBA0082B853 /* PWDTaskManager.m */; };
 		8621A00C1B9B20580082B853 /* PWDTaskManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621A00B1B9B20580082B853 /* PWDTaskManagerTests.m */; };
 		8621D1A31BFCBF5D00995C36 /* PWDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621D1A21BFCBF5D00995C36 /* PWDRootViewController.m */; };
@@ -63,6 +65,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		019FBC688CC2449A41991D45 /* libPods-PowerDoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PowerDoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E3433E41C0C345500D3D284 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		4E4A783C1C0422D000314390 /* PWDDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDDetailViewController.h; sourceTree = "<group>"; };
 		4E4A783D1C0422D000314390 /* PWDDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDDetailViewController.m; sourceTree = "<group>"; };
 		4E4A783E1C0422D000314390 /* PWDDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PWDDetailViewController.xib; sourceTree = "<group>"; };
@@ -80,6 +84,7 @@
 		4EFBB9161BF9BFF200F0BBA6 /* NSDate+PWDExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+PWDExtras.h"; sourceTree = "<group>"; };
 		4EFBB9171BF9BFF200F0BBA6 /* NSDate+PWDExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+PWDExtras.m"; sourceTree = "<group>"; };
 		4EFBB9191BF9C0B300F0BBA6 /* PWDNSDateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDNSDateTests.m; sourceTree = "<group>"; };
+		51F85B7A7FB51F5B32430123 /* Pods-PowerDoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PowerDoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PowerDoTests/Pods-PowerDoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8621A0081B9B1FBA0082B853 /* PWDTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTaskManager.h; sourceTree = "<group>"; };
 		8621A0091B9B1FBA0082B853 /* PWDTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTaskManager.m; sourceTree = "<group>"; };
 		8621A00B1B9B20580082B853 /* PWDTaskManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTaskManagerTests.m; sourceTree = "<group>"; };
@@ -130,6 +135,7 @@
 		E2C426541B9DDD9500E3BC92 /* PWDTodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTodayViewController.m; sourceTree = "<group>"; };
 		E2DAC0311BA8744000C33CBD /* PWDFeedbackTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDFeedbackTextField.h; sourceTree = "<group>"; };
 		E2DAC0321BA8744000C33CBD /* PWDFeedbackTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDFeedbackTextField.m; sourceTree = "<group>"; };
+		EA830DC4FCC26E384ED90FA1 /* Pods-PowerDoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PowerDoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PowerDoTests/Pods-PowerDoTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73270F9F6ED5A07D53047273 /* libPods-PowerDoTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +164,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26CF9F320D9AF30965175E04 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				51F85B7A7FB51F5B32430123 /* Pods-PowerDoTests.debug.xcconfig */,
+				EA830DC4FCC26E384ED90FA1 /* Pods-PowerDoTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		446560E1291F0B6C94B5C9C0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				019FBC688CC2449A41991D45 /* libPods-PowerDoTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8621A00D1B9B24610082B853 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,10 +203,13 @@
 		86485B121B973A4C0027D01A = {
 			isa = PBXGroup;
 			children = (
+				4E3433E41C0C345500D3D284 /* Podfile */,
 				86485B1D1B973A4C0027D01A /* PowerDo */,
 				86485B3A1B973A4C0027D01A /* PowerDoTests */,
 				86485B451B973A4C0027D01A /* PowerDoUITests */,
 				86485B1C1B973A4C0027D01A /* Products */,
+				26CF9F320D9AF30965175E04 /* Pods */,
+				446560E1291F0B6C94B5C9C0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -350,9 +377,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 86485B4E1B973A4C0027D01A /* Build configuration list for PBXNativeTarget "PowerDoTests" */;
 			buildPhases = (
+				1DC1E23AD72DBC7917D3F13E /* Check Pods Manifest.lock */,
 				86485B331B973A4C0027D01A /* Sources */,
 				86485B341B973A4C0027D01A /* Frameworks */,
 				86485B351B973A4C0027D01A /* Resources */,
+				90B587D6EEFE40B83A160AF7 /* Embed Pods Frameworks */,
+				373C722EEBDB5926C0CBF104 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -432,6 +462,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E3433E51C0C345500D3D284 /* Podfile in Resources */,
 				86485B311B973A4C0027D01A /* LaunchScreen.storyboard in Resources */,
 				4E4A78401C0422D000314390 /* PWDDetailViewController.xib in Resources */,
 				86485B2E1B973A4C0027D01A /* Assets.xcassets in Resources */,
@@ -454,6 +485,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1DC1E23AD72DBC7917D3F13E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		373C722EEBDB5926C0CBF104 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PowerDoTests/Pods-PowerDoTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		90B587D6EEFE40B83A160AF7 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PowerDoTests/Pods-PowerDoTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		86485B171B973A4C0027D01A /* Sources */ = {
@@ -649,6 +728,7 @@
 		};
 		86485B4F1B973A4C0027D01A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 51F85B7A7FB51F5B32430123 /* Pods-PowerDoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = PowerDoTests/Info.plist;
@@ -661,6 +741,7 @@
 		};
 		86485B501B973A4C0027D01A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA830DC4FCC26E384ED90FA1 /* Pods-PowerDoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = PowerDoTests/Info.plist;
