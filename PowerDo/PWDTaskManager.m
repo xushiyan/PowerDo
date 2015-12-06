@@ -10,8 +10,8 @@
 #import "PWDConstants.h"
 #import "PWDTask.h"
 #import "PWDDailyRecord.h"
-#import "NSDate+PWDExtras.h"
 #import "NSPredicate+PWDExtras.h"
+@import PowerKit;
 
 @implementation PWDTaskManager
 

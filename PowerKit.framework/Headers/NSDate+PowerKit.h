@@ -1,14 +1,14 @@
 //
-//  NSDate+PWDExtras.h
-//  PowerDo
+//  NSDate+PowerKit.h
+//  PowerKit
 //
-//  Created by Xu, Raymond on 11/16/15.
-//  Copyright © 2015 xushiyan. All rights reserved.
+//  Created by XU SHIYAN on 7/12/15.
+//  Copyright © 2015 PowerStudio. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface NSDate (PWDExtras)
+@interface NSDate (PowerKit)
 
 + (instancetype)dateOfTodayNoon;
 + (instancetype)dateOfTodayNoonFromNowDate:(NSDate *)nowDate;

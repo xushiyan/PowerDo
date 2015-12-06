@@ -15,7 +15,6 @@
 		4EC7ECC81C035F04003C5259 /* PWDTodayPowerBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC7ECC71C035F04003C5259 /* PWDTodayPowerBar.m */; };
 		4EF5F5F51C01B4C200BF6CBE /* PWDChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5F5F41C01B4C200BF6CBE /* PWDChartView.m */; };
 		4EF5F5F81C01CB8900BF6CBE /* PWDChartScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5F5F71C01CB8900BF6CBE /* PWDChartScrollView.m */; };
-		4EFBB9181BF9BFF200F0BBA6 /* NSDate+PWDExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFBB9171BF9BFF200F0BBA6 /* NSDate+PWDExtras.m */; };
 		4EFBB91A1BF9C0B300F0BBA6 /* PWDNSDateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFBB9191BF9C0B300F0BBA6 /* PWDNSDateTests.m */; };
 		73270F9F6ED5A07D53047273 /* libPods-PowerDoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 019FBC688CC2449A41991D45 /* libPods-PowerDoTests.a */; };
 		8621A00A1B9B1FBA0082B853 /* PWDTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621A0091B9B1FBA0082B853 /* PWDTaskManager.m */; };
@@ -35,6 +34,7 @@
 		86B0F7EB1C0176B100724324 /* UITableViewCell+PWDExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B0F7EA1C0176B100724324 /* UITableViewCell+PWDExtras.m */; };
 		86E0D33F1C1493C000C86203 /* PowerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D7BC581C1492F400A84E7F /* PowerKit.framework */; };
 		86E0D3401C1493C000C86203 /* PowerKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 86D7BC581C1492F400A84E7F /* PowerKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		86E0D3491C1495F600C86203 /* PowerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86E0D3481C1495F600C86203 /* PowerKit.framework */; };
 		86E21A741B973D3C0098AC93 /* PWDTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E21A731B973D3C0098AC93 /* PWDTaskTests.m */; };
 		86E8D95A1BFB6A0700E93E7F /* PWDTask+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E8D9571BFB6A0700E93E7F /* PWDTask+CoreDataProperties.m */; };
 		86E8D95B1BFB6A0700E93E7F /* PWDTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E8D9591BFB6A0700E93E7F /* PWDTask.m */; };
@@ -94,8 +94,6 @@
 		4EF5F5F41C01B4C200BF6CBE /* PWDChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDChartView.m; sourceTree = "<group>"; };
 		4EF5F5F61C01CB8900BF6CBE /* PWDChartScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDChartScrollView.h; sourceTree = "<group>"; };
 		4EF5F5F71C01CB8900BF6CBE /* PWDChartScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDChartScrollView.m; sourceTree = "<group>"; };
-		4EFBB9161BF9BFF200F0BBA6 /* NSDate+PWDExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+PWDExtras.h"; sourceTree = "<group>"; };
-		4EFBB9171BF9BFF200F0BBA6 /* NSDate+PWDExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+PWDExtras.m"; sourceTree = "<group>"; };
 		4EFBB9191BF9C0B300F0BBA6 /* PWDNSDateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDNSDateTests.m; sourceTree = "<group>"; };
 		51F85B7A7FB51F5B32430123 /* Pods-PowerDoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PowerDoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PowerDoTests/Pods-PowerDoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8621A0081B9B1FBA0082B853 /* PWDTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTaskManager.h; sourceTree = "<group>"; };
@@ -128,7 +126,8 @@
 		86AF08DC1C00738600F70D5A /* NSPredicate+PWDExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPredicate+PWDExtras.m"; sourceTree = "<group>"; };
 		86B0F7E91C0176B100724324 /* UITableViewCell+PWDExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+PWDExtras.h"; sourceTree = "<group>"; };
 		86B0F7EA1C0176B100724324 /* UITableViewCell+PWDExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+PWDExtras.m"; sourceTree = "<group>"; };
-		86D7BC581C1492F400A84E7F /* PowerKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PowerKit.framework; sourceTree = "<group>"; };
+		86D7BC581C1492F400A84E7F /* PowerKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PowerKit.framework; path = /Users/xushiyan/Development/PowerDo/PowerKit.framework; sourceTree = "<absolute>"; };
+		86E0D3481C1495F600C86203 /* PowerKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PowerKit.framework; sourceTree = "<group>"; };
 		86E21A731B973D3C0098AC93 /* PWDTaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTaskTests.m; sourceTree = "<group>"; };
 		86E8D9561BFB6A0700E93E7F /* PWDTask+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PWDTask+CoreDataProperties.h"; sourceTree = "<group>"; };
 		86E8D9571BFB6A0700E93E7F /* PWDTask+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PWDTask+CoreDataProperties.m"; sourceTree = "<group>"; };
@@ -158,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86E0D33F1C1493C000C86203 /* PowerKit.framework in Frameworks */,
+				86E0D3491C1495F600C86203 /* PowerKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,8 +203,6 @@
 				86A75FAB1BA2E20700588730 /* PWDConstants.m */,
 				E23664D41BAB11A60035C0D2 /* UIColor+Extras.h */,
 				E23664D51BAB11A60035C0D2 /* UIColor+Extras.m */,
-				4EFBB9161BF9BFF200F0BBA6 /* NSDate+PWDExtras.h */,
-				4EFBB9171BF9BFF200F0BBA6 /* NSDate+PWDExtras.m */,
 				86AF08DB1C00738600F70D5A /* NSPredicate+PWDExtras.h */,
 				86AF08DC1C00738600F70D5A /* NSPredicate+PWDExtras.m */,
 				86B0F7E91C0176B100724324 /* UITableViewCell+PWDExtras.h */,
@@ -216,7 +214,7 @@
 		86485B121B973A4C0027D01A = {
 			isa = PBXGroup;
 			children = (
-				86D7BC581C1492F400A84E7F /* PowerKit.framework */,
+				86E0D3481C1495F600C86203 /* PowerKit.framework */,
 				4E3433E41C0C345500D3D284 /* Podfile */,
 				86485B1D1B973A4C0027D01A /* PowerDo */,
 				86485B3A1B973A4C0027D01A /* PowerDoTests */,
@@ -557,7 +555,6 @@
 				8621A00A1B9B1FBA0082B853 /* PWDTaskManager.m in Sources */,
 				E262CCEA1BA0881A00A82C98 /* PWDSettingsViewController.m in Sources */,
 				86AF08D91C00271100F70D5A /* PWDDailyRecord+CoreDataProperties.m in Sources */,
-				4EFBB9181BF9BFF200F0BBA6 /* NSDate+PWDExtras.m in Sources */,
 				86B0F7EB1C0176B100724324 /* UITableViewCell+PWDExtras.m in Sources */,
 				86E8D95A1BFB6A0700E93E7F /* PWDTask+CoreDataProperties.m in Sources */,
 				4EF5F5F81C01CB8900BF6CBE /* PWDChartScrollView.m in Sources */,

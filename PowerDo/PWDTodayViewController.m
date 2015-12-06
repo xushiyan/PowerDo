@@ -12,10 +12,10 @@
 #import "PWDTaskDifficultyIndicator.h"
 #import "PWDDailyRecord.h"
 #import "PWDConstants.h"
-#import "NSDate+PWDExtras.h"
 #import "UIColor+Extras.h"
 #import "NSPredicate+PWDExtras.h"
 #import "PWDTodayPowerBar.h"
+@import PowerKit;
 
 @interface PWDTodayViewController () {
     CGFloat _headerHeight;

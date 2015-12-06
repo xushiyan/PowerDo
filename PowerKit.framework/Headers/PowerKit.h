@@ -18,3 +18,4 @@ FOUNDATION_EXPORT const unsigned char PowerKitVersionString[];
 
 
 #import <PowerKit/UIViewController+PowerKit.h>
+#import <PowerKit/NSDate+PowerKit.h>
