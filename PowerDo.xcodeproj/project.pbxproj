@@ -13,7 +13,6 @@
 		4E575F671BFA14560099DDEB /* PWDTaskDifficultyIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E575F661BFA14560099DDEB /* PWDTaskDifficultyIndicator.m */; };
 		4EB1112A1B9C0D4900BF5656 /* PowerDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4EB111281B9C0D4900BF5656 /* PowerDo.xcdatamodeld */; };
 		4EC7ECC81C035F04003C5259 /* PWDTodayPowerBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC7ECC71C035F04003C5259 /* PWDTodayPowerBar.m */; };
-		4EF5F5F21C019ACD00BF6CBE /* UIViewController+PWDExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5F5F11C019ACD00BF6CBE /* UIViewController+PWDExtras.m */; };
 		4EF5F5F51C01B4C200BF6CBE /* PWDChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5F5F41C01B4C200BF6CBE /* PWDChartView.m */; };
 		4EF5F5F81C01CB8900BF6CBE /* PWDChartScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5F5F71C01CB8900BF6CBE /* PWDChartScrollView.m */; };
 		4EFBB9181BF9BFF200F0BBA6 /* NSDate+PWDExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFBB9171BF9BFF200F0BBA6 /* NSDate+PWDExtras.m */; };
@@ -34,6 +33,8 @@
 		86AF08DA1C00271100F70D5A /* PWDDailyRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 86AF08D81C00271100F70D5A /* PWDDailyRecord.m */; };
 		86AF08DD1C00738600F70D5A /* NSPredicate+PWDExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 86AF08DC1C00738600F70D5A /* NSPredicate+PWDExtras.m */; };
 		86B0F7EB1C0176B100724324 /* UITableViewCell+PWDExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B0F7EA1C0176B100724324 /* UITableViewCell+PWDExtras.m */; };
+		86E0D33F1C1493C000C86203 /* PowerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D7BC581C1492F400A84E7F /* PowerKit.framework */; };
+		86E0D3401C1493C000C86203 /* PowerKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 86D7BC581C1492F400A84E7F /* PowerKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		86E21A741B973D3C0098AC93 /* PWDTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E21A731B973D3C0098AC93 /* PWDTaskTests.m */; };
 		86E8D95A1BFB6A0700E93E7F /* PWDTask+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E8D9571BFB6A0700E93E7F /* PWDTask+CoreDataProperties.m */; };
 		86E8D95B1BFB6A0700E93E7F /* PWDTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E8D9591BFB6A0700E93E7F /* PWDTask.m */; };
@@ -64,9 +65,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		86E0D3411C1493C000C86203 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				86E0D3401C1493C000C86203 /* PowerKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		019FBC688CC2449A41991D45 /* libPods-PowerDoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PowerDoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E3433E41C0C345500D3D284 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		4E3433E41C0C345500D3D284 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		4E4A783C1C0422D000314390 /* PWDDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDDetailViewController.h; sourceTree = "<group>"; };
 		4E4A783D1C0422D000314390 /* PWDDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDDetailViewController.m; sourceTree = "<group>"; };
 		4E4A783E1C0422D000314390 /* PWDDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PWDDetailViewController.xib; sourceTree = "<group>"; };
@@ -75,8 +90,6 @@
 		4EB111291B9C0D4900BF5656 /* PowerDo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PowerDo.xcdatamodel; sourceTree = "<group>"; };
 		4EC7ECC61C035F04003C5259 /* PWDTodayPowerBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTodayPowerBar.h; sourceTree = "<group>"; };
 		4EC7ECC71C035F04003C5259 /* PWDTodayPowerBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTodayPowerBar.m; sourceTree = "<group>"; };
-		4EF5F5F01C019ACD00BF6CBE /* UIViewController+PWDExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PWDExtras.h"; sourceTree = "<group>"; };
-		4EF5F5F11C019ACD00BF6CBE /* UIViewController+PWDExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PWDExtras.m"; sourceTree = "<group>"; };
 		4EF5F5F31C01B4C200BF6CBE /* PWDChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDChartView.h; sourceTree = "<group>"; };
 		4EF5F5F41C01B4C200BF6CBE /* PWDChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDChartView.m; sourceTree = "<group>"; };
 		4EF5F5F61C01CB8900BF6CBE /* PWDChartScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDChartScrollView.h; sourceTree = "<group>"; };
@@ -115,6 +128,7 @@
 		86AF08DC1C00738600F70D5A /* NSPredicate+PWDExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPredicate+PWDExtras.m"; sourceTree = "<group>"; };
 		86B0F7E91C0176B100724324 /* UITableViewCell+PWDExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+PWDExtras.h"; sourceTree = "<group>"; };
 		86B0F7EA1C0176B100724324 /* UITableViewCell+PWDExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+PWDExtras.m"; sourceTree = "<group>"; };
+		86D7BC581C1492F400A84E7F /* PowerKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PowerKit.framework; sourceTree = "<group>"; };
 		86E21A731B973D3C0098AC93 /* PWDTaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDTaskTests.m; sourceTree = "<group>"; };
 		86E8D9561BFB6A0700E93E7F /* PWDTask+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PWDTask+CoreDataProperties.h"; sourceTree = "<group>"; };
 		86E8D9571BFB6A0700E93E7F /* PWDTask+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PWDTask+CoreDataProperties.m"; sourceTree = "<group>"; };
@@ -143,6 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86E0D33F1C1493C000C86203 /* PowerKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,8 +209,6 @@
 				86AF08DC1C00738600F70D5A /* NSPredicate+PWDExtras.m */,
 				86B0F7E91C0176B100724324 /* UITableViewCell+PWDExtras.h */,
 				86B0F7EA1C0176B100724324 /* UITableViewCell+PWDExtras.m */,
-				4EF5F5F01C019ACD00BF6CBE /* UIViewController+PWDExtras.h */,
-				4EF5F5F11C019ACD00BF6CBE /* UIViewController+PWDExtras.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -203,6 +216,7 @@
 		86485B121B973A4C0027D01A = {
 			isa = PBXGroup;
 			children = (
+				86D7BC581C1492F400A84E7F /* PowerKit.framework */,
 				4E3433E41C0C345500D3D284 /* Podfile */,
 				86485B1D1B973A4C0027D01A /* PowerDo */,
 				86485B3A1B973A4C0027D01A /* PowerDoTests */,
@@ -363,6 +377,7 @@
 				86485B171B973A4C0027D01A /* Sources */,
 				86485B181B973A4C0027D01A /* Frameworks */,
 				86485B191B973A4C0027D01A /* Resources */,
+				86E0D3411C1493C000C86203 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -556,7 +571,6 @@
 				4EB1112A1B9C0D4900BF5656 /* PowerDo.xcdatamodeld in Sources */,
 				86F043C81BF738ED0048FADB /* PWDPlanViewController.m in Sources */,
 				86AF08DA1C00271100F70D5A /* PWDDailyRecord.m in Sources */,
-				4EF5F5F21C019ACD00BF6CBE /* UIViewController+PWDExtras.m in Sources */,
 				E2C426551B9DDD9500E3BC92 /* PWDTodayViewController.m in Sources */,
 				86485B201B973A4C0027D01A /* main.m in Sources */,
 				4EF5F5F51C01B4C200BF6CBE /* PWDChartView.m in Sources */,
@@ -703,6 +717,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PowerDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xushiyan.app.PowerDo;
@@ -718,6 +736,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PowerDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xushiyan.app.PowerDo;
