@@ -7,17 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <PowerKit/PowerKit.h>
 #import "PWDTask.h"
 
 @interface UIColor (Extras)
 
-+ (UIColor *)colorFromHexString:(NSString *)hexString;
 + (UIColor *)themeColor;
 + (UIColor *)happyMoodColor;
 + (UIColor *)unhappyMoodColor;
 + (UIColor *)colorFromTaskDifficulty:(PWDTaskDifficulty)difficulty;
-+ (UIColor *)flatOrangeColor;
-+ (UIColor *)flatSunflowerColor;
-+ (UIColor *)flatCarrotColor;
+
 
 @end

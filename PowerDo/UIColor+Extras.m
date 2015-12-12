@@ -10,15 +10,8 @@
 
 @implementation UIColor (Extras)
 
-+ (UIColor *)colorFromHexString:(NSString *)hexString {
-    unsigned rgbValue = 0;
-    NSScanner *scanner = [NSScanner scannerWithString:hexString];
-    [scanner scanHexInt:&rgbValue];
-    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
-}
-
 + (UIColor *)themeColor {
-    return [UIColor colorFromHexString:@"27ae60"];
+    return [UIColor flatNephritisColor];
 }
 
 + (UIColor *)happyMoodColor {
@@ -43,34 +36,6 @@
             break;
     }
     return color;
-}
-
-+ (UIColor *)flatNephritisColor {
-    return [UIColor colorFromHexString:@"27ae60"];
-}
-
-+ (UIColor *)flatOrangeColor {
-    return [UIColor colorFromHexString:@"f39c12"];
-}
-
-+ (UIColor *)flatSunflowerColor {
-    return [UIColor colorFromHexString:@"f1c40f"];
-}
-
-+ (UIColor *)flatCarrotColor {
-    return [UIColor colorFromHexString:@"e67e22"];
-}
-
-+ (UIColor *)flatPumpkinColor {
-    return [UIColor colorFromHexString:@"d35400"];
-}
-
-+ (UIColor *)flatPomegranateColor {
-    return [UIColor colorFromHexString:@"c0392b"];
-}
-
-+ (UIColor *)flatGreenSeaColor {
-    return [UIColor colorFromHexString:@"16a085"];
 }
 
 @end
