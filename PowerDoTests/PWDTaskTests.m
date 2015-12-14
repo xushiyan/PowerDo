@@ -56,7 +56,6 @@
     
     XCTAssertEqual(task.dueDateGroup, PWDTaskDueDateGroupTomorrow);
     XCTAssertEqual(task.difficulty, PWDTaskDifficultyEasy);
-    XCTAssertEqual(task.points, 0);
     XCTAssertEqual(task.status, PWDTaskStatusInPlan);
     XCTAssertFalse(task.sealed);
 }
