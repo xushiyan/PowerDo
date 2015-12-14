@@ -12,7 +12,7 @@
 #import "PWDConstants.h"
 #import "UIColor+Extras.h"
 #import "PWDDailyRecord.h"
-#import "NSDate+PWDExtras.h"
+@import PowerKit;
 
 @interface AppDelegate ()
 

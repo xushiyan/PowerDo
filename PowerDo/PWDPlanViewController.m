@@ -9,12 +9,12 @@
 #import "PWDPlanViewController.h"
 #import "PWDTaskManager.h"
 #import "PWDTask.h"
-#import "NSDate+PWDExtras.h"
 #import "UIColor+Extras.h"
 #import "PWDTaskDifficultyIndicator.h"
 #import "PWDConstants.h"
 #import "PWDDailyRecord.h"
 #import "PWDDetailViewController.h"
+@import PowerKit;
 
 @interface PWDPlanViewController () <UITextFieldDelegate> {
     CGFloat _headerHeight;

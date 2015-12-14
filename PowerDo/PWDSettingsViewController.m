@@ -7,12 +7,12 @@
 //
 
 @import MessageUI;
+@import PowerKit;
 #import "PWDSettingsViewController.h"
 #import "PWDConstants.h"
 #import "PWDTaskManager.h"
 #import "PWDFeedbackViewController.h"
 #import "UITableViewCell+PWDExtras.h"
-#import "UIViewController+PWDExtras.h"
 
 NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
 

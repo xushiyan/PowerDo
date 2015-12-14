@@ -7,8 +7,8 @@
 //
 
 #import "PWDDailyRecord.h"
-#import "NSDate+PWDExtras.h"
 #import "PWDTask.h"
+@import PowerKit;
 
 @implementation PWDDailyRecord
 

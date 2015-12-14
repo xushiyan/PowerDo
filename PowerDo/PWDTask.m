@@ -7,7 +7,7 @@
 //
 
 #import "PWDTask.h"
-#import "NSDate+PWDExtras.h"
+@import PowerKit;
 
 @implementation PWDTask
 

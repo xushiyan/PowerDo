@@ -8,8 +8,8 @@
 
 #import "PWDDetailViewController.h"
 #import "UIColor+Extras.h"
-#import "NSDate+PWDExtras.h"
 #import "PWDConstants.h"
+@import PowerKit;
 
 @interface PWDDetailViewController () <UITextViewDelegate>
 
