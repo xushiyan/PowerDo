@@ -6,8 +6,8 @@
 //  Copyright © 2015 xushiyan. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <PowerKit/PowerKit.h>
+@import UIKit;
+@import PowerKit;
 #import "PWDTask.h"
 
 @interface UIColor (Extras)

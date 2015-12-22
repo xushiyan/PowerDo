@@ -1,1 +1,1 @@
-../../../PowerKit/Pod/Classes/NSDate+PowerKit.h
+../../../PowerKit/Pod/Classes/Categories/NSDate+PowerKit.h

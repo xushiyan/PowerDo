@@ -1,6 +1,6 @@
 # PowerKit
 
-[![CI Status](http://img.shields.io/travis/XU SHIYAN/PowerKit.svg?style=flat)](https://travis-ci.org/XU SHIYAN/PowerKit)
+[![CI Status](http://img.shields.io/travis/xushiyan/PowerKit.svg?style=flat)](https://travis-ci.org/xushiyan/PowerKit)
 [![Version](https://img.shields.io/cocoapods/v/PowerKit.svg?style=flat)](http://cocoapods.org/pods/PowerKit)
 [![License](https://img.shields.io/cocoapods/l/PowerKit.svg?style=flat)](http://cocoapods.org/pods/PowerKit)
 [![Platform](https://img.shields.io/cocoapods/p/PowerKit.svg?style=flat)](http://cocoapods.org/pods/PowerKit)

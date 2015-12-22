@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		42E721AAF2A3FB976772E46C /* libPods-PowerDo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD728D7BAB6F2D72CA37EF1 /* libPods-PowerDo.a */; };
 		4E3433E51C0C345500D3D284 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 4E3433E41C0C345500D3D284 /* Podfile */; };
 		4E4A783F1C0422D000314390 /* PWDDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4A783D1C0422D000314390 /* PWDDetailViewController.m */; };
 		4E4A78401C0422D000314390 /* PWDDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E4A783E1C0422D000314390 /* PWDDetailViewController.xib */; };
@@ -17,7 +16,6 @@
 		4EF5F5F51C01B4C200BF6CBE /* PWDChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5F5F41C01B4C200BF6CBE /* PWDChartView.m */; };
 		4EF5F5F81C01CB8900BF6CBE /* PWDChartScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5F5F71C01CB8900BF6CBE /* PWDChartScrollView.m */; };
 		4EFBB91A1BF9C0B300F0BBA6 /* PWDNSDateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFBB9191BF9C0B300F0BBA6 /* PWDNSDateTests.m */; };
-		73270F9F6ED5A07D53047273 /* libPods-PowerDoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 019FBC688CC2449A41991D45 /* libPods-PowerDoTests.a */; };
 		8621A00A1B9B1FBA0082B853 /* PWDTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621A0091B9B1FBA0082B853 /* PWDTaskManager.m */; };
 		8621A00C1B9B20580082B853 /* PWDTaskManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621A00B1B9B20580082B853 /* PWDTaskManagerTests.m */; };
 		8621D1A31BFCBF5D00995C36 /* PWDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621D1A21BFCBF5D00995C36 /* PWDRootViewController.m */; };
@@ -37,6 +35,7 @@
 		86E8D95A1BFB6A0700E93E7F /* PWDTask+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E8D9571BFB6A0700E93E7F /* PWDTask+CoreDataProperties.m */; };
 		86E8D95B1BFB6A0700E93E7F /* PWDTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E8D9591BFB6A0700E93E7F /* PWDTask.m */; };
 		86F043C81BF738ED0048FADB /* PWDPlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F043C71BF738ED0048FADB /* PWDPlanViewController.m */; };
+		AA42271F0E2A1D3A7902C90F /* Pods_PowerDoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F84C5F0FC1154F08EE582896 /* Pods_PowerDoTests.framework */; };
 		E22319081BA486D400C1C21F /* PWDFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E22319061BA486D400C1C21F /* PWDFeedbackViewController.m */; };
 		E22319091BA486D400C1C21F /* PWDFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E22319071BA486D400C1C21F /* PWDFeedbackViewController.xib */; };
 		E23664D31BAB0C810035C0D2 /* PWDFeedbackService.m in Sources */ = {isa = PBXBuildFile; fileRef = E23664D21BAB0C810035C0D2 /* PWDFeedbackService.m */; };
@@ -44,6 +43,7 @@
 		E262CCEA1BA0881A00A82C98 /* PWDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E262CCE91BA0881A00A82C98 /* PWDSettingsViewController.m */; };
 		E2C426551B9DDD9500E3BC92 /* PWDTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C426541B9DDD9500E3BC92 /* PWDTodayViewController.m */; };
 		E2DAC0331BA8744000C33CBD /* PWDFeedbackTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DAC0321BA8744000C33CBD /* PWDFeedbackTextField.m */; };
+		FE96EFC4BDAAE40AFEB33AD9 /* Pods_PowerDo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DBDE9AC8F6831BD6BD2A168 /* Pods_PowerDo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,8 +77,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		019FBC688CC2449A41991D45 /* libPods-PowerDoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PowerDoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2AD728D7BAB6F2D72CA37EF1 /* libPods-PowerDo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PowerDo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DBDE9AC8F6831BD6BD2A168 /* Pods_PowerDo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PowerDo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E3433E41C0C345500D3D284 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		4E4A783C1C0422D000314390 /* PWDDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDDetailViewController.h; sourceTree = "<group>"; };
 		4E4A783D1C0422D000314390 /* PWDDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDDetailViewController.m; sourceTree = "<group>"; };
@@ -147,6 +146,7 @@
 		E2DAC0311BA8744000C33CBD /* PWDFeedbackTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDFeedbackTextField.h; sourceTree = "<group>"; };
 		E2DAC0321BA8744000C33CBD /* PWDFeedbackTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDFeedbackTextField.m; sourceTree = "<group>"; };
 		EA830DC4FCC26E384ED90FA1 /* Pods-PowerDoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PowerDoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PowerDoTests/Pods-PowerDoTests.release.xcconfig"; sourceTree = "<group>"; };
+		F84C5F0FC1154F08EE582896 /* Pods_PowerDoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PowerDoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,7 +154,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42E721AAF2A3FB976772E46C /* libPods-PowerDo.a in Frameworks */,
+				FE96EFC4BDAAE40AFEB33AD9 /* Pods_PowerDo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,7 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73270F9F6ED5A07D53047273 /* libPods-PowerDoTests.a in Frameworks */,
+				AA42271F0E2A1D3A7902C90F /* Pods_PowerDoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,8 +190,8 @@
 		446560E1291F0B6C94B5C9C0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				019FBC688CC2449A41991D45 /* libPods-PowerDoTests.a */,
-				2AD728D7BAB6F2D72CA37EF1 /* libPods-PowerDo.a */,
+				3DBDE9AC8F6831BD6BD2A168 /* Pods_PowerDo.framework */,
+				F84C5F0FC1154F08EE582896 /* Pods_PowerDoTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
