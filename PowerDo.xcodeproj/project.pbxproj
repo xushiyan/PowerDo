@@ -15,7 +15,6 @@
 		4EC7ECC81C035F04003C5259 /* PWDTodayPowerBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC7ECC71C035F04003C5259 /* PWDTodayPowerBar.m */; };
 		4EF5F5F51C01B4C200BF6CBE /* PWDChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5F5F41C01B4C200BF6CBE /* PWDChartView.m */; };
 		4EF5F5F81C01CB8900BF6CBE /* PWDChartScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF5F5F71C01CB8900BF6CBE /* PWDChartScrollView.m */; };
-		4EFBB91A1BF9C0B300F0BBA6 /* PWDNSDateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFBB9191BF9C0B300F0BBA6 /* PWDNSDateTests.m */; };
 		8621A00A1B9B1FBA0082B853 /* PWDTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621A0091B9B1FBA0082B853 /* PWDTaskManager.m */; };
 		8621A00C1B9B20580082B853 /* PWDTaskManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621A00B1B9B20580082B853 /* PWDTaskManagerTests.m */; };
 		8621D1A31BFCBF5D00995C36 /* PWDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8621D1A21BFCBF5D00995C36 /* PWDRootViewController.m */; };
@@ -91,7 +90,6 @@
 		4EF5F5F41C01B4C200BF6CBE /* PWDChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDChartView.m; sourceTree = "<group>"; };
 		4EF5F5F61C01CB8900BF6CBE /* PWDChartScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDChartScrollView.h; sourceTree = "<group>"; };
 		4EF5F5F71C01CB8900BF6CBE /* PWDChartScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDChartScrollView.m; sourceTree = "<group>"; };
-		4EFBB9191BF9C0B300F0BBA6 /* PWDNSDateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDNSDateTests.m; sourceTree = "<group>"; };
 		51F85B7A7FB51F5B32430123 /* Pods-PowerDoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PowerDoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PowerDoTests/Pods-PowerDoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		799CA31F66E7EB2399F99BEE /* Pods-PowerDo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PowerDo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PowerDo/Pods-PowerDo.debug.xcconfig"; sourceTree = "<group>"; };
 		8621A0081B9B1FBA0082B853 /* PWDTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDTaskManager.h; sourceTree = "<group>"; };
@@ -263,7 +261,6 @@
 		86485B3A1B973A4C0027D01A /* PowerDoTests */ = {
 			isa = PBXGroup;
 			children = (
-				86658E5D1BA2F57900FE67B3 /* Helper */,
 				86E21A721B973CBD0098AC93 /* Model */,
 				86485B3B1B973A4C0027D01A /* PowerDoTests.m */,
 				86485B3D1B973A4C0027D01A /* Info.plist */,
@@ -278,14 +275,6 @@
 				86485B481B973A4C0027D01A /* Info.plist */,
 			);
 			path = PowerDoUITests;
-			sourceTree = "<group>";
-		};
-		86658E5D1BA2F57900FE67B3 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				4EFBB9191BF9C0B300F0BBA6 /* PWDNSDateTests.m */,
-			);
-			name = Helper;
 			sourceTree = "<group>";
 		};
 		86A75F8B1BA2CC4600588730 /* View */ = {
@@ -631,7 +620,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EFBB91A1BF9C0B300F0BBA6 /* PWDNSDateTests.m in Sources */,
 				8621A00C1B9B20580082B853 /* PWDTaskManagerTests.m in Sources */,
 				86E21A741B973D3C0098AC93 /* PWDTaskTests.m in Sources */,
 				86485B3C1B973A4C0027D01A /* PowerDoTests.m in Sources */,
