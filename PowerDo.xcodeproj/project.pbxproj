@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4E2DEA7C1C27E093009681E9 /* PowerKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 86850CFD1C1C1A3B00F3772D /* PowerKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4E2DEA7D1C27E114009681E9 /* PowerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86850CFD1C1C1A3B00F3772D /* PowerKit.framework */; };
 		4E3433E51C0C345500D3D284 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 4E3433E41C0C345500D3D284 /* Podfile */; };
 		4E4A783F1C0422D000314390 /* PWDDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4A783D1C0422D000314390 /* PWDDetailViewController.m */; };
 		4E4A78401C0422D000314390 /* PWDDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E4A783E1C0422D000314390 /* PWDDetailViewController.xib */; };
@@ -71,7 +69,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4E2DEA7C1C27E093009681E9 /* PowerKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -115,7 +112,6 @@
 		86485B481B973A4C0027D01A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86658E601BA3372700FE67B3 /* PWDStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDStatsViewController.h; sourceTree = "<group>"; };
 		86658E611BA3372700FE67B3 /* PWDStatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDStatsViewController.m; sourceTree = "<group>"; };
-		86850CFD1C1C1A3B00F3772D /* PowerKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PowerKit.framework; sourceTree = "<group>"; };
 		86A75FAA1BA2E20700588730 /* PWDConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWDConstants.h; sourceTree = "<group>"; };
 		86A75FAB1BA2E20700588730 /* PWDConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWDConstants.m; sourceTree = "<group>"; };
 		86AF08D51C00271100F70D5A /* PWDDailyRecord+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PWDDailyRecord+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -154,7 +150,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E2DEA7D1C27E114009681E9 /* PowerKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,7 +206,6 @@
 		86485B121B973A4C0027D01A = {
 			isa = PBXGroup;
 			children = (
-				86850CFD1C1C1A3B00F3772D /* PowerKit.framework */,
 				4E3433E41C0C345500D3D284 /* Podfile */,
 				86485B1D1B973A4C0027D01A /* PowerDo */,
 				86485B3A1B973A4C0027D01A /* PowerDoTests */,

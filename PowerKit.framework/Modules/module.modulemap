@@ -1,6 +1,0 @@
-framework module PowerKit {
-  umbrella header "PowerKit.h"
-
-  export *
-  module * { export * }
-}
