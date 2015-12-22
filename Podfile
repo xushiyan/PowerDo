@@ -4,7 +4,7 @@
 # use_frameworks!
 
 target 'PowerDo' do
-
+pod "PowerKit"
 end
 
 target 'PowerDoTests' do

@@ -1,10 +1,13 @@
 PODS:
   - OCMock (3.2)
+  - PowerKit (0.1.0)
 
 DEPENDENCIES:
   - OCMock (~> 3.2)
+  - PowerKit
 
 SPEC CHECKSUMS:
   OCMock: 28def049ef47f996b515a8eeea958be7ccab2dbb
+  PowerKit: d4623d580ee6cb104dcb0d4a68d6be79559f1251
 
 COCOAPODS: 0.39.0
