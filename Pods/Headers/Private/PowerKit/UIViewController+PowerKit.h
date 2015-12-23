@@ -1,1 +1,1 @@
-../../../PowerKit/Pod/Classes/Categories/UIViewController+PowerKit.h
+../../../PowerKit/Pod/Classes/UIViewController+PowerKit.h

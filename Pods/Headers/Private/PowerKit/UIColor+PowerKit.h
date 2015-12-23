@@ -1,1 +1,1 @@
-../../../PowerKit/Pod/Classes/Categories/UIColor+PowerKit.h
+../../../PowerKit/Pod/Classes/UIColor+PowerKit.h
