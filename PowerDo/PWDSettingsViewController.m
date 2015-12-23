@@ -16,7 +16,7 @@
 
 NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
 
-@interface PWDSettingsViewController () <MFMailComposeViewControllerDelegate>
+@interface PWDSettingsViewController () <MFMailComposeViewControllerDelegate,PWKFeedbackFooterViewDelegate>
 
 @end
 
@@ -31,55 +31,16 @@ NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
     UITableView *tableView = self.tableView;
     tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.estimatedRowHeight = 44;
+    PWKFeedbackFooterView *footer = [[PWKFeedbackFooterView alloc] initWithFrame:CGRectMake(0, 0, 0, 44)];
+    footer.appStoreURL = [NSURL URLWithString:@"itms-apps://itunes.com/apps/PowerDo"];
+    footer.delegate = self;
+    tableView.tableFooterView = footer;
     [UITableViewCell registerClassForTableView:tableView];
 }
 
 #pragma mark - UITableViewDelegate
-
-- (void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    NSInteger section = indexPath.section;
-    NSInteger row = indexPath.row;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    switch (section) {
-        case PWDSettingsSectionFeedback:
-            switch (row) {
-                case PWDFeedbackRowFeedback: {
-                    if ([MFMailComposeViewController canSendMail]) {
-                        MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
-                        mail.mailComposeDelegate = self;
-                        [mail setToRecipients:@[@"feedback-powerlog@outlook.com"]];
-                        [mail setSubject:NSLocalizedString(@"Feedback for PowerDo", @"Email subject for feedback.")];
-                        
-                        NSBundle *bundle = [NSBundle mainBundle];
-                        UIDevice *device = [UIDevice currentDevice];
-                        NSLocale *locale = [NSLocale currentLocale];
-                        UIScreen *screen = [UIScreen mainScreen];
-                        NSMutableString *body = [NSMutableString stringWithString:NSLocalizedString(@"Hi\n\nI would like to provide the following feedback.\n\n\n\n\n", @"Feedback email body")];
-                        [body appendFormat:@"%@: %@ build %@\n", NSLocalizedString(@"App version", @""), [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], [bundle objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey]];
-                        [body appendFormat:@"%@: %@ %@\n", NSLocalizedString(@"OS version", @""),[device systemName], [device systemVersion]];
-                        [body appendFormat:@"%@: %@\n", NSLocalizedString(@"Device", @""), [device localizedModel]];
-                        [body appendFormat:@"%@: %@\n", NSLocalizedString(@"Device locale", @""), [locale localeIdentifier]];
-                        [body appendFormat:@"%@: %@\n", NSLocalizedString(@"App locale", @""), [[bundle preferredLocalizations] firstObject]];
-                        [body appendFormat:@"%@: %@\n", NSLocalizedString(@"Screen Size", @""), NSStringFromCGRect(screen.bounds)];
-                        [body appendFormat:@"%@: %.1lf\n", NSLocalizedString(@"Screen Scale", @""), screen.scale];
-                        [mail setMessageBody:body isHTML:NO];
-                        
-                        [self presentViewController:mail animated:YES completion:NULL];
-                    } else {
-                        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-                        [self presentNoMailAlert];
-                    }
-                }
-                    break;
-                case PWDFeedbackRowRateIt: {
-                    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-                    NSURL *appStoreURL = [NSURL URLWithString:@"itms-apps://itunes.com/apps/PowerDo"];
-                    [[UIApplication sharedApplication] openURL:appStoreURL];
-                }
-                    break;
-            }
-            break;
-    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -90,12 +51,6 @@ NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger num = 0;
-    switch (section) {
-        case PWDSettingsSectionFeedback: {
-            num = PWDFeedbackRowEnd;
-        }
-            break;
-    }
     return num;
 }
 
@@ -103,29 +58,40 @@ NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
     UITableViewCell *xCell = [tableView dequeueReusableCellWithIdentifier:[UITableViewCell identifier] forIndexPath:indexPath];;
     
     NSInteger section = indexPath.section;
-    NSInteger row = indexPath.row;
     switch (section) {
-        case PWDSettingsSectionFeedback: {
-            xCell.accessoryView = nil;
-            switch (row) {
-                case PWDFeedbackRowFeedback: {
-                    xCell.textLabel.text = NSLocalizedString(@"Feedback", @"Settings cell label");
-                    xCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                }
-                    break;
-                case PWDFeedbackRowRateIt: {
-                    xCell.textLabel.text = NSLocalizedString(@"Rate It", @"Settings cell label");
-                    xCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                }
-                    break;
-            }
-        }
-            break;
+
     }
     return xCell;
 }
 
 #pragma mark - Actions
+#pragma mark - PWKFeedbackFooterViewDelegate
+- (void)feedbackFooterView:(PWKFeedbackFooterView *)feedbackFooterView didTapFeedbackButton:(UIButton *)feedbackButton {
+    if ([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
+        mail.mailComposeDelegate = self;
+        [mail setToRecipients:@[@"feedback-powerlog@outlook.com"]];
+        [mail setSubject:NSLocalizedString(@"Feedback for PowerDo", @"Email subject for feedback.")];
+        
+        NSBundle *bundle = [NSBundle mainBundle];
+        UIDevice *device = [UIDevice currentDevice];
+        NSLocale *locale = [NSLocale currentLocale];
+        UIScreen *screen = [UIScreen mainScreen];
+        NSMutableString *body = [NSMutableString stringWithString:NSLocalizedString(@"Hi\n\nI would like to provide the following feedback.\n\n\n\n\n", @"Feedback email body")];
+        [body appendFormat:@"%@: %@ build %@\n", NSLocalizedString(@"App version", @""), [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"], [bundle objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey]];
+        [body appendFormat:@"%@: %@ %@\n", NSLocalizedString(@"OS version", @""),[device systemName], [device systemVersion]];
+        [body appendFormat:@"%@: %@\n", NSLocalizedString(@"Device", @""), [device localizedModel]];
+        [body appendFormat:@"%@: %@\n", NSLocalizedString(@"Device locale", @""), [locale localeIdentifier]];
+        [body appendFormat:@"%@: %@\n", NSLocalizedString(@"App locale", @""), [[bundle preferredLocalizations] firstObject]];
+        [body appendFormat:@"%@: %@\n", NSLocalizedString(@"Screen Size", @""), NSStringFromCGRect(screen.bounds)];
+        [body appendFormat:@"%@: %.1lf\n", NSLocalizedString(@"Screen Scale", @""), screen.scale];
+        [mail setMessageBody:body isHTML:NO];
+        
+        [self presentViewController:mail animated:YES completion:NULL];
+    } else {
+        [self presentNoMailAlert];
+    }
+}
 
 #pragma mark - MFMailComposeViewControllerDelegate
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
