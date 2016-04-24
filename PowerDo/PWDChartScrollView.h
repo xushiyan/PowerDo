@@ -12,7 +12,7 @@
 
 @interface PWDChartScrollView : UIScrollView
 
-@property (nonatomic,weak) PWDChartView *chartView;
+@property (nonatomic,weak) PWDChartView * _Nullable chartView;
 
 - (void)updateChartDisplay;
 - (void)updateChartWithRecords:(NSArray <PWDDailyRecord *> * _Nullable)records;

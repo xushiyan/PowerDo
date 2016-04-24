@@ -29,10 +29,11 @@ NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
     self.navigationItem.backBarButtonItem = backButtonItem;
     
     UITableView *tableView = self.tableView;
+    tableView.delaysContentTouches = NO;
     tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.estimatedRowHeight = 44;
     PWKFeedbackFooterView *footer = [[PWKFeedbackFooterView alloc] initWithFrame:CGRectMake(0, 0, 0, 44)];
-    footer.appStoreURL = [NSURL URLWithString:@"itms-apps://itunes.com/apps/PowerDo"];
+    footer.appStoreURL = [NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id1060135715"];
     footer.delegate = self;
     tableView.tableFooterView = footer;
     [UITableViewCell registerClassForTableView:tableView];
@@ -70,7 +71,7 @@ NSString * const PWLSettingsCellIdentifier = @"PWLSettingsCellIdentifier";
     if ([MFMailComposeViewController canSendMail]) {
         MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
         mail.mailComposeDelegate = self;
-        [mail setToRecipients:@[@"feedback-powerlog@outlook.com"]];
+        [mail setToRecipients:@[@"feedback-powerdo@outlook.com"]];
         [mail setSubject:NSLocalizedString(@"Feedback for PowerDo", @"Email subject for feedback.")];
         
         NSBundle *bundle = [NSBundle mainBundle];
