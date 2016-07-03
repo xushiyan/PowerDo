@@ -1,4 +1,4 @@
-## [PowerDo](https://itunes.apple.com/app/id1060135715) is a gamified TODO manager that helps execute your daily plan.
+### [PowerDo](https://itunes.apple.com/app/id1060135715) is a gamified TODO manager that helps execute your daily plan.
 
 View Trends|Swipe to Complete|Plan Wisely
 :---:|:---:|:---:
