@@ -10,6 +10,8 @@ View Trends|Swipe to Complete|Plan Wisely
 - If you postpone something, you'll lose points for that day.
 - You can add extra things to today's plan and gain points when you complete before 11:59 pm.
 
-#####  In short, plan something and finish it!
+**In short, plan something and finish it!**
 
 [![Download on AppStore](https://cdn.rawgit.com/xushiyan/PowerDo/master/Download_on_the_App_Store_Badge_US-UK_135x40.svg)](https://itunes.apple.com/app/id1060135715)
+
+#### PowerDo uses [PowerKit](https://cocoapods.org/pods/PowerKit)!
